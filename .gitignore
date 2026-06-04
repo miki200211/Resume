@@ -5,6 +5,9 @@ Resume Data/
 # 本機預覽伺服器設定（只在你自己電腦有用）
 .claude/
 
+# 舊版（作品集版面）備份，不發布
+index_portfolio_backup.html
+
 # 系統 / 編輯器雜物
 Thumbs.db
 .DS_Store

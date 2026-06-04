@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!-- 專案詳細頁：CarMax 自動化工作流程。含實際截圖。 -->
+<html lang="zh-Hant" data-theme="dark" data-title-en="CarMax Auto Workflow — Miki Hsieh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CarMax 自動化工作流程 — 一鍵自動建案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" data-en="Home">首頁</a>
+        <a href="resume.html" data-en="Resume">履歷</a>
+        <a href="projects.html" data-en="Work">實習作品</a>
+        <a href="personal.html" data-en="Personal">個人作品</a>
+      </nav>
+      <div class="controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="detail-hero">
+    <div class="wrap">
+      <a href="projects.html" class="back-link" data-en="← Back to work">← 回實習作品</a>
+      <div class="top">
+        <img class="proj-icon" src="images/icon-carmax.png" alt="CarMax Workflow" />
+        <h1 data-en="CarMax Auto Workflow">CarMax 自動化工作流程</h1>
+      </div>
+      <p class="one-liner" data-en="A one-click pipeline that takes a repair case from raw download all the way to a created JIRA ticket — download, match, enrich, LLM text processing, format conversion, upload.">一鍵自動建案：把一筆維修案件從原始下載一路帶到建好 JIRA 單——下載、比對、補資料、LLM 文本處理、格式轉換、上傳。</p>
+      <div class="badges">
+        <span class="chip">Python</span><span class="chip">Tkinter</span><span class="chip">Selenium</span>
+        <span class="chip">JIRA API</span><span class="chip">concurrent.futures</span><span class="chip">LLM</span><span class="chip">PyInstaller</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+
+      <div class="detail-sec">
+        <h2 data-en="Background & Problem">背景與問題</h2>
+        <p data-en="Creating a JIRA case from a CarMax repair record meant a long manual chain: download data, compare, fetch extra info, rewrite the text into a standard format, then file it. Doing this per case took ~30 minutes and was easy to get wrong.">從車美仕維修紀錄建一張 JIRA 單，要走一長串人工流程：下載資料、比對、補抓資訊、把文本改寫成標準格式、再建案。單案約 30 分鐘，且容易出錯。</p>
+        <figure class="detail-shot" style="max-width:520px;">
+          <img src="images/shot-carmax-buttons.png" alt="CarMax 工具操作面板" loading="lazy" />
+          <figcaption data-en="Tool control panel — full auto, download & match, LLM, format conversion, Catch (real screenshot)">工具操作面板：全自動執行、下載資料比對、LLM 處理、格式轉換、Catch（實際截圖）</figcaption>
+        </figure>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="The Pipeline">自動化流程</h2>
+        <ul class="feat-list">
+          <li><b data-en="1 · Download">1 · 下載資料</b><span data-en="Parallel download of the CarMax repair log (Selenium) and JIRA data (REST API).">並行下載車美仕維修履歷（Selenium）與 JIRA 資料（REST API）。</span></li>
+          <li><b data-en="2 · Match">2 · 對比資料</b><span data-en="Cross-checks the two sources to find cases that still need a JIRA ticket.">比對兩邊資料，找出尚未建案的案件。</span></li>
+          <li><b data-en="3 · Catch / enrich">3 · Catch 補資料</b><span data-en="Scrapes the extra fields needed to complete each case.">補抓每筆案件還缺的欄位資訊。</span></li>
+          <li><b data-en="4 · LLM text processing">4 · LLM 文本處理</b><span data-en="Uses an LLM to rewrite messy repair notes into clean, standardized wording.">用 LLM 把雜亂的維修備註改寫成乾淨、統一的標準文本。</span></li>
+          <li><b data-en="5 · Format & upload">5 · 格式轉換 → 上傳 JIRA</b><span data-en="Converts to the JIRA format and creates the tickets automatically.">轉成 JIRA 格式並自動建立案件。</span></li>
+        </ul>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="Technical Highlights">技術亮點</h2>
+        <ul class="feat-list">
+          <li><b data-en="“Ultra-Auto PRO” — dual-account parallel">「真·超自動 PRO」雙帳號並行</b><span data-en="Spawns two subprocesses to run the full pipeline for the CMX and M-Box accounts at the same time, streaming both outputs back into one GUI log with [CMX] / [Mbox] tags.">同時開兩個子行程，讓 CMX 與 M-Box 兩組帳號各自跑完整流程，兩邊輸出即時串回同一個 GUI 日誌（加 [CMX] / [Mbox] 前綴）。</span></li>
+          <li><b data-en="Threaded GUI">背景執行緒 GUI</b><span data-en="Download and processing run on background threads so the window stays responsive; logs stream live.">下載與處理走背景執行緒，視窗不卡死；日誌即時串流。</span></li>
+          <li><b data-en="Frozen-exe worker trick">打包後的 worker 機制</b><span data-en="After PyInstaller packaging there's no standalone worker file, so the app re-launches itself with an env-var flag to enter worker mode — dev and frozen builds share one code path.">打包成 .exe 後沒有獨立 worker 檔，於是程式「重啟自己」並帶環境變數旗標進入 worker 模式——開發與打包版共用同一條程式路徑。</span></li>
+          <li><b data-en="No stored passwords">不存密碼</b><span data-en="Credentials are fetched at runtime through the Horizon credential bridge, so no passwords live inside the app.">透過 Horizon 憑證橋接於執行時取得帳密，程式內不存任何密碼。</span></li>
+        </ul>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="Outcome">成果</h2>
+        <ul class="feat-list">
+          <li><b>30 min → 2 min</b><span data-en="Per-case handling time, end to end.">單案從頭到尾的處理時間。</span></li>
+          <li><b>3 min → 1 min</b><span data-en="Text conversion step alone.">光是文本轉換這一步。</span></li>
+        </ul>
+      </div>
+
+      <div class="prevnext">
+        <a href="project-trackclose.html" data-en="← Prev: TrackClose">← 上一個：TrackClose</a>
+        <a href="project-oow.html" data-en="Next: RMA / OOW →">下一個：RMA / OOW →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
+  <script src="assets/app.js"></script>
+</body>
+</html>

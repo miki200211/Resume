@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- 專案詳細頁：Horizon 憑證橋接安全工具（Go）。
+     注意：只描述安全「設計概念」，不公開任何金鑰材料或內部路徑。 -->
+<html lang="zh-Hant" data-theme="dark" data-title-en="Horizon — Miki Hsieh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horizon — CSE 憑證橋接安全工具</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" data-en="Home">首頁</a>
+        <a href="resume.html" data-en="Resume">履歷</a>
+        <a href="projects.html" data-en="Work">實習作品</a>
+        <a href="personal.html" data-en="Personal">個人作品</a>
+      </nav>
+      <div class="controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="detail-hero">
+    <div class="wrap">
+      <a href="projects.html" class="back-link" data-en="← Back to work">← 回實習作品</a>
+      <div class="top">
+        <img class="proj-icon" src="images/icon-horizon.png" alt="Horizon" />
+        <h1 data-en="Horizon — CSE Credential Bridge">Horizon — CSE 憑證橋接安全工具</h1>
+      </div>
+      <p class="one-liner" data-en="Not a password vault but a credential bridge: authorized people write encrypted secrets through a GUI; the other automation tools read them through a CLI only — so no tool has to manage passwords itself.">不是密碼保管箱，而是「憑證橋接器」：有權限者用 GUI 把帳密密文寫入，其他自動化程式只透過 CLI 取用——讓每支工具都不必自己管密碼。</p>
+      <div class="badges">
+        <span class="chip">Go</span><span class="chip">AES-256-GCM</span><span class="chip">PBKDF2</span><span class="chip">Windows DPAPI</span><span class="chip">HMAC</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+
+      <div class="detail-sec">
+        <h2 data-en="Background & Problem">背景與問題</h2>
+        <p data-en="Several automation tools all needed JIRA / CarMax credentials. Letting each one keep its own password file would scatter secrets everywhere. The team needed one central, secure place — that automation could still read from a command line.">前面好幾支自動化工具都需要 JIRA / 車美仕的帳密。如果每支都自己存一份密碼檔，機密會散落各處。團隊需要一個集中、安全、又能讓自動化程式從命令列取用的機制。</p>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="Solution">解決方案</h2>
+        <p data-en="A bridge with two modes: a GUI (where authorized staff log in and save encrypted credentials to shared cloud storage) and a CLI (which other tools call to fetch a credential at runtime). Secrets are never stored inside the individual tools.">一座橋，兩種模式：GUI（有權限的人登入後，把加密憑證存到共用雲端）與 CLI（其他工具於執行時呼叫取得憑證）。機密永遠不存在各個工具裡。</p>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="Security Design (concept)">安全設計（概念）</h2>
+        <ul class="feat-list">
+          <li><b data-en="Two-factor cloud key">雙因子雲端金鑰</b><span data-en="Decrypting cloud credentials requires BOTH read access to a restricted shared folder AND running on the correct corporate domain — holding the executable and the ciphertext alone is not enough to decrypt offline.">解密雲端憑證需要「受限共用資料夾的讀取權」與「在正確的公司網域執行」兩者兼具——只拿到執行檔與密文，無法離線破解。</span></li>
+          <li><b data-en="Strong encryption">強加密</b><span data-en="Cloud credentials use AES-256-GCM; the key is derived with PBKDF2-SHA256 at a high iteration count.">雲端憑證用 AES-256-GCM；金鑰以 PBKDF2-SHA256 高迭代次數衍生。</span></li>
+          <li><b data-en="Local secrets via DPAPI">本地設定走 DPAPI</b><span data-en="Personal local settings are protected with Windows DPAPI, bound to the current logged-in user.">個人本地設定以 Windows DPAPI 保護，綁定當前登入的使用者。</span></li>
+          <li><b data-en="Tamper-evident audit log">防竄改稽核日誌</b><span data-en="Every access is written to an HMAC-SHA256-signed audit log; tampered lines are rejected and entries expire automatically.">每次存取都寫入 HMAC-SHA256 簽章的稽核日誌；被竄改的行會被丟棄，紀錄逾期自動清除。</span></li>
+          <li><b data-en="Defense in depth">縱深防禦</b><span data-en="Machine binding, Windows AD authentication, a daily-login time limit, and a fail-closed CLI check; key rotation (re-encrypt) includes rollback protection.">機器綁定、Windows AD 驗證、每日登入時效、CLI fail-closed 驗證；金鑰輪換（重新加密）含回滾保護。</span></li>
+        </ul>
+        <p style="font-size:13px; color:var(--muted); margin-top:14px;" data-en="Note: this page describes the security design only. No key material, internal URLs or confidential paths are published.">註：本頁僅描述安全設計概念，不公開任何金鑰材料、內部網址或機密路徑。</p>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="Outcome">成果</h2>
+        <p data-en="Automation tools no longer manage passwords themselves; secrets stay centralized and encrypted, and anyone without the right access or domain cannot decrypt them offline.">自動化工具不再各自管密碼；機密集中且加密，缺乏正確權限或網域的人無法離線解密。</p>
+      </div>
+
+      <div class="prevnext">
+        <a href="project-aiweb.html" data-en="← Prev: AI_Web">← 上一個：AI_Web</a>
+        <a href="projects.html" data-en="All projects →">回作品總覽 →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
+  <script src="assets/app.js"></script>
+</body>
+</html>

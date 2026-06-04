@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- 專案詳細頁：TrackClose。最深層，介紹背景/功能/技術亮點/成果。 -->
+<html lang="zh-Hant" data-theme="dark" data-title-en="TrackClose — Miki Hsieh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrackClose — 售後維修案件追蹤系統</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" data-en="Home">首頁</a>
+        <a href="resume.html" data-en="Resume">履歷</a>
+        <a href="projects.html" data-en="Work">實習作品</a>
+        <a href="personal.html" data-en="Personal">個人作品</a>
+      </nav>
+      <div class="controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="detail-hero">
+    <div class="wrap">
+      <a href="projects.html" class="back-link" data-en="← Back to work">← 回實習作品</a>
+      <div class="top">
+        <img class="proj-icon" src="images/icon-trackclose.png" alt="TrackClose" />
+        <h1>TrackClose</h1>
+      </div>
+      <p class="one-liner" data-en="An after-sales case tracking system that auto-matches JIRA tickets against the CarMax repair log and routes each case into the right tab for one-click fill-in and upload.">售後維修案件追蹤系統：自動比對 JIRA 案件與車美仕（CarMax）維修履歷，把每筆案件分流到正確分頁，一鍵回填與上傳。</p>
+      <div class="badges">
+        <span class="chip">Python</span><span class="chip">Tkinter</span><span class="chip">Selenium</span>
+        <span class="chip">JIRA REST API</span><span class="chip">Tesseract OCR</span><span class="chip" data-en="Multithreading">多執行緒</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+
+      <div class="detail-sec">
+        <h2 data-en="Background & Problem">背景與問題</h2>
+        <p data-en="After-sales repair data lived in two separate systems — JIRA and the CarMax repair log. Every day a specialist had to manually cross-check hundreds of records, fill in shipping tracking numbers, and decide which cases to close or follow up. It was slow and error-prone.">售後維修資料分散在 JIRA 與車美仕維修履歷兩套系統。專員每天得人工比對成百上千筆資料、回填收/寄宅配單號、判斷哪些可以結案、哪些要跟催——既耗時又容易漏件、出錯。</p>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="Solution">解決方案</h2>
+        <p data-en="A Tkinter desktop tool that scrapes both systems, classifies every case into four tabs, and lets the specialist fill in or upload to JIRA with one click. It is split into three layers: UI, a data-processing layer, and the spiders.">一套 Tkinter 桌面工具：自動爬取兩邊資料、把每筆案件智慧分類到四大分頁，專員一鍵即可回填或上傳 JIRA。系統分為三層：介面層、資料處理層、資料爬取層。</p>
+        <ul class="feat-list">
+          <li><b data-en="UI layer">介面層</b><span data-en="Four tabs — 3-day repair / closure / follow-up / raw data — with double-click pop-ups, copy, and one-click JIRA upload.">四大分頁：3 日返修 / 結案 / 跟催 / 原始資料；支援雙擊彈窗、複製、一鍵上傳 JIRA。</span></li>
+          <li><b data-en="Data layer">資料處理層</b><span data-en="Cleans and normalizes raw data, classifies and groups cases, and auto-generates the standardized fill-in text.">清洗與正規化原始資料、分類與分組案件，並自動產生回填用的標準化字串。</span></li>
+          <li><b data-en="Spider layer">爬取層</b><span data-en="JIRA REST API pulls a year of cases; Selenium logs into CarMax and downloads the repair log (with OCR captcha solving).">JIRA REST API 抓取近一年案件；Selenium 登入車美仕下載維修履歷（含 OCR 驗證碼辨識）。</span></li>
+        </ul>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="Technical Highlights">技術亮點</h2>
+        <ul class="feat-list">
+          <li><b data-en="Smart classification by key intersection">以關鍵欄位交集做智慧分類</b><span data-en="Uses (plate, inbound tracking no., outbound tracking no.) as a key to intersect JIRA and the repair log, routing cases into 3-day repair / closure / follow-up.">以（車牌、收到宅配單號、寄出宅配單號）為 Key，交集比對 JIRA 與維修履歷，自動分流到 3 日返修 / 結案 / 跟催。</span></li>
+          <li><b data-en="Union-Find grouping">Union-Find 群組綁定</b><span data-en="Merges multiple JIRA tickets that share labels or the same customer car number into one group, so a whole group is closed or followed up together — no missed tickets.">用併查集把 Labels 互相引用或客戶車號相同的多張 JIRA 單合併成一組，讓同群組一起結案 / 跟催，避免漏件。</span></li>
+          <li><b data-en="Regex text extraction">智慧文本萃取（預編譯 Regex）</b><span data-en="Pre-compiled regular expressions precisely pull tracking numbers, software versions and RMA analysis results out of messy JIRA comments.">大量預編譯正規表達式，從雜亂的 JIRA 留言中精準抽取宅配單號、軟體版本、RMA 分析結果。</span></li>
+          <li><b data-en="Async spiders + live log">非同步爬蟲 + 即時日誌</b><span data-en="Spiders run on background threads so the GUI never freezes; a QueueHandler streams worker logs into the GUI in real time.">爬蟲走背景執行緒，GUI 不卡死；QueueHandler 把背景執行緒的日誌即時送進 GUI 視窗。</span></li>
+          <li><b data-en="Headless OCR tuning">無頭模式 OCR 優化</b><span data-en="In headless mode, low render scale broke captcha reading; forcing a 2× device scale plus a Tesseract character whitelist greatly raised accuracy.">無頭模式下渲染比例太小導致驗證碼辨識失敗；強制 2 倍縮放 + Tesseract 字元白名單，大幅提升辨識率。</span></li>
+        </ul>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="Outcome">成果</h2>
+        <p data-en="The tool replaced a tedious manual cross-check with automatic classification and one-click actions, cutting handling time dramatically and reducing missed or mis-filed cases.">把原本繁瑣的人工比對換成自動分類與一鍵操作，大幅縮短處理時間，並降低漏件與人為歸檔錯誤。</p>
+      </div>
+
+      <div class="prevnext">
+        <a href="projects.html" data-en="← All projects">← 全部作品</a>
+        <a href="project-carmax.html" data-en="Next: CarMax →">下一個：CarMax →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
+  <script src="assets/app.js"></script>
+</body>
+</html>

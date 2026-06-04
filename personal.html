@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- 個人作品：放你私下的 side projects。
+     ★怎麼新增一個作品：複製下面任一張卡片，把「待填」的字換掉即可。
+       要放圖：把 <div class="ph-ic">🎵</div> 換成 <img class="proj-icon" src="images/你的圖.png">
+       要放連結：把 <article class="card placeholder"> 換成 <a class="card placeholder" href="網址" target="_blank"> -->
+<html lang="zh-Hant" data-theme="dark" data-title-en="Personal Works — Miki Hsieh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>個人作品 — 謝茗鈞 Miki Hsieh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" data-en="Home">首頁</a>
+        <a href="resume.html" data-en="Resume">履歷</a>
+        <a href="projects.html" data-en="Work">實習作品</a>
+        <a href="personal.html" data-en="Personal">個人作品</a>
+      </nav>
+      <div class="controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow reveal">Personal</span>
+      <h2 class="section-title reveal" data-en="Personal Works">個人作品</h2>
+      <p class="section-sub reveal" data-en="Side projects I build off the clock — this is my own space, separate from work. (Slots below are placeholders; fill them in with your real projects.)">下班後自己做的 side projects——這是與工作分開、屬於我自己的空間。（下面是預留位置，填入你的真實作品即可。）</p>
+
+      <!-- 預留位置：4 格。依你的興趣先放了主題提示，換成真的作品就好 -->
+      <div class="grid-2">
+
+        <article class="card placeholder reveal">
+          <div class="ph-ic">🎧</div>
+          <h3 data-en="Audio / Hi-Fi project (TBD)">音響 / Hi-Fi 作品（待填）</h3>
+          <p data-en="e.g. a DIY amp, DAC build, or a speaker measurement project. Describe what you made and what you learned.">例如：DIY 擴大機、DAC、喇叭量測等。寫下你做了什麼、學到什麼。</p>
+          <span class="hint" data-en="✎ Replace this card with your real project">✎ 把這張卡換成你的真實作品</span>
+        </article>
+
+        <article class="card placeholder reveal">
+          <div class="ph-ic">🎸</div>
+          <h3 data-en="Music / Guitar project (TBD)">音樂 / 吉他作品（待填）</h3>
+          <p data-en="e.g. a classical-guitar cover, a City Pop arrangement, or a recording setup. Add a link or embed.">例如：古典吉他翻彈、City Pop 編曲、錄音作品。可附連結或嵌入。</p>
+          <span class="hint" data-en="✎ Add a link / YouTube / SoundCloud">✎ 可加上連結 / YouTube / SoundCloud</span>
+        </article>
+
+        <article class="card placeholder reveal">
+          <div class="ph-ic">💻</div>
+          <h3 data-en="Coding side project (TBD)">程式 side project（待填）</h3>
+          <p data-en="A personal app, script, hardware/Arduino project or experiment. Add the repo link and tech stack.">個人 app、腳本、硬體 / Arduino 專案或實驗。附上 repo 連結與技術。</p>
+          <span class="hint" data-en="✎ Link a GitHub repo here">✎ 這裡放 GitHub repo 連結</span>
+        </article>
+
+        <article class="card placeholder reveal">
+          <div class="ph-ic">➕</div>
+          <h3 data-en="Anything else (TBD)">其他作品（待填）</h3>
+          <p data-en="Photography, writing, a Japan-related project… anything you're proud of off the clock.">攝影、寫作、日本相關的作品……任何你私下引以為傲的東西。</p>
+          <span class="hint" data-en="✎ Copy this card to add more">✎ 想多放幾個就複製這張卡片</span>
+        </article>
+
+      </div>
+
+      <p class="section-sub reveal" style="margin-top:34px; margin-bottom:0;" data-en="Tip: each card is just a block of HTML — copy one, change the text, optionally swap the icon for an image and wrap it in a link.">小提示：每張卡片就是一段 HTML——複製一張、改文字，需要的話把圖示換成圖片、再用連結包起來即可。</p>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
+  <script src="assets/app.js"></script>
+</body>
+</html>
