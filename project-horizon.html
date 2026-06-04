@@ -37,7 +37,7 @@
         <img class="proj-icon" src="images/icon-horizon.png" alt="Horizon" />
         <h1 data-en="Horizon — CSE Credential Bridge">Horizon — CSE 憑證橋接安全工具</h1>
       </div>
-      <p class="one-liner" data-en="Not a password vault but a credential bridge: authorized people write encrypted secrets through a GUI; the other automation tools read them through a CLI only — so no tool has to manage passwords itself.">不是密碼保管箱，而是「憑證橋接器」：有權限者用 GUI 把帳密密文寫入，其他自動化程式只透過 CLI 取用——讓每支工具都不必自己管密碼。</p>
+      <p class="one-liner" data-en="Not a password vault but a credential bridge: authorized people write encrypted secrets through a GUI; the other automation tools read them through a CLI only — so no tool has to manage passwords itself.">不是密碼保管箱，而是「憑證橋接器」：有權限者用 GUI 把帳密密文寫入，其他自動化程式只透過 CLI 取用——讓每支工具都不必在本地或程式中儲存明文密碼。</p>
       <div class="badges">
         <span class="chip">Go</span><span class="chip">AES-256-GCM</span><span class="chip">PBKDF2</span><span class="chip">Windows DPAPI</span><span class="chip">HMAC</span>
       </div>
@@ -49,7 +49,7 @@
 
       <div class="detail-sec">
         <h2 data-en="Background & Problem">背景與問題</h2>
-        <p data-en="Several automation tools all needed JIRA / client system credentials. Letting each one keep its own password file would scatter secrets everywhere. The team needed one central, secure place — that automation could still read from a command line.">前面好幾支自動化工具都需要 JIRA / 車美仕的帳密。如果每支都自己存一份密碼檔，機密會散落各處。團隊需要一個集中、安全、又能讓自動化程式從命令列取用的機制。</p>
+        <p data-en="Several automation tools all needed JIRA / client system credentials. Letting each one keep its own password file would scatter secrets everywhere. The team needed one central, secure place — that automation could still read from a command line.">前面好幾支自動化工具都需要 JIRA / 客戶系統的帳密。如果每支都自己存一份密碼檔，機密會散落各處。團隊需要一個集中、安全、又能讓自動化程式從命令列取用的機制。</p>
       </div>
 
       <div class="detail-sec">
@@ -71,7 +71,7 @@
 
       <div class="detail-sec">
         <h2 data-en="Outcome">成果</h2>
-        <p data-en="Automation tools no longer manage passwords themselves; secrets stay centralized and encrypted, and anyone without the right access or domain cannot decrypt them offline.">自動化工具不再各自管密碼；機密集中且加密，缺乏正確權限或網域的人無法離線解密。</p>
+        <p data-en="Automation tools no longer manage passwords themselves; secrets stay centralized and encrypted, and anyone without the right access or domain cannot decrypt them offline.">自動化工具不再各自儲存明文密碼；機密集中且加密，缺乏正確權限或網域的人無法離線解密。</p>
       </div>
 
       <div class="prevnext">
