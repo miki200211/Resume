@@ -1,0 +1,11 @@
+# === 機密 / 大型原始資料：請勿上傳到 GitHub ===
+# 此資料夾含公司內部工具原始碼、加密金鑰材料，且 PPTX 超過 GitHub 100MB 上限。
+Resume Data/
+
+# 本機預覽伺服器設定（只在你自己電腦有用）
+.claude/
+
+# 系統 / 編輯器雜物
+Thumbs.db
+.DS_Store
+desktop.ini

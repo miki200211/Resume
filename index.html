@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Miki Hsieh 個人作品集 (Portfolio) — 深色主題 + 中英雙語 + 作品截圖
+  ----------------------------------------------------------------------------
+  單檔網頁：HTML + CSS + JavaScript 全寫在這一個檔案，直接用瀏覽器打開即可。
+  圖片放在同層的 images/ 資料夾。
+
+  ★ 三大功能怎麼運作（之後想改才需要看）：
+    1) 深色 / 淺色主題
+       - 顏色都用 CSS 變數，定義在最下面的 :root（深色，預設）
+         與 :root[data-theme="light"]（淺色）。
+       - 右上角 ☀/☾ 按鈕用 JS 切換 <html data-theme="..."> 並記在瀏覽器。
+    2) 中 / EN 雙語
+       - 預設顯示中文。要翻譯的元素都加了 data-en="English text"。
+       - 按「EN」時，JS 會把這些元素的內容換成 data-en；按「中」換回來。
+       - 想改英文：找到該元素的 data-en="..." 改字即可。
+    3) 作品截圖
+       - 每張作品卡片左上角是該工具的 App 圖示（images/icon-*.png）。
+       - CarMax 卡片另外放了一張「實際截圖」（images/shot-*.png）。
+  ============================================================================
+-->
+<html lang="zh-Hant" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>謝茗鈞 Miki Hsieh — CSE 自動化工具開發</title>
+  <meta name="description" content="謝茗鈞 Miki Hsieh 個人作品集：Garmin AOEM CSE 實習，客戶服務工程 × 自動化工具開發。" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== 深色主題（預設）===== */
+    :root {
+      --ink:      #f1f6fc;   /* 標題 */
+      --text:     #d7e0ec;   /* 內文 */
+      --muted:    #93a4bd;   /* 次要文字 */
+      --bg:       #0b1220;   /* 頁面底 */
+      --bg-2:     #0e1729;   /* 交錯區塊底 */
+      --card:     #121d33;   /* 卡片底 */
+      --line:     #243149;   /* 線條 / 邊框 */
+      --accent:   #2dd4bf;   /* 主強調（青綠） */
+      --accent-2: #60a5fa;   /* 次強調（藍） */
+      --chip-bg:  #1a2740;
+      --chip-line:#2a3a57;
+      --tag-bg:   #16284a;
+      --tag-fg:   #9cc3ff;
+      --badge-bg: rgba(45,212,191,.16);
+      --nav-bg:   rgba(11,18,32,.82);
+      --shadow:   0 12px 34px rgba(0,0,0,.40);
+      --radius:   16px;
+      --maxw:     1080px;
+    }
+    /* ===== 淺色主題（按 ☀ 切換）===== */
+    :root[data-theme="light"] {
+      --ink:      #0b1f33;
+      --text:     #1f2a37;
+      --muted:    #5b6b72;
+      --bg:       #f6f8fb;
+      --bg-2:     #eef2f7;
+      --card:     #ffffff;
+      --line:     #e6ebf1;
+      --accent:   #00b3a4;
+      --accent-2: #2563eb;
+      --chip-bg:  #f1f5f9;
+      --chip-line:#e2e8f0;
+      --tag-bg:   #eef4ff;
+      --tag-fg:   #2456c7;
+      --badge-bg: rgba(0,179,164,.10);
+      --nav-bg:   rgba(255,255,255,.86);
+      --shadow:   0 10px 30px rgba(11,31,51,.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      font-family: "Inter", "Noto Sans TC", system-ui, -apple-system, "Microsoft JhengHei", sans-serif;
+      color: var(--text); background: var(--bg); line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      transition: background .3s, color .3s;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+    section { padding: 88px 0; }
+    section.alt { background: var(--bg-2); }
+    h2.section-title { font-size: clamp(26px,4vw,38px); font-weight: 900; color: var(--ink); letter-spacing: .5px; margin-bottom: 8px; }
+    .section-sub { color: var(--muted); margin-bottom: 44px; font-size: 15px; }
+    .eyebrow { display: inline-block; font-weight: 700; letter-spacing: 3px; font-size: 12px; color: var(--accent); text-transform: uppercase; margin-bottom: 14px; }
+
+    /* ===== 導覽列 ===== */
+    header.nav { position: sticky; top: 0; z-index: 50; background: var(--nav-bg); backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px; }
+    .brand { font-weight: 900; color: var(--ink); font-size: 18px; letter-spacing: .5px; white-space: nowrap; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; margin-left: auto; }
+    .nav-links a { font-size: 15px; color: var(--muted); font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-tools { display: flex; align-items: center; gap: 8px; }
+    .tool-btn { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 8px; padding: 6px 11px; font-size: 13px; font-weight: 700; cursor: pointer; transition: border-color .2s, color .2s; font-family: inherit; }
+    .tool-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .nav-toggle { display: none; font-size: 20px; padding: 4px 10px; }
+
+    /* ===== HERO（兩種主題都維持深色橫幅）===== */
+    .hero { background: radial-gradient(900px 500px at 85% -10%, rgba(0,179,164,.22), transparent 60%), radial-gradient(700px 500px at 0% 0%, rgba(37,99,235,.20), transparent 55%), linear-gradient(160deg, #0b1f33 0%, #13314f 100%); color: #fff; }
+    .hero .wrap { padding-top: 84px; padding-bottom: 84px; }
+    .hero .eyebrow { color: #6ff0e4; }
+    .hero h1 { font-size: clamp(34px,6vw,60px); font-weight: 900; line-height: 1.12; letter-spacing: 1px; }
+    .hero h1 .en { display: block; font-size: clamp(16px,2.4vw,22px); font-weight: 600; color: #9fb3c8; letter-spacing: 4px; margin-top: 10px; }
+    .hero .role { margin-top: 18px; font-size: clamp(17px,2.4vw,21px); font-weight: 700; color: #e8f1ff; }
+    .hero .pitch { margin-top: 16px; max-width: 660px; color: #c2d2e3; font-size: 16px; }
+    .hero-cta { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px; font-weight: 700; font-size: 15px; transition: transform .15s, box-shadow .2s, background .2s; }
+    .btn-primary { background: var(--accent); color: #00231f; box-shadow: 0 8px 24px rgba(0,179,164,.4); }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost { border: 1px solid rgba(255,255,255,.35); color: #fff; }
+    .btn-ghost:hover { background: rgba(255,255,255,.1); }
+
+    .stats { margin-top: 54px; display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+    .stat { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 22px 18px; }
+    .stat .num { font-size: clamp(26px,4vw,36px); font-weight: 900; color: #fff; letter-spacing: .5px; }
+    .stat .num .unit { font-size: 16px; color: #6ff0e4; margin-left: 2px; }
+    .stat .label { font-size: 13px; color: #aebfd0; margin-top: 4px; }
+
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 34px; align-items: start; }
+    .about-grid p { color: var(--text); margin-bottom: 14px; }
+    .about-grid strong { color: var(--ink); }
+    .info-list { padding: 26px; }
+    .info-list .row { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+    .info-list .row:last-child { border-bottom: 0; }
+    .info-list .k { width: 92px; flex: none; color: var(--accent-2); font-weight: 700; font-size: 14px; }
+    .info-list .v { color: var(--text); font-size: 15px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .tag { background: var(--tag-bg); color: var(--tag-fg); font-size: 13px; padding: 5px 12px; border-radius: 999px; font-weight: 600; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .skill-card { padding: 24px; }
+    .skill-card h3 { color: var(--ink); font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .skill-card h3 .dot { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: var(--chip-bg); border: 1px solid var(--chip-line); color: var(--text); font-size: 13.5px; padding: 6px 12px; border-radius: 8px; font-weight: 500; }
+
+    /* PROJECTS */
+    .projects { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+    .project { padding: 26px; display: flex; flex-direction: column; transition: transform .18s, box-shadow .2s; }
+    .project:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0,0,0,.45); }
+    .project .top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .proj-icon { width: 46px; height: 46px; border-radius: 12px; object-fit: cover; flex: none; box-shadow: 0 4px 14px rgba(0,0,0,.35); background: #0b1220; }
+    .project .badge { font-size: 12px; font-weight: 800; letter-spacing: 1px; color: var(--accent); background: var(--badge-bg); padding: 4px 10px; border-radius: 6px; }
+    .project .lang { font-size: 12px; color: var(--muted); font-weight: 700; margin-left: auto; }
+    .project h3 { color: var(--ink); font-size: 20px; margin: 6px 0; }
+    .project .one-liner { color: var(--muted); font-size: 14.5px; margin-bottom: 14px; }
+    .proj-shot { margin: 2px 0 16px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--bg-2); }
+    .proj-shot img { display: block; width: 100%; height: auto; }
+    .proj-shot figcaption { font-size: 12px; color: var(--muted); padding: 7px 11px; border-top: 1px solid var(--line); }
+    .project ul { list-style: none; margin: 0 0 16px; }
+    .project ul li { position: relative; padding-left: 20px; font-size: 14px; color: var(--text); margin-bottom: 7px; }
+    .project ul li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    .project .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    .project .stack .chip { font-size: 12px; padding: 4px 9px; }
+
+    /* CASES */
+    .cases { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .case { padding: 24px; }
+    .case .ic { font-size: 26px; }
+    .case h3 { color: var(--ink); font-size: 17px; margin: 12px 0 8px; }
+    .case p { font-size: 14px; color: var(--muted); }
+    .domains { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+    /* TIMELINE */
+    .timeline { position: relative; margin-left: 8px; padding-left: 28px; border-left: 2px solid var(--line); }
+    .tl-item { position: relative; padding: 0 0 34px 8px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before { content: ""; position: absolute; left: -37px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(45,212,191,.20); }
+    .tl-item .when { font-size: 13px; font-weight: 700; color: var(--accent-2); }
+    .tl-item h3 { color: var(--ink); font-size: 18px; margin: 4px 0; }
+    .tl-item p { font-size: 14.5px; color: var(--muted); }
+
+    /* QUOTE */
+    .quote { background: linear-gradient(160deg, #0b1f33, #13314f); color: #fff; text-align: center; }
+    .quote blockquote { max-width: 760px; margin: 0 auto; font-size: clamp(20px,3vw,28px); font-weight: 700; line-height: 1.5; }
+    .quote .by { margin-top: 18px; color: #6ff0e4; font-weight: 700; letter-spacing: 1px; }
+
+    /* CONTACT / FOOTER */
+    .contact { text-align: center; }
+    .contact .links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+    footer { background: #07101e; color: #93a4bd; text-align: center; padding: 28px 0; font-size: 13px; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      .nav-links { position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--card); border-bottom: 1px solid var(--line); display: none; margin: 0; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 22px; border-top: 1px solid var(--line); }
+      .nav-toggle { display: block; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+      .about-grid, .skills-grid, .projects, .cases { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ 導覽列 ============ -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#hero" class="brand">Miki <span>Hsieh</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about"    data-en="About">關於我</a>
+        <a href="#skills"   data-en="Skills">技能</a>
+        <a href="#projects" data-en="Projects">專案作品</a>
+        <a href="#cases"    data-en="Service">客戶服務</a>
+        <a href="#timeline" data-en="Experience">經歷</a>
+        <a href="#contact"  data-en="Contact">聯絡</a>
+      </nav>
+      <div class="nav-tools">
+        <button class="tool-btn" id="langToggle" aria-label="切換語言">EN</button>
+        <button class="tool-btn" id="themeToggle" aria-label="切換主題">☀</button>
+        <button class="tool-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO 首頁 ============ -->
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <span class="eyebrow">2026 Intern Report · Garmin AOEM CSE</span>
+      <h1 data-en="Miki Hsieh <span class='en'>謝茗鈞 ・ みき</span>">謝茗鈞 <span class="en">MIKI HSIEH ・ みき</span></h1>
+      <div class="role" data-en="Customer Service Engineering × Automation">客戶服務工程 × 自動化工具開發</div>
+      <p class="pitch" data-en="A CSE intern with an electronic-engineering background. I break down the repetitive, time-consuming after-sales repair workflow and redesign it into one-click automation — from data scraping and smart matching to JIRA upload — and build secure credential and networking tools for the team.">
+        電子工程背景的 CSE 實習生。我把每天重複、耗時的售後維修流程，
+        拆解後重新設計成「一鍵完成」的自動化工具——從資料爬取、智慧比對、
+        到上傳 JIRA，並為團隊打造安全的憑證與網路基礎工具。
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary" data-en="View my work →">看我的作品 →</a>
+        <a href="#contact" class="btn btn-ghost" data-en="Get in touch">聯絡我</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="num"><span data-count="93.33">0</span><span class="unit">%</span></div>
+          <div class="label" data-en="Repair flow time cut<br>(15min → 1min)">維修流程時間縮短<br>(15 分 → 1 分)</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span data-count="2">0</span><span class="unit">min</span></div>
+          <div class="label" data-en="Per-case time<br>(was 30 min)">單案處理時間<br>(原本 30 分鐘)</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span data-count="5">0</span><span class="unit" data-en="apps">套</span></div>
+          <div class="label" data-en="Self-built internal<br>tools & automations">自製內部<br>自動化／工具程式</div>
+        </div>
+        <div class="stat">
+          <div class="num">N2</div>
+          <div class="label" data-en="JLPT Japanese<br>bilingual ZH / JP">日語檢定<br>中／日雙語溝通</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 關於我 ============ -->
+  <section id="about">
+    <div class="wrap">
+      <span class="eyebrow reveal">About</span>
+      <h2 class="section-title reveal" data-en="About Me">關於我</h2>
+      <p class="section-sub reveal" data-en="Turning hardware, languages and code into on-site problem-solving.">把硬體背景、語言能力與寫程式，串成解決現場問題的力量。</p>
+
+      <div class="about-grid">
+        <div class="reveal">
+          <p data-en="I'm <strong>Miki Hsieh</strong>, an Electronic Engineering student at NKUST, focusing on IC design and PCB layout. During my internship at <strong>Garmin AOEM CSE</strong> (Customer Service Engineering), my work spanned three areas: <strong>front-line customer service</strong>, <strong>internal process automation</strong>, and on-site support for <strong>overseas product rework</strong>.">
+            我是 <strong>謝茗鈞（Miki Hsieh）</strong>，國立高雄科技大學電子工程系，
+            主修 IC 設計與 PCB Layout。在 Garmin AOEM CSE（客戶服務工程）實習期間，
+            我的工作橫跨三個面向：<strong>第一線客戶服務</strong>、<strong>內部流程自動化</strong>，
+            以及<strong>國外產品重工</strong>的現場支援。
+          </p>
+          <p data-en="Facing a high volume of repetitive repair cases every day, I started from the users' pain points and gradually turned the manual workflow into automation tools — cutting per-case handling from 30 minutes to 2, and improving overall efficiency by about <strong>93%</strong>. I also care about data security, designing shared credential-bridging and network-routing tools for the team.">
+            面對每天大量、重複的車美仕維修案件，我從使用者的痛點出發，
+            一步步把人工流程拆解、設計成自動化工具，讓原本要 30 分鐘的單案處理縮短到 2 分鐘、
+            整體流程效率提升約 <strong>93%</strong>。我也重視資料安全，自行設計了團隊共用的
+            憑證橋接與網路分流工具。
+          </p>
+          <p data-en="With Japanese N2 and experience studying and guiding tours in Japan, I'm comfortable coordinating across teams and languages — and I believe: <em>it's not enough to understand the technology; you must also translate it into language customers can understand.</em>">
+            擁有日語 N2 與日本留學、領隊經驗，我習慣在跨部門、跨語言的環境中協調溝通——
+            並且相信：<em>不只要懂技術，還要能把技術轉換成客戶聽得懂的語言。</em>
+          </p>
+        </div>
+
+        <div class="card info-list reveal">
+          <div class="row"><div class="k" data-en="Dept">部門</div><div class="v" data-en="Garmin AOEM CSE Intern">Garmin AOEM CSE 實習</div></div>
+          <div class="row"><div class="k" data-en="Education">學歷</div><div class="v" data-en="NKUST, Electronic Engineering">國立高雄科技大學 電子工程系</div></div>
+          <div class="row"><div class="k" data-en="Focus">專業</div><div class="v" data-en="IC Design / IC Layout / Discrete Circuit / PCB Layout">IC Design / IC Layout / 離散電路設計 / PCB Layout</div></div>
+          <div class="row"><div class="k" data-en="Languages">語言</div><div class="v" data-en="Chinese (native), Japanese N2, JP tour-guide license, studied at Nagasaki Univ.">中文（母語）、日語 N2、日本領隊執照、長崎大學留學</div></div>
+          <div class="row">
+            <div class="k" data-en="Interests">興趣</div>
+            <div class="v">
+              <div class="tags">
+                <span class="tag" data-en="Hi-Fi Audio">音響發燒友</span><span class="tag" data-en="Classical Guitar">古典吉他</span>
+                <span class="tag">City Pop</span><span class="tag" data-en="Whisky">威士忌</span>
+                <span class="tag" data-en="Fashion">時尚</span><span class="tag">Coding</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 技能 ============ -->
+  <section id="skills" class="alt">
+    <div class="wrap">
+      <span class="eyebrow reveal">Skills</span>
+      <h2 class="section-title reveal" data-en="Skills">技術能力</h2>
+      <p class="section-sub reveal" data-en="From firmware and desktop apps to security and networking — I build the whole tool.">從韌體、桌面應用到資安與網路，一條龍把工具做出來。</p>
+
+      <div class="skills-grid">
+        <div class="card skill-card reveal">
+          <h3><span class="dot"></span><span data-en="Languages">程式語言</span></h3>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">Go</span>
+            <span class="chip">C / C++</span><span class="chip">C#</span>
+            <span class="chip">Visual Basic</span><span class="chip">Arduino</span>
+          </div>
+        </div>
+        <div class="card skill-card reveal">
+          <h3><span class="dot"></span><span data-en="Automation & Scraping">自動化 & 爬蟲</span></h3>
+          <div class="chips">
+            <span class="chip">Selenium</span><span class="chip">JIRA REST API</span>
+            <span class="chip">Requests</span><span class="chip">Tesseract OCR</span>
+            <span class="chip" data-en="Multithreading / multiprocessing">多執行緒 / 子行程並行</span>
+          </div>
+        </div>
+        <div class="card skill-card reveal">
+          <h3><span class="dot"></span><span data-en="Desktop & Data">桌面應用 & 資料處理</span></h3>
+          <div class="chips">
+            <span class="chip">Tkinter</span><span class="chip">Go walk GUI</span>
+            <span class="chip" data-en="PyInstaller packaging">PyInstaller 打包</span><span class="chip">openpyxl / Excel</span>
+            <span class="chip" data-en="Regex">正規表達式</span><span class="chip" data-en="LLM text processing">LLM 文本處理</span>
+          </div>
+        </div>
+        <div class="card skill-card reveal">
+          <h3><span class="dot"></span><span data-en="Security & Networking">資訊安全 & 網路</span></h3>
+          <div class="chips">
+            <span class="chip">AES-256-GCM</span><span class="chip">PBKDF2</span>
+            <span class="chip">Windows DPAPI</span><span class="chip" data-en="HMAC audit">HMAC 稽核</span>
+            <span class="chip">SOCKS5 / HTTP Proxy</span><span class="chip">Windows Socket API</span>
+          </div>
+        </div>
+        <div class="card skill-card reveal">
+          <h3><span class="dot"></span><span data-en="Hardware / Circuits">硬體 / 電路</span></h3>
+          <div class="chips">
+            <span class="chip" data-en="IC design & layout">IC 設計 & 佈局</span><span class="chip">PCB Layout</span>
+            <span class="chip" data-en="Discrete circuit design">離散電路設計</span><span class="chip" data-en="Circuit debugging">電路除錯</span>
+          </div>
+        </div>
+        <div class="card skill-card reveal">
+          <h3><span class="dot"></span><span data-en="Soft Skills">軟實力</span></h3>
+          <div class="chips">
+            <span class="chip" data-en="Cross-team comms">跨部門溝通</span><span class="chip" data-en="Complaint handling">客訴處理</span>
+            <span class="chip" data-en="On-site support">現場技術支援</span><span class="chip" data-en="Japanese N2">日語 N2</span>
+            <span class="chip" data-en="Resource coord / crisis response">資源調度 / 緊急應變</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 專案作品 ============ -->
+  <!-- 想新增作品：複製任一段 <article class="project">…</article> 再改字與圖片路徑 -->
+  <section id="projects">
+    <div class="wrap">
+      <span class="eyebrow reveal">Projects</span>
+      <h2 class="section-title reveal" data-en="Projects">專案作品</h2>
+      <p class="section-sub reveal" data-en="Five automation and infrastructure tools built for the CSE team.">五套為 CSE 團隊打造的自動化與基礎工具。</p>
+
+      <div class="projects">
+
+        <!-- 專案 1 -->
+        <article class="card project reveal">
+          <div class="top">
+            <img class="proj-icon" src="images/icon-trackclose.png" alt="TrackClose" />
+            <span class="badge" data-en="Automation">自動化</span>
+            <span class="lang">Python</span>
+          </div>
+          <h3 data-en="TrackClose — After-Sales Case Tracking">TrackClose — 售後維修案件追蹤系統</h3>
+          <p class="one-liner" data-en="Auto-matches JIRA cases against the CarMax repair log; three tabs (3-day repair / closure / follow-up) for one-click fill-in and upload.">把 JIRA 案件與車美仕維修履歷自動比對，三大分頁「3 日返修 / 結案 / 跟催」一鍵回填與上傳。</p>
+          <ul>
+            <li data-en="Smart classification by (plate, inbound/outbound tracking no.) intersection">智慧分類：以（車牌、收／寄宅配單號）交集比對，自動分流案件</li>
+            <li data-en="Union-Find grouping merges multiple JIRA tickets of the same plate to close/follow-up together">Union-Find 群組綁定：同車牌多張 JIRA 單自動合併，一起結案 / 跟催</li>
+            <li data-en="Pre-compiled regex extracts tracking no., version and analysis from messy comments">大量預編譯正規表達式，從雜亂留言精準抽取單號、版本、分析結果</li>
+            <li data-en="Headless-OCR tuning (2× scaling + char whitelist) boosts CAPTCHA accuracy">無頭 OCR 優化（放大 2 倍 + 字元白名單）大幅提升驗證碼辨識率</li>
+            <li data-en="Spiders decoupled from the GUI via background threads + a live log window">爬蟲與 GUI 分離：背景執行緒 + 即時日誌視窗</li>
+          </ul>
+          <div class="stack">
+            <span class="chip">Tkinter</span><span class="chip">Selenium</span>
+            <span class="chip">JIRA API</span><span class="chip">Tesseract OCR</span>
+            <span class="chip" data-en="Multithreading">多執行緒</span>
+          </div>
+        </article>
+
+        <!-- 專案 2（含實際截圖）-->
+        <article class="card project reveal">
+          <div class="top">
+            <img class="proj-icon" src="images/icon-carmax.png" alt="CarMax Workflow" />
+            <span class="badge" data-en="Automation">自動化</span>
+            <span class="lang">Python</span>
+          </div>
+          <h3 data-en="CarMax Auto Workflow — One-Click Case Creation">CarMax 自動化工作流程 — 一鍵自動建案</h3>
+          <p class="one-liner" data-en="A full pipeline — download, match, enrich, LLM text processing, format conversion, JIRA upload — in one click.">從下載、比對、補資料、LLM 文本處理、格式轉換到上傳 JIRA 的完整流程，一鍵跑完。</p>
+          <figure class="proj-shot">
+            <img src="images/shot-carmax-buttons.png" alt="CarMax 工具按鈕面板截圖" loading="lazy" />
+            <figcaption data-en="Tool control panel (real screenshot)">工具操作面板（實際截圖）</figcaption>
+          </figure>
+          <ul>
+            <li data-en="“Ultra-Auto PRO”: two subprocesses run the CMX / M-Box accounts in parallel">「真·超自動 PRO」：同時開兩個子行程跑 CMX / M-Box 兩組帳號完整流程</li>
+            <li data-en="Parallel CarMax + JIRA download; subprocess output streamed live to the GUI">並行下載 CarMax + JIRA，子行程輸出即時串回 GUI 日誌</li>
+            <li data-en="After .exe packaging, a “re-launch self + env var” worker shares one code path">打包成 .exe 後用「重啟自己 + 環境變數」的 worker 機制共用同一條程式路徑</li>
+            <li data-en="Result: per-case 30min → 2min; text conversion 3min → 1min">成果：單案 30 分 → 2 分；文本轉換 3 分 → 1 分</li>
+          </ul>
+          <div class="stack">
+            <span class="chip">Tkinter</span><span class="chip">Selenium</span>
+            <span class="chip">concurrent.futures</span><span class="chip">LLM</span>
+            <span class="chip">PyInstaller</span>
+          </div>
+        </article>
+
+        <!-- 專案 3 -->
+        <article class="card project reveal">
+          <div class="top">
+            <img class="proj-icon" src="images/icon-oow.png" alt="RMA OOW PRO" />
+            <span class="badge" data-en="Workflow Tool">流程工具</span>
+            <span class="lang">Python</span>
+          </div>
+          <h3 data-en="RMA Integrated Processing (OOW PRO)">RMA 整合處理系統（OOW PRO）</h3>
+          <p class="one-liner" data-en="A multi-page desktop tool integrating repair quotes, CarMax LINE notifications (image+text), and message settings.">整合維修報價、車美仕維修通知（LINE 圖文）與訊息設定的多頁桌面工具。</p>
+          <ul>
+            <li data-en="Repair quoting and out-of-warranty (OOW) case handling">維修報價與保固外（OOW）案件處理</li>
+            <li data-en="Image/text generation for daily loaner-unit replies; unified wording, fewer human errors">圖文 / 文本轉換：每日備機回覆一鍵產生，統一對內外語言、降低人為出錯</li>
+            <li data-en="Version stored in a JIRA field; auto update-check on launch">版本管理：版號存於 JIRA 欄位，啟動時自動檢查更新</li>
+            <li data-en="Credentials fetched via the bridge tool; no passwords stored in the app">透過憑證橋接工具取得帳密，程式內不存任何密碼</li>
+          </ul>
+          <div class="stack">
+            <span class="chip">Tkinter</span><span class="chip">JIRA API</span>
+            <span class="chip" data-en="Modular pages">模組化頁面</span>
+          </div>
+        </article>
+
+        <!-- 專案 4 -->
+        <article class="card project reveal">
+          <div class="top">
+            <img class="proj-icon" src="images/icon-aiweb.png" alt="AI_Web" />
+            <span class="badge" data-en="Network Tool">網路工具</span>
+            <span class="lang">Go</span>
+          </div>
+          <h3 data-en="AI_Web — Per-App Network Routing">AI_Web — 應用程式網路分流工具</h3>
+          <p class="one-liner" data-en="Routes specific apps / URLs through specific NICs, splitting office vs. external networks — no driver, no injection, EDR-friendly.">讓「指定程式 / 指定網址」走「指定網卡」，在辦公網路與外部網路間分流；不裝驅動、不注入、EDR 友善。</p>
+          <ul>
+            <li data-en="Custom source-IP-bound SOCKS5 / HTTP proxy forces traffic onto a chosen NIC">自寫綁定來源 IP 的 SOCKS5 / HTTP 代理，強制流量走指定網卡</li>
+            <li data-en="Per-domain persistent routes pin URLs to a gateway (UAC elevation)">依網域設定永久路由，把特定網址釘到指定閘道（UAC 提權）</li>
+            <li data-en="Handles Chromium proxy flags and isolated user-data dirs">Chromium 系瀏覽器 proxy 參數與獨立設定檔處理</li>
+            <li data-en="Connection monitoring, auto NIC-IP refresh, log-retention cleanup">連線監控、網卡 IP 變動自動刷新、日誌保留期自動清理</li>
+            <li data-en="Rewritten from Python to Go, keeping the “user-level, no-hook” constraints">由 Python 版重寫為 Go，維持「一般權限、不 hook」的設計約束</li>
+          </ul>
+          <div class="stack">
+            <span class="chip">Go</span><span class="chip">walk GUI</span>
+            <span class="chip">gopsutil</span><span class="chip">Windows sys API</span>
+          </div>
+        </article>
+
+        <!-- 專案 5 -->
+        <article class="card project reveal">
+          <div class="top">
+            <img class="proj-icon" src="images/icon-horizon.png" alt="Horizon" />
+            <span class="badge" data-en="Security">資訊安全</span>
+            <span class="lang">Go</span>
+          </div>
+          <h3 data-en="Horizon — CSE Credential Bridge">Horizon — CSE 憑證橋接安全工具</h3>
+          <p class="one-liner" data-en="Not a password vault but a “credential bridge”: authorized users write encrypted secrets via GUI; automations read them via CLI only.">不是密碼保管箱，而是「憑證橋接器」：有權限者用 GUI 密文寫入雲端，其他自動化程式只透過 CLI 取用。</p>
+          <ul>
+            <li data-en="Two-factor cloud key: needs both read access and the correct corporate domain to decrypt">雙因子雲端金鑰：需「讀取權 + 正確公司網域」兩者兼具才能解密</li>
+            <li data-en="Cloud secrets in AES-256-GCM; key derivation via PBKDF2-SHA256 (high iterations)">雲端憑證 AES-256-GCM、金鑰衍生 PBKDF2-SHA256（高迭代）</li>
+            <li data-en="Local settings via Windows DPAPI, bound to the current user">本地設定走 Windows DPAPI，綁定當前登入使用者</li>
+            <li data-en="HMAC-SHA256-signed audit log (tamper-evident, auto-expiring)">HMAC-SHA256 簽章的稽核日誌（防竄改、逾期自動清除）</li>
+            <li data-en="Machine binding, Windows AD auth, key rotation with rollback protection">機器綁定、Windows AD 驗證、金鑰輪換含回滾保護</li>
+          </ul>
+          <div class="stack">
+            <span class="chip">Go</span><span class="chip">AES-GCM</span>
+            <span class="chip">PBKDF2</span><span class="chip">DPAPI</span>
+            <span class="chip">HMAC</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 客戶服務案例 ============ -->
+  <section id="cases" class="alt">
+    <div class="wrap">
+      <span class="eyebrow reveal">Customer Service</span>
+      <h2 class="section-title reveal" data-en="Customer Service & Problem Solving">客戶服務 & 問題解決</h2>
+      <p class="section-sub reveal" data-en="On the front line, tracing in-car infotainment issues down to root cause.">站在第一線，把車機上的疑難雜症一個個追到根因。</p>
+
+      <div class="cases">
+        <div class="card case reveal">
+          <div class="ic">🖥️</div>
+          <h3 data-en="CarPlay / AutoLynk Black Screen">CarPlay / AutoLynk 黑畫面</h3>
+          <p data-en="Widespread reports of a black projection screen. Gathering clues from each investigation, I pinned it to specific phone models + iOS versions when projecting to the head unit.">市場大量回報投影黑畫面。從每次調查蒐集關鍵訊息，最終定位為「特定手機型號 + 特定 iOS 版本」投影主機時才會觸發。</p>
+        </div>
+        <div class="card case reveal">
+          <div class="ic">📞</div>
+          <h3 data-en="Official LINE Case Handling">Official LINE 案件處理</h3>
+          <p data-en="Handled complaints and requests via the official LINE account — including real-world situations like “the call that wouldn't hang up” — with trackable records.">透過官方 LINE 處理客訴與需求案件，包含「掛不掉的電話」等實際現場狀況，並做成可追蹤的紀錄。</p>
+        </div>
+        <div class="card case reveal">
+          <div class="ic">🛠️</div>
+          <h3 data-en="On-Site Witness & Tech Support">現地立會 & 現場技術支援</h3>
+          <p data-en="Recorded issues on site and provided technical support, feeding field observations back to engineering to speed up reproduction and fixes.">實際到場記錄車機問題、進行技術支援，將現場觀察回饋給工程團隊，加速問題重現與修復。</p>
+        </div>
+      </div>
+
+      <div class="domains reveal">
+        <span class="tag" data-en="Bluetooth / USB media">藍牙 / USB 多媒體</span>
+        <span class="tag">Apple CarPlay</span>
+        <span class="tag">Android Auto</span>
+        <span class="tag" data-en="Surround-view camera">環景影像系統</span>
+        <span class="tag" data-en="GARMIN navigation (traffic / online maps / AR)">GARMIN 導航（路況 / 線上地圖 / AR）</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 經歷時間軸 ============ -->
+  <section id="timeline">
+    <div class="wrap">
+      <span class="eyebrow reveal">Experience</span>
+      <h2 class="section-title reveal" data-en="Experience">經歷</h2>
+      <p class="section-sub reveal" data-en="Hands-on experience across disciplines, between Taiwan and Japan.">在台灣與日本之間，跨領域累積的實戰經驗。</p>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="when" data-en="Internship">實習</div>
+          <h3 data-en="Garmin AOEM CSE — Customer Service Engineering Intern">Garmin AOEM CSE — 客戶服務工程實習生</h3>
+          <p data-en="Front-line customer service, internal automation tool development, and on-site support for overseas product rework.">負責第一線客戶服務、內部流程自動化工具開發，以及國外產品重工的現場支援。</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="when" data-en="Field Support">現場支援</div>
+          <h3 data-en="Overseas Product Rework (Japan)">國外產品重工（日本）</h3>
+          <p data-en="Traveled to Japan to assist with product rework and on-site troubleshooting, coordinating across languages and teams using my Japanese.">赴日本協助產品重工與現場排除，跨語言、跨部門協調，活用日語能力進行溝通。</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="when" data-en="Study Abroad">留學</div>
+          <h3 data-en="Nagasaki University, Japan — Exchange / Study">日本 長崎大學 交換 / 留學</h3>
+          <p data-en="Studied Japanese culture, literature and tea ceremony; earned Japanese N2 and a Japan tour-guide license.">修習日本文化、文學、茶道等課程，取得日語 N2 與日本領隊執照。</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="when" data-en="Education">學歷</div>
+          <h3 data-en="NKUST — Electronic Engineering">國立高雄科技大學 — 電子工程系</h3>
+          <p data-en="Majoring in IC design, IC layout, discrete circuit design and PCB layout — a foundation in hardware and systems thinking.">主修 IC Design、IC Layout、離散電路設計與 PCB Layout，打下硬體與系統思維基礎。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 金句 ============ -->
+  <section class="quote">
+    <div class="wrap reveal">
+      <blockquote data-en="It's not enough to understand the technology —<br>you must translate it into language customers understand.">「不只要懂技術，<br>還要能把技術轉換成客戶聽得懂的語言。」</blockquote>
+      <div class="by">— Miki Hsieh</div>
+    </div>
+  </section>
+
+  <!-- ============ 聯絡 ============ -->
+  <section id="contact" class="contact">
+    <div class="wrap reveal">
+      <span class="eyebrow">Contact</span>
+      <h2 class="section-title" data-en="Let's Talk">一起聊聊</h2>
+      <p class="section-sub" style="margin-bottom:0;" data-en="Interested in automation, customer-service engineering or hardware-firmware integration? Let's connect.">對自動化、客戶服務工程或硬韌體整合有興趣，歡迎與我聯絡。</p>
+      <div class="links">
+        <!-- 想換成你的真實聯絡方式就改這裡 -->
+        <a href="mailto:mike.2002.live@gmail.com" class="btn btn-primary">✉️ mike.2002.live@gmail.com</a>
+        <!-- 之後可加 GitHub / LinkedIn：
+        <a href="https://github.com/你的帳號" class="btn btn-ghost">GitHub</a>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> <span data-en="Miki Hsieh ・ Hand-coded with HTML / CSS / JavaScript">謝茗鈞 Miki Hsieh ・ 以 HTML / CSS / JavaScript 手刻</span>
+  </footer>
+
+  <!-- ============ JavaScript ============ -->
+  <script>
+    /* ---- 手機選單 ---- */
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => navLinks.classList.remove('open'))
+    );
+
+    /* ---- 頁尾年份 ---- */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ---- 主題切換（深 / 淺）---- */
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    function applyTheme(t) {
+      root.setAttribute('data-theme', t);
+      themeBtn.textContent = (t === 'dark') ? '☀' : '☾'; // 顯示「按下去會切到的」相反圖示
+      localStorage.setItem('theme', t);
+    }
+    applyTheme(localStorage.getItem('theme') || 'dark');
+    themeBtn.addEventListener('click', () =>
+      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')
+    );
+
+    /* ---- 中 / EN 語言切換 ----
+       做法：每個要翻譯的元素都有 data-en="英文"。第一次切換時把原本的中文
+       存到 el._zh，之後在 中文(_zh) 與 英文(data-en) 之間互換 innerHTML。 */
+    const titles = {
+      zh: '謝茗鈞 Miki Hsieh — CSE 自動化工具開發',
+      en: 'Miki Hsieh — CSE Automation & Tooling'
+    };
+    const langBtn = document.getElementById('langToggle');
+    function applyLang(lang) {
+      document.querySelectorAll('[data-en]').forEach(el => {
+        if (el._zh === undefined) el._zh = el.innerHTML;   // 首次：記住中文原文
+        el.innerHTML = (lang === 'en') ? el.dataset.en : el._zh;
+      });
+      root.lang = (lang === 'en') ? 'en' : 'zh-Hant';
+      document.title = titles[lang] || titles.zh;
+      langBtn.textContent = (lang === 'en') ? '中' : 'EN'; // 顯示可切換到的語言
+      localStorage.setItem('lang', lang);
+    }
+    applyLang(localStorage.getItem('lang') || 'zh');
+    langBtn.addEventListener('click', () =>
+      applyLang(localStorage.getItem('lang') === 'en' ? 'zh' : 'en')
+    );
+
+    /* ---- 捲動進場動畫 ---- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* ---- HERO 數據數字跑動 ---- */
+    function runCount(el) {
+      const target = parseFloat(el.dataset.count);
+      const hasDecimal = el.dataset.count.includes('.');
+      const dur = 1200, t0 = performance.now();
+      function step(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = hasDecimal ? (target * eased).toFixed(2) : Math.round(target * eased);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    const statIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { runCount(e.target); statIO.unobserve(e.target); } });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.stat .num [data-count]').forEach(el => statIO.observe(el));
+  </script>
+</body>
+</html>
