@@ -277,3 +277,19 @@ footer { background:#07101e; color:#93a4bd; text-align:center; padding:28px 0; f
   }
   .sidebar { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 }
+
+/* ===== 金句樣式 ===== */
+.quote-text {
+  font-size: clamp(10px, 3.2vw, 28px);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+html[lang="en"] .quote-text {
+  white-space: normal;
+  word-break: normal;
+  font-size: clamp(14px, 3.5vw, 24px);
+}
