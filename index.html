@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<!-- 首頁 / Landing：網站門面。點卡片進入「履歷 / 專案作品 / 個人作品」三大層。 -->
+<!-- 首頁 / Landing：網站門面。點卡片進入「履歷 / 專案成果 / 個人作品」三大層。 -->
 <html lang="zh-Hant" data-theme="dark" data-title-en="Miki Hsieh — Portfolio">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>謝茗鈞 Miki Hsieh — 個人網站</title>
-  <meta name="description" content="謝茗鈞 Miki Hsieh 個人網站：客戶服務工程 × 自動化工具開發 × Android 工具開發。履歷、專案作品、個人作品。" />
+  <meta name="description" content="謝茗鈞 Miki Hsieh 個人網站：客戶服務工程 × 自動化工具開發 × Android 工具開發。履歷、專案成果、個人作品。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    /* 首頁 Hero：自拍圓形照 + 背景圖（僅本頁用）*/
+    .hero-flex { display:flex; align-items:center; gap:44px; }
+    .hero-flex .hero-text { flex:1; min-width:0; text-shadow:0 2px 14px rgba(0,0,0,.45); }
+    .hero-photo { flex:none; width:250px; height:250px; border-radius:50%; object-fit:cover;
+      border:4px solid rgba(255,255,255,.85); box-shadow:0 18px 50px rgba(0,0,0,.55); }
+    @media (max-width:820px){
+      .hero-flex { flex-direction:column-reverse; gap:26px; }
+      .hero-photo { width:160px; height:160px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -20,7 +31,7 @@
       <nav class="nav-links" id="navLinks">
         <a href="index.html" data-en="Home">首頁</a>
         <a href="resume.html" data-en="Resume">履歷</a>
-        <a href="projects.html" data-en="Projects">專案作品</a>
+        <a href="projects.html" data-en="Projects">專案成果</a>
         <a href="personal.html" data-en="Personal">個人作品</a>
       </nav>
       <div class="controls">
@@ -32,13 +43,16 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" style="background:linear-gradient(160deg,rgba(8,18,32,.82),rgba(15,40,66,.72)),url('images/background.jpg') center/cover no-repeat;">
     <div class="wrap">
+      <div class="hero-flex">
+        <div class="hero-text">
       <span class="eyebrow">Garmin AOEM CSE · 2026</span>
       <h1>謝茗鈞 <span class="en">MIKI HSIEH ・ みき</span></h1>
       <div class="role" data-en="Customer Service Engineering × Automation × Android Tooling">客戶服務工程 × 自動化工具開發 × Android 工具開發</div>
       <p class="pitch" data-en="An electronic-engineering engineer who turns repetitive after-sales repair workflows into one-click automation. Core strength in backend and automation (Go · Python), with full-stack Android / desktop delivery and a rare Japanese N2 × cross-border tech-support background.">
-        電子工程背景的工程人員，把每天重複、耗時的售後維修流程，重新設計成「一鍵完成」的自動化工具。核心專長為後端與自動化整合（Go · Python），並具備 Android／桌面全端開發，以及日語 N2 × 跨國技術支援的稀缺背景。
+        畢業於國立高雄科技大學電子工程專業背景（涵蓋 IC 電路設計、PCB Layout），並深耕於後端開發與自動化整合（Go / Python）。擅長將日常繁複、耗時的硬體維修或檢測流程，重新設計並實作為高效的自動化工具。
+		擁有 Android 與桌面端全端開發能力，能獨立交付完整的軟體解決方案。結合 JLPT N2 日語能力與跨國技術支援經驗，具備跨文化溝通與第一線解決海外技術問題的即戰力，致力於以軟體技術為硬體產業賦能、實現極致的自動化流程
       </p>
       <div class="hero-cta">
         <a href="resume.html" class="btn btn-primary" data-en="View résumé →">查看履歷 →</a>
@@ -50,6 +64,9 @@
         <div class="stat"><div class="num">4<span class="unit" data-en="apps">套</span></div><div class="label" data-en="Self-built tools">自製內部工具</div></div>
         <div class="stat"><div class="num">N2</div><div class="label" data-en="Japanese · bilingual">日語 · 中日雙語</div></div>
       </div>
+        </div>
+        <img class="hero-photo" src="images/Selfie.jpg" alt="謝茗鈞 Miki Hsieh" />
+      </div>
     </div>
   </section>
 
@@ -58,24 +75,24 @@
     <div class="wrap">
       <span class="eyebrow reveal">Explore</span>
       <h2 class="section-title reveal" data-en="Pick where to dive in">想先看哪一層？</h2>
-      <p class="section-sub reveal" data-en="A résumé for HR, deep-dive project write-ups, and my personal side projects.">給 HR 的履歷、可深入點開的專案詳解，以及我私下的個人作品。</p>
+      <p class="section-sub reveal" data-en="A résumé for HR, deep-dive project write-ups, and my personal side projects.">履歷、專案成果、個人作品可點擊深入查看。</p>
       <div class="entry-grid">
         <a href="resume.html" class="card entry-card reveal">
           <div class="ic">📄</div>
           <h3 data-en="Résumé">履歷</h3>
-          <p data-en="A clean, HR-ready résumé — switch language, theme, or export to PDF in one click.">乾淨、給 HR 看的履歷——可切換語言/主題，一鍵存成 PDF。</p>
+          <p data-en="A clean, HR-ready résumé — switch language, theme, or export to PDF in one click.">提供符合 A4 規格的數位載體，可一鍵快速導出 PDF，完整呈現所有詳實資訊。</p>
           <span class="go" data-en="Open résumé →">查看履歷 →</span>
         </a>
         <a href="projects.html" class="card entry-card reveal">
           <div class="ic">🛠️</div>
-          <h3 data-en="Projects">專案作品</h3>
+          <h3 data-en="Projects">專案成果</h3>
           <p data-en="Four automation & infrastructure tools built at Garmin CSE — click into each for the full technical story.">在 Garmin CSE 打造的四套自動化與基礎工具——每個都能點進去看完整技術細節。</p>
           <span class="go" data-en="See projects →">看專案詳解 →</span>
         </a>
         <a href="personal.html" class="card entry-card reveal">
           <div class="ic">✨</div>
           <h3 data-en="Personal Works">個人作品</h3>
-          <p data-en="Android apps and desktop utilities developed after hours — quant monitor, Wear OS, API integration, and networking.">下班後自主開發的 Android App 與桌面工具——包含量化監控、手錶程式、API 對接及網路工具等。</p>
+          <p data-en="Android apps and desktop utilities developed after hours — quant monitor, Wear OS, API integration, and networking.">自主開發的 Android App 與桌面工具——包含量化監控、手錶程式及網路工具等。</p>
           <span class="go" data-en="Take a look →">看個人作品 →</span>
         </a>
       </div>
@@ -86,23 +103,23 @@
   <section class="alt">
     <div class="wrap">
       <span class="eyebrow reveal">What I did</span>
-      <h2 class="section-title reveal" data-en="Three sides of my work">工作的三個面向</h2>
-      <p class="section-sub reveal" data-en="From the front line to the factory floor — and a lot of automation in between.">從第一線到工廠現場——中間是大量的自動化。</p>
+      <h2 class="section-title reveal" data-en="Three sides of my work">工作三個面向</h2>
+      <p class="section-sub reveal" data-en="From the front line to the factory floor — and a lot of automation in between.">以下是我核心工作。</p>
       <div class="grid-3">
         <div class="card entry-card reveal">
           <div class="ic">🎧</div>
           <h3 data-en="Customer Service">客戶服務</h3>
-          <p data-en="Front-line complaint handling via Official LINE; on-site witness records; root-caused the infotainment software black-screen issue.">透過 Official LINE 處理第一線客訴、現地立會紀錄，定位 車載軟體黑畫面根因。</p>
+          <p data-en="Front-line complaint handling via Official LINE; on-site witness records; root-caused the infotainment software black-screen issue.">處理第一線客戶服務、現場調查紀錄等。</p>
         </div>
         <div class="card entry-card reveal">
           <div class="ic">⚙️</div>
           <h3 data-en="Automation">自動化流程</h3>
-          <p data-en="Built the tools that cut a 30-minute manual case down to 2 minutes — scraping, matching, LLM, JIRA upload.">打造把 30 分鐘人工單案縮短到 2 分鐘的工具——爬取、比對、LLM、上傳 JIRA。</p>
+          <p data-en="Built the tools that cut a 30-minute manual case down to 2 minutes — scraping, matching, LLM, JIRA upload.">人工處理流程自動化——使用Pythen開發爬蟲、資料比對、處理資料、API串聯。</p>
         </div>
         <div class="card entry-card reveal">
           <div class="ic">🗾</div>
           <h3 data-en="Overseas Rework">國外產品重工</h3>
-          <p data-en="Traveled to Japan for product rework and on-site troubleshooting, coordinating across teams and languages.">赴日本支援產品重工與現場排除，跨部門、跨語言協調溝通。</p>
+          <p data-en="Traveled to Japan for product rework and on-site troubleshooting, coordinating across teams and languages.">赴日本支援產品處理與現場排除問題，跨部門、跨語言協調溝通。</p>
         </div>
       </div>
     </div>
