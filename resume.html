@@ -128,7 +128,7 @@
             <li><b>Mission</b>: Committed to empowering hardware and maintenance industries through software engineering, driving workflows toward extreme efficiency.</li>
           ">
             <li><b>專業背景</b>：國立高雄科技大學電子工程系畢業，涵蓋 IC 電路設計與 PCB Layout，深耕於後端開發與自動化整合（Go / Python）。</li>
-            <li><b>流程自動化</b>：擅長將日常繁雜、耗時的硬體維修或檢測流程，重新設計並實作為高效的一鍵自動化軟體工具。</li>
+            <li><b>流程自動化</b>：擅長將日常繁雜、耗時的維修流程，重新設計並實作為高效的一鍵自動化軟體工具。</li>
             <li><b>全端開發與交付</b>：具備 Android 行動裝置及桌面應用程式的全端開發實力，能獨立設計並交付完整的軟體解決方案。</li>
             <li><b>跨國協作即戰力</b>：擁有 JLPT N2 日語檢定與赴日技術支援經驗，具備跨文化溝通與第一線排除海外技術問題的溝通協調能力。</li>
             <li><b>核心理念</b>：致力於以軟體技術為硬體與維修產業賦能，實現極致的自動化與效率提升。</li>
@@ -136,12 +136,17 @@
         </section>
         <section class="sec">
           <h2 class="sec-title" data-en="Key Achievements">主要成就</h2>
-          <div class="ach">
-            <div class="item"><div class="n">~93%</div><div class="t" data-en="Faster workflow (15min → 1min)">流程時間縮短（15 分 → 1 分）</div></div>
-            <div class="item"><div class="n">30 → 2 min</div><div class="t" data-en="Per-case handling time">單案處理時間</div></div>
-            <div class="item"><div class="n">4</div><div class="t" data-en="Self-built internal tools">自製內部工具（Python / Go）</div></div>
-            <div class="item"><div class="n">N2</div><div class="t" data-en="Japanese · ZH / JP bilingual">日語檢定 · 中日雙語</div></div>
-          </div>
+          <ul class="ach-list" data-en="
+            <li><b>1. Auto Workflow Integration</b>: Case handling was manual and tedious (cross-checking, log downloading, manual ticketing), developed one-click auto-ticketing program, per-case time <b>30 min => 2 min</b>.</li>
+            <li><b>2. RMA / OOW Integration (OOW PRO)</b>: Out-of-warranty quotes and replies were edited manually causing format errors, developed OOW integration and LINE notifications, text conversion <b>3 min => 1 min</b>.</li>
+            <li><b>3. TrackClose Case Tracker</b>: Cross-referencing hundreds of cases daily across JIRA and client logs was tedious and error-prone, developed async crawler and Union-Find grouping to automate matching and follow-ups.</li>
+            <li><b>4. Horizon Credential Bridge</b>: Plain credentials scattered across scripts and PCs posed high security risks, built Go credential bridge with cloud AES-256-GCM/DPAPI/HMAC, ensuring <b>0 plaintext passwords stored</b>.</li>
+          ">
+            <li><b>1. 自動化工作流程（一鍵自動建案）</b>：痛點為流程繁瑣需人工手動交叉比對、下載及填寫建單，極其耗時，因此開發一鍵自動建單程式，單案處理 <b>30分鐘 => 2分鐘</b>。</li>
+            <li><b>2. RMA / OOW 整合處理系統（OOW PRO）</b>：痛點為保修外報價與備機回覆均由人工編輯，格式不一且易出錯，因此開發 OOW 整合工具與 LINE 通知，文字轉換 <b>3分鐘 => 1分鐘</b>。</li>
+            <li><b>3. TrackClose 售後案件追蹤系統</b>：痛點為每日需在不同系統間人工交叉比對上百筆資料並跟催，極易漏件，因此開發非同步爬蟲與 Union-Find 群組綁定，實現一鍵自動比對分類與跟催。</li>
+            <li><b>4. Horizon 憑證橋接安全工具</b>：痛點為多套自動化工具帳密明文散落於各電腦中，資安風險極高，因此開發雙因子雲端解密與 CLI/GUI 憑證中心，讓程式 <b>100% 不儲存明文密碼</b>。</li>
+          </ul>
         </section>
         <section class="sec">
           <h2 class="sec-title" data-en="Work Experience">工作經歷</h2>
