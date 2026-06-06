@@ -50,10 +50,6 @@
       <div class="detail-sec">
         <h2 data-en="Background & Problem">背景與問題</h2>
         <p data-en="Creating a JIRA case from a client repair record meant a long manual chain: download data, compare, fetch extra info, rewrite the text into a standard format, then file it. Doing this per case took ~30 minutes and was easy to get wrong.">從客戶維修紀錄建一張 JIRA 單，要走一長串人工流程：下載資料、比對、補抓資訊、把文本改寫成標準格式、再建案。單案約 30 分鐘，且容易出錯。</p>
-        <figure class="detail-shot" style="max-width:520px;">
-          <img src="images/shot-carmax-buttons.png" alt="工具操作面板" loading="lazy" />
-          <figcaption data-en="Tool control panel — full auto, download & match, LLM, format conversion, Catch (real screenshot)">工具操作面板：全自動執行、下載資料比對、LLM 處理、格式轉換、Catch（實際截圖）</figcaption>
-        </figure>
       </div>
 
       <div class="detail-sec">
@@ -70,7 +66,7 @@
       <div class="detail-sec">
         <h2 data-en="Technical Highlights">技術亮點</h2>
         <ul class="feat-list">
-          <li><b data-en="“Ultra-Auto PRO” — dual-account parallel">「真·超自動 PRO」雙帳號並行</b><span data-en="Spawns two subprocesses to run the full pipeline for the client and M-Box accounts at the same time, streaming both outputs back into one GUI log with [客戶] / [Mbox] tags.">同時開兩個子行程，讓 客戶與 M-Box 兩組帳號各自跑完整流程，兩邊輸出即時串回同一個 GUI 日誌（加 [客戶] / [Mbox] 前綴）。</span></li>
+          <li><b data-en="“Ultra-Auto PRO” — dual-account parallel">「真·超自動 PRO」雙帳號並行</b><span data-en="Spawns two subprocesses to run the full pipeline for the client and client 2 accounts at the same time, streaming both outputs back into one GUI log with [Client] / [Client2] tags.">同時開兩個子行程，讓 客戶與 客戶2 兩組帳號各自跑完整流程，兩邊輸出即時串回同一個 GUI 日誌（加 [客戶] / [客戶2] 前綴）。</span></li>
           <li><b data-en="Threaded GUI">背景執行緒 GUI</b><span data-en="Download and processing run on background threads so the window stays responsive; logs stream live.">下載與處理走背景執行緒，視窗不卡死；日誌即時串流。</span></li>
           <li><b data-en="Frozen-exe worker trick">打包後的 worker 機制</b><span data-en="After PyInstaller packaging there's no standalone worker file, so the app re-launches itself with an env-var flag to enter worker mode — dev and frozen builds share one code path.">打包成 .exe 後沒有獨立 worker 檔，於是程式「重啟自己」並帶環境變數旗標進入 worker 模式——開發與打包版共用同一條程式路徑。</span></li>
           <li><b data-en="No plaintext passwords stored">不存明文密碼</b><span data-en="Credentials are fetched at runtime through the credential bridge security tool, so no plaintext passwords live inside the app.">透過憑證橋接安全工具於執行時取得帳密，程式內不存任何明文密碼。</span></li>
