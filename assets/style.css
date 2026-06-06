@@ -293,3 +293,23 @@ html[lang="en"] .quote-text {
   word-break: normal;
   font-size: clamp(14px, 3.5vw, 24px);
 }
+
+/* ===== 首頁條列式 Pitch ===== */
+.pitch-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pitch-list li {
+  font-size: 15px;
+  color: var(--text);
+  opacity: 0.9;
+  line-height: 1.4;
+  font-weight: 500;
+}
+:root[data-theme="dark"] .pitch-list li {
+  color: #a3b8cc;
+}
