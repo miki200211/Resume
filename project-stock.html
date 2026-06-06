@@ -32,14 +32,14 @@
 
   <section class="detail-hero">
     <div class="wrap">
-      <a href="personal.html" class="back-link" data-en="← Back to personal works">← 回個人作品</a>
+      <a href="personal.html" class="back-link" data-en="← Back to Personal Works">← 回個人作品</a>
       <div class="top">
         <div class="proj-icon" style="display:flex;align-items:center;justify-content:center;font-size:32px;background:linear-gradient(150deg,var(--accent),var(--accent-d));">📈</div>
-        <h1 data-en="Alpaca — US Stock Quant Trading System">Alpaca — 美股量化交易系統</h1>
+        <h1 data-en="Alpaca — US Equity Quantitative Trading System">Alpaca — 美股量化交易系統</h1>
       </div>
-      <p class="one-liner" data-en="A US-stock quant trading system in Go: Minervini Trend Template plus cross-sectional momentum, with a point-in-time S&P 500 constituent filter that eliminates look-ahead and survivorship bias. Backtests the full 8,114-stock US universe and trades live via the Alpaca API.">Go 打造的美股量化交易系統：Minervini Trend Template ＋ 橫斷面動能選股，並以「點對點成份股過濾」徹底消除 look-ahead 與生存者偏差；支援全美股 8,114 檔回測，並透過 Alpaca API 實盤交易。</p>
+      <p class="one-liner" data-en="A Go-based US equity quantitative trading system implementing Minervini's Trend Template with cross-sectional momentum ranking. A point-in-time S&P 500 constituent filter fully eliminates look-ahead and survivorship bias. Backtests the entire 8,114-stock US universe with Monte Carlo stress testing, and executes live trades via the Alpaca API.">以 Go 打造的美股量化交易系統：實作 Minervini Trend Template ＋ 橫斷面動能排名，透過「點對點成份股過濾」徹底消除 look-ahead 與生存者偏差；支援全美股 8,114 檔回測（含蒙地卡羅壓力測試），並透過 Alpaca API 執行實盤交易。</p>
       <div class="badges">
-        <span class="chip">Go</span><span class="chip">Alpaca API</span><span class="chip" data-en="Backtest engine">回測引擎</span><span class="chip">Monte Carlo</span>
+        <span class="chip">Go</span><span class="chip">Alpaca API</span><span class="chip" data-en="Backtest Engine">回測引擎</span><span class="chip">Monte Carlo</span>
       </div>
     </div>
   </section>
@@ -49,28 +49,40 @@
 
       <div class="ach" style="margin-bottom:40px;">
         <div class="item"><div class="n">8,114</div><div class="t" data-en="US stocks cached locally">檔全美股本地快取</div></div>
-        <div class="item"><div class="n" data-en="Zero bias">零偏差</div><div class="t" data-en="Look-ahead + survivorship eliminated">消除 look-ahead + 生存者偏差</div></div>
+        <div class="item"><div class="n" data-en="Zero Bias">零偏差</div><div class="t" data-en="Look-ahead &amp; survivorship eliminated">消除 look-ahead + 生存者偏差</div></div>
         <div class="item"><div class="n">10,000</div><div class="t" data-en="Monte Carlo paths">蒙地卡羅路徑</div></div>
-        <div class="item"><div class="n" data-en="Backtest = Live">回測=實盤</div><div class="t" data-en="100% deterministic alignment">100% 決定性對齊</div></div>
+        <div class="item"><div class="n" data-en="Backtest = Live">回測＝實盤</div><div class="t" data-en="100% deterministic alignment">100% 決定性對齊</div></div>
       </div>
 
       <div class="detail-sec">
         <h2 data-en="Background">背景</h2>
-        <p data-en="I had built a large Python quant stack (F_4, see below), but wanted (a) a screening + backtest + live system that is 100% reproducible, and (b) backtests with zero look-ahead and survivorship bias — the two most common ways quant backtests lie. So I rebuilt it in Go around the Alpaca API.">我原本寫了一套龐大的 Python 量化系統（F_4，見下），但想要：(a) 篩選＋回測＋實盤完全可重現的系統；(b) 完全沒有 look-ahead 與生存者偏差的回測——這兩者正是量化回測最常見的「說謊」方式。於是我用 Go 圍繞 Alpaca API 重建了它。</p>
+        <p data-en="I had already built a large-scale Python quantitative platform (F_4, described below), but two fundamental problems remained unsolved: (a) a unified pipeline where screening, backtesting, and live trading yield 100% identical, reproducible signals; and (b) backtests completely free of look-ahead and survivorship bias — the two most pervasive ways quant backtests silently overstate performance. To address both at once, I rebuilt the entire system from scratch in Go, centered around the Alpaca API.">在此之前我已有一套龐大的 Python 量化平台（F_4，見下），但兩個根本問題始終未解：(a) 篩選、回測、實盤三者的結果要完全可重現且 100% 一致；(b) 回測必須完全不含 look-ahead 與生存者偏差——這兩者是量化回測最普遍的「隱性灌水」方式。為同時解決這兩個問題，我以 Go 從頭圍繞 Alpaca API 重建了整套系統。</p>
       </div>
 
       <div class="detail-sec">
-        <h2 data-en="Core highlight: eliminating bias">核心亮點：消除偏差</h2>
+        <h2 data-en="Core Highlights: Eliminating Bias at the Source">核心亮點：從源頭消除偏差</h2>
         <ul class="feat-list">
-          <li><b data-en="Point-in-time constituent filter">點對點成份股過濾</b><span data-en="On every rebalance date the engine queries the stocks that were actually in the S&P 500 on that day, so future winners (e.g. SMCI, VRT, DELL, IBKR) are blocked before their index-inclusion date — eliminating look-ahead AND survivorship bias.">每個 rebalance 日，引擎會查詢「當日真實存在於 S&P 500」的成份股，因此未來才入選的贏家（如 SMCI、VRT、DELL、IBKR）在入選日前會被屏蔽——同時消除 look-ahead 與生存者偏差。</span></li>
-          <li><b data-en="Full US universe (8,114 stocks)">全美股宇宙（8,114 檔）</b><span data-en="With -universe all_us it pulls every active, tradable US stock from the Alpaca Assets API and caches all daily K-lines locally as JSON, so any full-market backtest loads in seconds.">以 -universe all_us 從 Alpaca Assets API 取得所有活躍可交易的美股，並把全部日 K 線快取成本地 JSON，任何全市場回測都能秒級載入。</span></li>
-          <li><b data-en="Deterministic backtest ↔ live">回測與實盤決定性一致</b><span data-en="Stable alphabetical sorting and symbol tie-breakers make backtest and live results 100% reproducible and identical.">以穩定的字母排序與代號 tie-breaker，讓回測與實盤結果 100% 可重現、完全一致。</span></li>
-          <li><b data-en="Monte Carlo stress testing">蒙地卡羅壓力測試</b><span data-en="10,000-path circular block bootstrap reports profit probability and ruin (max-drawdown > 50%) probability, so risk is quantified rather than assumed.">以 10,000 條路徑的 circular block bootstrap 模擬，輸出獲利機率與破產（最大回撤 > 50%）機率，讓風險被量化而非靠猜。</span></li>
+          <li>
+            <b data-en="Point-in-time constituent filter">點對點成份股過濾</b>
+            <span data-en="On every rebalance date, the engine queries which stocks were actually in the S&amp;P 500 on that specific day. Future winners — such as SMCI, VRT, DELL, and IBKR — are excluded prior to their actual index-inclusion dates, simultaneously eliminating both look-ahead bias and survivorship bias.">每個 rebalance 日，引擎查詢「當日真實存在於 S&amp;P 500」的成份股清單。未來才入選的贏家（如 SMCI、VRT、DELL、IBKR）在實際入選日前一律排除，同時消除 look-ahead 偏差與生存者偏差。</span>
+          </li>
+          <li>
+            <b data-en="Full US universe — 8,114 stocks">全美股宇宙——8,114 檔</b>
+            <span data-en="The -universe all_us flag pulls every active, tradable US equity from the Alpaca Assets API and caches all daily OHLCV data as local JSON files. Any full-market backtest loads in seconds rather than minutes.">-universe all_us 旗標從 Alpaca Assets API 取得所有活躍可交易美股，並將完整日 K 線（OHLCV）快取為本地 JSON。任何全市場回測均能在數秒內載入，無需重複下載。</span>
+          </li>
+          <li>
+            <b data-en="Deterministic backtest–live alignment">決定性的回測與實盤一致性</b>
+            <span data-en="Stable alphabetical sorting combined with symbol-level tie-breakers ensures that backtest signals and live signals are 100% reproducible with zero ambiguity from non-deterministic iteration order.">穩定的字母排序搭配代號 tie-breaker，確保回測訊號與實盤訊號 100% 可重現，不因迭代順序不確定而產生任何歧義。</span>
+          </li>
+          <li>
+            <b data-en="Monte Carlo stress testing">蒙地卡羅壓力測試</b>
+            <span data-en="A 10,000-path circular block bootstrap quantifies both profit probability and ruin probability (maximum drawdown exceeding 50%), replacing gut-feel risk assessment with rigorous statistical bounds.">10,000 條路徑的 circular block bootstrap 模擬，輸出獲利機率與破產機率（最大回撤超過 50%），以嚴謹的統計區間取代主觀風險直覺。</span>
+          </li>
         </ul>
       </div>
 
       <div class="detail-sec">
-        <h2 data-en="Architecture (data flow)">系統架構（資料流）</h2>
+        <h2 data-en="System Architecture (Data Flow)">系統架構（資料流）</h2>
         <div style="background:#0b1220; border:1px solid #233149; border-radius:12px; padding:18px; overflow:auto;">
           <pre class="mermaid">
 flowchart LR
@@ -85,30 +97,36 @@ flowchart LR
       </div>
 
       <div class="detail-sec">
-        <h2 data-en="Backtest results (clearly labeled)">回測結果（明確標示）</h2>
-        <p data-en="Clean run, 2020–2026 (~5.8 yrs), point-in-time S&P 500, no look-ahead. These are BACKTEST figures, not a promise of live returns.">乾淨回測，2020–2026（約 5.8 年），point-in-time S&P 500、無 look-ahead。以下為「回測」數據，非實盤報酬保證。</p>
+        <h2 data-en="Backtest Results (clearly labeled as backtest)">回測結果（明確標示為回測）</h2>
+        <p data-en="Clean run: 2020–2026 (~5.8 years), point-in-time S&amp;P 500 universe, zero look-ahead. All figures below are backtest results only — not a forecast or guarantee of live performance.">乾淨回測：2020–2026（約 5.8 年），point-in-time S&amp;P 500 宇宙、零 look-ahead。以下所有數據均為「回測」結果，非對實盤績效的預測或保證。</p>
         <ul class="feat-list">
-          <li><b>CAGR 29.61% · MDD -32.66% · Sharpe 0.82</b><span data-en="$3,000 concentrated tier — total return +351.89%, profit factor 4.21, win rate 63.9%.">$3,000 集中型——總報酬 +351.89%、獲利因子 4.21、勝率 63.9%。</span></li>
-          <li><b data-en="Monte Carlo: 99.72% profit probability">蒙地卡羅：99.72% 獲利機率</b><span data-en="Over 10,000 simulated 6-year paths; ruin (MDD > 50%) probability 10.11%.">10,000 條 6 年模擬路徑；破產（回撤 > 50%）機率 10.11%。</span></li>
+          <li>
+            <b>CAGR 29.61% · MDD −32.66% · Sharpe 0.82</b>
+            <span data-en="$3,000 concentrated-tier strategy — cumulative return +351.89%, profit factor 4.21, win rate 63.9%.">$3,000 集中型策略——累計報酬 +351.89%、獲利因子 4.21、勝率 63.9%。</span>
+          </li>
+          <li>
+            <b data-en="Monte Carlo: 99.72% profit probability">蒙地卡羅：99.72% 獲利機率</b>
+            <span data-en="Across 10,000 simulated 6-year paths; ruin probability (max drawdown exceeding 50%) was 10.11%.">10,000 條 6 年模擬路徑；破產機率（回撤超過 50%）為 10.11%。</span>
+          </li>
         </ul>
       </div>
 
       <div class="detail-sec">
-        <h2 data-en="Lineage: the older F_4 system">淵源：舊版 F_4 系統</h2>
-        <p data-en="This Go system evolves from F_4 “Elite Trading System” — a ~31,000-line Python platform (Minervini Trend Template + Armstrong ECM Pi-Cycle, a 9-factor Elite Score, dynamic risk modes, Monte Carlo + crisis stress tests). I'm consolidating its strategy logic into the cleaner, faster Go build.">這套 Go 系統由 F_4「Elite Trading System」演進而來——一個約 31,000 行的 Python 平台（Minervini Trend Template ＋ Armstrong ECM Pi-Cycle、九因子 Elite Score、動態風險模式、蒙地卡羅與危機壓力測試）。我正把它的策略邏輯整併進更乾淨、更快的 Go 版本。</p>
+        <h2 data-en="Lineage: The F_4 System">淵源：F_4 系統</h2>
+        <p data-en="This Go system evolved from F_4 — an approximately 31,000-line Python quantitative platform incorporating Minervini's Trend Template, Armstrong's ECM Pi-Cycle, a 9-factor Elite Score, dynamic risk management modes, and Monte Carlo plus crisis stress testing. I am progressively migrating its core strategy logic into this cleaner, faster Go implementation.">這套 Go 系統由 F_4 演進而來——一個約 31,000 行的 Python 量化平台，整合了 Minervini Trend Template、Armstrong ECM Pi-Cycle、九因子 Elite Score、動態風險管理模式，以及蒙地卡羅與危機壓力測試。我正逐步將其核心策略邏輯遷移至這套更精簡、更快速的 Go 實作中。</p>
       </div>
 
       <div class="detail-sec">
         <h2 data-en="Screenshot">介面截圖</h2>
         <figure class="detail-shot">
           <img src="images/shot-stock.png" alt="美股量化系統介面截圖" loading="lazy" />
-          <figcaption data-en="Control panel: download, screening and log output (real screenshot)">主控制台：資料下載、選股篩選與日誌輸出（實際截圖）</figcaption>
+          <figcaption data-en="Control panel: data download, stock screening, and log output (actual screenshot)">主控制台：資料下載、選股篩選與日誌輸出（實際截圖）</figcaption>
         </figure>
       </div>
 
       <div class="prevnext">
-        <a href="personal.html" data-en="← All personal works">← 回個人作品</a>
-        <a href="project-crypto-dashboard.html" data-en="crypto-dashboard →">看 crypto-dashboard →</a>
+        <a href="personal.html" data-en="← All Personal Works">← 回個人作品</a>
+        <a href="project-crypto-dashboard.html" data-en="Crypto Dashboard →">看 crypto-dashboard →</a>
       </div>
     </div>
   </section>

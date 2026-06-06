@@ -47,32 +47,12 @@
 
         <article class="card pcard reveal">
           <div class="top">
-            <span style="font-size: 28px; line-height: 1;">📊</span>
-            <span class="badge" data-en="Quant Monitor">量化監控</span>
-            <span class="lang">Kotlin</span>
-          </div>
-          <h3 data-en="Winter Watch — Market Regime Monitor">Winter Watch — 市場狀態監控器</h3>
-          <figure class="card-shot">
-            <img src="images/shot-winter-watch.png" alt="Winter Watch App Screenshot" loading="lazy" />
-            <figcaption data-en="Dashboard UI displaying indicators & sparklines (Mockup)">市場狀態指標與 Sparkline 數據折線圖（示意圖）</figcaption>
-          </figure>
-          <p data-en="A read-only market-regime monitor for trend-followers. Refreshes 10 quant indicators (SMA200, Mayer Multiple, Weekly RSI…) on 4h UTC closes via the public Binance and CoinGecko APIs (no key), weighting them into a 0–100 composite score and a Strategy Gate (open/closed) signal; uses stale-while-revalidate caching for zero-latency startup. Built with Kotlin, Jetpack Compose and Room.">
-            為趨勢交易者設計的市場狀態監控器。透過 Binance 與 CoinGecko 公開 API（免金鑰）在 4h UTC 收盤更新 10 個量化指標（SMA200、Mayer Multiple、週 RSI 等），加權成 0–100 綜合分數與「Strategy Gate（開/關）」訊號；採 SWR 快取，啟動零延遲。基於 Kotlin、Jetpack Compose 與 Room。
-          </p>
-          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Android (Kotlin / Compose / Room SQLite)">Android (Kotlin / Compose / Room SQLite)</span>
-        </article>
-
-        <article class="card pcard reveal">
-          <div class="top">
             <span style="font-size: 28px; line-height: 1;">🔊</span>
             <span class="badge" data-en="Wear OS App">穿戴裝置</span>
             <span class="lang">Kotlin</span>
           </div>
           <h3 data-en="MemeWatch — Meme Soundboard">MemeWatch — 迷因語音板</h3>
-          <figure class="card-shot">
-            <img src="images/shot-memewatch.png" alt="MemeWatch Screenshot" loading="lazy" />
-            <figcaption data-en="Meme Soundboard for Phone & Wear OS Watch (Mockup)">手機與 Wear OS 手錶的迷因語音板介面（示意圖）</figcaption>
-          </figure>
+
           <p data-en="A meme soundboard for phones and Wear OS watches (custom-uploaded + preset clips). Integrates AdMob ads and Google Play Billing and packages as a signed .aab for the Play Store. Built with Kotlin, Jetpack Compose for Wear OS and Room.">
             專為 Android 手機與 Wear OS 智慧手錶設計的迷因語音播放器，支援自訂上傳與預設音效。已整合 AdMob 廣告與 Google Play 帳務，並可打包為簽章 .aab 上架 Google Play。使用 Kotlin、Jetpack Compose for Wear OS 與 Room。
           </p>
@@ -92,19 +72,6 @@
           <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Android (Kotlin / Compose / Gemini API)">Android (Kotlin / Compose / Gemini API)</span>
         </article>
 
-        <article class="card pcard reveal">
-          <div class="top">
-            <span style="font-size: 28px; line-height: 1;">⚡</span>
-            <span class="badge" data-en="Networking">網路工具</span>
-            <span class="lang">Kotlin</span>
-          </div>
-          <h3 data-en="Network Optimizer">網路優化大師</h3>
-          <p data-en="Auto detect latency, configure optimal DNS to improve speed, monitor Wi-Fi/cellular latency, inspect app external IP statuses, and provide a local secure DNS VPN connection. Built with Kotlin & Android SDK.">
-            網路狀態監控與最佳化工具。可自動測試多個 DNS 延遲並一鍵設定最佳 DNS，監控 4G/5G/Wi-Fi 延遲狀態，並支援 local DNS VPN 安全連線保護。基於 Kotlin 與 Android SDK。
-          </p>
-          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Android (Kotlin / Android VPN / DNS APIs)">Android (Kotlin / Android VPN / DNS APIs)</span>
-        </article>
-
       </div>
 
       <!-- 自動化與個人工具 -->
@@ -121,10 +88,7 @@
             <span class="lang">Go</span>
           </div>
           <h3 data-en="crypto-dashboard — Crypto Quant Trading Dashboard">crypto-dashboard — 加密貨幣量化交易儀表板</h3>
-          <figure class="card-shot">
-            <img src="images/shot-crypto-dashboard.png" alt="crypto-dashboard Desktop App Screenshot" loading="lazy" />
-            <figcaption data-en="Desktop UI with charts, signals, and transaction logs (Actual screenshot)">具備圖表、訊號與交易日誌的桌面 Wails 介面（實際截圖）</figcaption>
-          </figure>
+
           <p data-en="A complete Go port of a ~3,994-line Python crypto-quant stack into 5,817 lines of Go (incl. 803 test lines, go test green). Wails replaces PyQt; concurrency via goroutines + sync.Mutex; Parquet partition cache; go-binance for Binance; with built-in max-drawdown hard cap and monthly circuit-breaker risk guards.">
             將約 3,994 行 Python 加密貨幣量化系統完整移植為 5,817 行 Go（含 803 行測試，go test 全綠）。以 Wails 取代 PyQt、goroutines＋sync.Mutex 處理並行、Parquet 分區快取、go-binance 對接 Binance；內建最大回撤硬上限與每月熔斷風控。
           </p>
@@ -139,10 +103,7 @@
             <span class="lang">Go</span>
           </div>
           <h3 data-en="SoftEther VPN Command Bridge">VPN 快速連線工具</h3>
-          <figure class="card-shot">
-            <img src="images/shot-vpn.png" alt="VPN Command Bridge Interface" loading="lazy" />
-            <figcaption data-en="VPN Client Interface with server list and one-click connection (Actual screenshot)">VPN 連線管理介面、伺服器清單與一鍵連線功能（實際截圖）</figcaption>
-          </figure>
+
           <p data-en="A desktop Go utility bridging SoftEther VPN client (vpncmd) and VPNGate API. Runs as a background web server with browser GUI. Handles automatic virtual NIC check/creation, quality scoring, and quick profile-based connection.">
             對接 VPNGate API 的 SoftEther VPN Client 連線工具。在背景執行 Go 伺服器並提供瀏覽器網頁介面，可自動偵測與建立虛擬網卡、獲取伺服器清單、依 Ping/速度計算品質評分並一鍵連線。
           </p>
@@ -155,16 +116,13 @@
             <span class="badge" data-en="Quant Trading">量化交易</span>
             <span class="lang">Go</span>
           </div>
-          <h3 data-en="Alpaca — US Stock Quant System">Alpaca — 美股量化交易系統</h3>
-          <figure class="card-shot">
-            <img src="images/shot-stock.png" alt="Stock Trend Filter Interface" loading="lazy" />
-            <figcaption data-en="Screener control panel with download and analysis tools (Actual screenshot)">主控制台：包含股票下載、趨勢指標篩選與日誌輸出（實際截圖）</figcaption>
-          </figure>
-          <p data-en="A US-stock quant trading system in Go using Minervini's Trend Template plus cross-sectional momentum. A point-in-time S&P 500 constituent filter eliminates look-ahead and survivorship bias; it backtests the full 8,114-stock US universe (Monte-Carlo stress-tested) and trades live via Alpaca. Evolved from F_4, a ~31,000-line Python system.">
-            Go 打造的美股量化交易系統，以 Minervini Trend Template ＋ 橫斷面動能選股；透過「點對點成份股過濾」消除 look-ahead 與生存者偏差，支援全美股 8,114 檔回測（含蒙地卡羅壓力測試）與 Alpaca 實盤。由舊版約 31,000 行 Python 系統 F_4 演進、以 Go 重寫整合中。
+          <h3 data-en="Alpaca — US Equity Quantitative Trading System">Alpaca — 美股量化交易系統</h3>
+
+          <p data-en="A Go-based US equity quantitative trading system implementing Minervini's Trend Template with cross-sectional momentum ranking. A point-in-time S&amp;P 500 constituent filter fully eliminates look-ahead and survivorship bias. Backtests the entire 8,114-stock US universe with Monte Carlo stress testing and executes live trades via the Alpaca API. Evolved from F_4, a ~31,000-line Python quant platform.">
+            Go 打造的美股量化交易系統，以 Minervini Trend Template ＋ 橫斷面動能排名選股；透過「點對點成份股過濾」徹底消除 look-ahead 與生存者偏差，支援全美股 8,114 檔回測（含蒙地卡羅壓力測試）與 Alpaca 實盤。由舊版約 31,000 行 Python 量化平台 F_4 演進、以 Go 重寫整合中。
           </p>
           <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Desktop (Go / Alpaca API / Backtest / Monte Carlo)">Desktop (Go / Alpaca API / Backtest / Monte Carlo)</span>
-          <a class="go" href="project-stock.html" style="margin-top:10px; color:var(--accent); font-weight:700;" data-en="→ Architecture and details">→ 看系統架構與技術詳解</a>
+          <a class="go" href="project-stock.html" style="margin-top:10px; color:var(--accent); font-weight:700;" data-en="→ System architecture &amp; technical details">→ 看系統架構與技術詳解</a>
         </article>
 
         <article class="card pcard reveal">
@@ -174,10 +132,7 @@
             <span class="lang">Python</span>
           </div>
           <h3 data-en="Excel to PDF Batch Converter">Excel 批次轉 PDF 工具</h3>
-          <figure class="card-shot">
-            <img src="images/shot-excel-pdf.png" alt="Excel to PDF Converter Interface" loading="lazy" />
-            <figcaption data-en="Simple folder selector interface for batch converting sheets to PDF (Actual screenshot)">簡潔的資料夾選擇介面，一鍵批次轉換試算表（實際截圖）</figcaption>
-          </figure>
+
           <p data-en="A utility Tkinter tool automating Excel sheets conversion to PDF. Automates MS Excel via Win32 COM APIs to convert all spreadsheet files in a selected directory with a single click, keeping accurate pagination.">
             實用 Tkinter 桌面小工具。呼叫 Win32 COM 介面自動操作 Excel 核心，一鍵將指定資料夾中所有的 Excel 活頁簿批次轉換為乾淨的 PDF 文件，避免排版跑版。
           </p>
