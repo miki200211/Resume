@@ -242,7 +242,7 @@ footer { background:#07101e; color:#93a4bd; text-align:center; padding:28px 0; f
   object-fit: cover;
   transition: transform 0.3s ease;
 }
-.pcard:hover .card-shot img {
+.pcard:hover .card-shot img, .entry-card:hover .card-shot img {
   transform: scale(1.05);
 }
 .card-shot figcaption {
