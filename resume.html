@@ -96,12 +96,12 @@
           <h2 class="sec-title" data-en="Key Achievements">主要成就</h2>
           <ul class="ach-list" data-en="
             <li><b>1. Auto Workflow Integration</b>: Case handling was manual and tedious (cross-checking, log downloading, manual ticketing), developed one-click auto-ticketing program, per-case time <b>30 min => 2 min</b>.</li>
-            <li><b>2. Out-of-Warranty (OOW) Process Integration</b>: Out-of-warranty quotes and replies were edited manually causing format errors, developed OOW integration and LINE notifications, text conversion <b>3 min => 1 min</b>.</li>
+            <li><b>2. Out-of-Warranty (OOW) Process</b>: Out-of-warranty quotes and replies were edited manually causing format errors, developed OOW integration and LINE notifications, text conversion <b>3 min => 1 min</b>.</li>
             <li><b>3. After-sales Case Tracker</b>: Cross-referencing hundreds of cases daily across JIRA and client logs was tedious and error-prone, developed async crawler and Union-Find grouping to automate matching and follow-ups.</li>
-            <li><b>4. Go Credential Bridge</b>: Plain credentials scattered across scripts and PCs posed high security risks, built Go credential bridge with cloud AES-256-GCM/DPAPI/HMAC, ensuring <b>0 plaintext passwords stored</b>.</li>
+            <li><b>4. Credential Bridge Security Tool</b>: Plain credentials scattered across scripts and PCs posed high security risks, built Go credential bridge with cloud AES-256-GCM/DPAPI/HMAC, ensuring <b>0 plaintext passwords stored</b>.</li>
           ">
             <li><b>1. 自動化工作流程（一鍵自動建案）</b>：痛點為流程繁瑣需人工手動交叉比對、下載及填寫建單，極其耗時，因此開發一鍵自動建單程式，單案處理 <b>30分鐘 => 2分鐘</b>。</li>
-            <li><b>2. 保外流程整合系統</b>：痛點為保修外報價與備機回覆均由人工編輯，格式不一且易出錯，因此開發保外流程整合工具與 LINE 通知，文字轉換 <b>3分鐘 => 1分鐘</b>。</li>
+            <li><b>2. 保外流程系統</b>：痛點為保修外報價與備機回覆均由人工編輯，格式不一且易出錯，因此開發保外流程整合工具與 LINE 通知，文字轉換 <b>3分鐘 => 1分鐘</b>。</li>
             <li><b>3. 售後案件追蹤系統</b>：痛點為每日需在不同系統間人工交叉比對上百筆資料並跟催，極易漏件，因此開發非同步爬蟲與 Union-Find 項目綁定，實現一鍵自動比對分類與跟催。</li>
             <li><b>4. 憑證橋接安全工具</b>：痛點為多套自動化工具帳密明文散落於各電腦中，資安風險極高，因此開發雙因子雲端解密與 CLI/GUI 憑證中心，讓程式 <b>100% 不儲存明文密碼</b>。</li>
           </ul>
@@ -117,8 +117,8 @@
             <div class="org" data-en="Garmin · AOEM Customer Service Engineering (CSE)">Garmin 台灣航電 · AOEM 客戶服務工程部</div>
             <ul>
               <li data-en="**Led the development** of 4 internal automation & infrastructure tools (Go/Python), **cutting** per-case handling time from 30 to 2 minutes and **boosting** team efficiency by 93%."><b>主導開發</b> 4 套內部自動化與基礎工具（Go / Python），<b>縮短</b>售後維修單案處理時間自 30 分鐘至 2 分鐘，<b>提升</b>整體流程效率達 93%。</li>
-              <li data-en="**Designed and refactored** the JIRA & client repair log matching system, **integrating** OCR and Union-Find algorithms to cross-reference hundreds of daily entries and **eliminate** human tracking errors."><b>設計與重構</b> JIRA 與客戶維修履歷比對系統，<b>結合</b> OCR 驗證碼辨識與 Union-Find 算法進行關聯案件綁定，<b>自動對照</b>每日上百筆資料，<b>消除</b>人工手動比對的失誤與漏單率。</li>
-              <li data-en="**Built and maintained** a team-wide credential bridge, **implementing** AES-256-GCM, DPAPI, and HMAC auditing to **secure** 100% of automation scripts from storing plaintext passwords."><b>建構與維護</b> 團隊憑證安全橋接器，<b>導入</b> AES-256-GCM、DPAPI 與 HMAC 稽核，<b>保障</b>所有自動化腳本內 100% 無明文密碼儲存，強化企業資訊安全。</li>
+              <li data-en="**Designed and refactored** the JIRA & client repair log matching system (After-sales Case Tracker), **integrating** OCR and Union-Find algorithms to cross-reference hundreds of daily entries and **eliminate** human tracking errors."><b>設計與重構</b> JIRA 與客戶維修履歷比對系統（售後案件追蹤系統），<b>結合</b> OCR 驗證碼辨識與 Union-Find 算法進行關聯案件綁定，<b>自動對照</b>每日上百筆資料，<b>消除</b>人工手動比對的失誤與漏單率。</li>
+              <li data-en="**Built and maintained** a team-wide credential bridge, **implementing** AES-256-GCM, DPAPI, and HMAC auditing to **secure** 100% of automation scripts from storing plaintext passwords."><b>建構與維護</b> 團隊憑證安全橋接器（憑證橋接安全工具），<b>導入</b> AES-256-GCM、DPAPI 與 HMAC 稽核，<b>保障</b>所有自動化腳本內 100% 無明文密碼儲存，強化企業資訊安全。</li>
               <li data-en="**Coordinated** Official LINE customer support and JIRA ticketing, **analyzing and tracing** infotainment black-screen complaints to specific phone models & iOS versions, and collaborating with AOEM R&D to resolve root causes."><b>協調</b> Official LINE 客訴與 JIRA 建案，<b>追蹤並分析</b>車載軟體黑畫面客訴，<b>定位</b>故障與特定手機型號、iOS 版本的關聯性，並與 AOEM 研發團隊跨部門合作修復根因。</li>
               <li data-en="**Dispatched** to Japan for overseas product rework and on-site troubleshooting, **serving** as a bilingual (Chinese/Japanese) technical coordinator to facilitate cross-border communication and solve issues."><b>派駐</b> 日本支援國外產品重工與現場故障排除（Troubleshooting），<b>擔任</b>中日雙語現場技術對接與協調人，<b>加速</b>原廠與客戶間的溝通與問題解決時程。</li>
               <li data-en="**Delivered** the final internship presentation to management, successfully **demonstrating** the architecture and business value of automation tools to promote wider team adoption."><b>發表</b> 實習成果專案簡報，向管理階層**展示**自動化系統架構與業務效益，獲高層高度肯定並成功將工具**推廣**至其他業務組。</li>
@@ -131,7 +131,7 @@
           
           <div class="proj-item">
             <div class="proj-header">
-              <a href="project-trackclose.html" class="proj-title-link" data-en="【After-sales Case Tracker】">【售後案件追蹤系統】</a>
+              <a href="project-case-tracker.html" class="proj-title-link" data-en="【After-sales Case Tracker】">【售後案件追蹤系統】</a>
               <span class="proj-tech" data-en="Tech Stack: Python, Tkinter, Selenium, Tesseract OCR, JIRA API">使用技術：Python, Tkinter, Selenium, Tesseract OCR, JIRA API</span>
             </div>
             <div class="proj-detail">
@@ -155,7 +155,7 @@
 
           <div class="proj-item">
             <div class="proj-header">
-              <a href="project-horizon.html" class="proj-title-link" data-en="【Credential Bridge】">【憑證橋接安全工具】</a>
+              <a href="project-credential-bridge.html" class="proj-title-link" data-en="【Credential Bridge Security Tool】">【憑證橋接安全工具】</a>
               <span class="proj-tech" data-en="Tech Stack: Go, AES-256-GCM, Windows DPAPI, HMAC, CLI/GUI">使用技術：Go, AES-256-GCM, Windows DPAPI, HMAC, CLI/GUI</span>
             </div>
             <div class="proj-detail">

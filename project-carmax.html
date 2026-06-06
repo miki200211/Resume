@@ -73,7 +73,7 @@
           <li><b data-en="“Ultra-Auto PRO” — dual-account parallel">「真·超自動 PRO」雙帳號並行</b><span data-en="Spawns two subprocesses to run the full pipeline for the client and M-Box accounts at the same time, streaming both outputs back into one GUI log with [客戶] / [Mbox] tags.">同時開兩個子行程，讓 客戶與 M-Box 兩組帳號各自跑完整流程，兩邊輸出即時串回同一個 GUI 日誌（加 [客戶] / [Mbox] 前綴）。</span></li>
           <li><b data-en="Threaded GUI">背景執行緒 GUI</b><span data-en="Download and processing run on background threads so the window stays responsive; logs stream live.">下載與處理走背景執行緒，視窗不卡死；日誌即時串流。</span></li>
           <li><b data-en="Frozen-exe worker trick">打包後的 worker 機制</b><span data-en="After PyInstaller packaging there's no standalone worker file, so the app re-launches itself with an env-var flag to enter worker mode — dev and frozen builds share one code path.">打包成 .exe 後沒有獨立 worker 檔，於是程式「重啟自己」並帶環境變數旗標進入 worker 模式——開發與打包版共用同一條程式路徑。</span></li>
-          <li><b data-en="No plaintext passwords stored">不存明文密碼</b><span data-en="Credentials are fetched at runtime through the Horizon credential bridge, so no plaintext passwords live inside the app.">透過 Horizon 憑證橋接於執行時取得帳密，程式內不存任何明文密碼。</span></li>
+          <li><b data-en="No plaintext passwords stored">不存明文密碼</b><span data-en="Credentials are fetched at runtime through the credential bridge security tool, so no plaintext passwords live inside the app.">透過憑證橋接安全工具於執行時取得帳密，程式內不存任何明文密碼。</span></li>
         </ul>
       </div>
 
@@ -86,8 +86,8 @@
       </div>
 
       <div class="prevnext">
-        <a href="project-trackclose.html" data-en="← Prev: TrackClose">← 上一個：TrackClose</a>
-        <a href="project-oow.html" data-en="Next: RMA / OOW →">下一個：RMA / OOW →</a>
+        <a href="project-case-tracker.html" data-en="← Prev: After-sales Case Tracker">← 上一個：售後案件追蹤系統</a>
+        <a href="project-oow.html" data-en="Next: Out-of-Warranty (OOW) Process →">下一個：保外流程 →</a>
       </div>
     </div>
   </section>

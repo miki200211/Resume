@@ -11,7 +11,7 @@ A CSE professional with an electronic-engineering background — customer-servic
 - 🌐 中文 / English 雙語切換
 - 📱 響應式（手機 / 桌面）
 
-收錄開發的四個工具：TrackClose 售後案件追蹤、一鍵自動建案、RMA / OOW 整合處理、Horizon 憑證橋接（Go）。
+收錄開發的四個工具：售後案件追蹤系統、一鍵自動建案（自動化工作流程）、保外流程系統、憑證橋接安全工具（Go）。
 
 ## 技術 / Built with
 HTML · CSS · JavaScript
