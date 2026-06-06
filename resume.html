@@ -73,8 +73,20 @@
         <section class="sec">
           <h2 class="sec-title" data-en="Certifications">證照</h2>
           <ul class="ci">
-            <li data-en="JLPT Japanese N2">日本語能力試驗 N2</li>
-            <li data-en="Japan Tour-Guide License">日本領隊執照</li>
+            <li class="cert-item">
+              <span data-en="JLPT Japanese N2">日本語能力試驗 N2</span>
+              <div class="cert-thumb" onclick="openCertModal('images/JLPT N2.png')">
+                <img src="images/JLPT N2.png" alt="JLPT N2 Certificate" />
+                <span class="zoom-overlay">🔍 檢視證書</span>
+              </div>
+            </li>
+            <li class="cert-item">
+              <span data-en="Japan Tour-Guide License">日本領隊執照</span>
+              <div class="cert-thumb" onclick="openCertModal('images/Tour Manager License.png')">
+                <img src="images/Tour Manager License.png" alt="Tour Guide Certificate" />
+                <span class="zoom-overlay">🔍 檢視證書</span>
+              </div>
+            </li>
           </ul>
         </section>
         <section class="sec">
@@ -84,10 +96,18 @@
             <div class="school" data-en="National Kaohsiung Univ. of Sci. & Tech.">國立高雄科技大學</div>
             <div class="deg" data-en="B.S. in Electronic Engineering">電子工程系</div>
             <div class="yr">2021 – 2025</div>
+            <div class="cert-thumb" onclick="openCertModal('images/NKUSD.png')">
+              <img src="images/NKUSD.png" alt="NKUST Certificate" />
+              <span class="zoom-overlay">🔍 檢視證書</span>
+            </div>
           </div>
           <div class="edu">
             <div class="school" data-en="Nagasaki University, Japan">日本 長崎大學</div>
             <div class="deg" data-en="Exchange / Study abroad">交換留學</div>
+            <div class="cert-thumb" onclick="openCertModal('images/nagasaki.png')">
+              <img src="images/nagasaki.png" alt="Nagasaki University Certificate" />
+              <span class="zoom-overlay">🔍 檢視證明</span>
+            </div>
           </div>
         </section>
         <section class="sec">
@@ -156,6 +176,23 @@
   <footer>
     © <span id="year"></span> 謝茗鈞 Miki Hsieh ・ <span data-en="Online résumé, hand-coded">線上履歷，手刻</span>
   </footer>
+
+  <!-- Lightbox Modal for Certificates/Education -->
+  <div id="certModal" class="modal" onclick="this.style.display='none'">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="imgModalTarget" alt="Certificate Image Preview">
+  </div>
+
+  <script>
+    function openCertModal(src) {
+      const modal = document.getElementById('certModal');
+      const img = document.getElementById('imgModalTarget');
+      if (modal && img) {
+        img.src = src;
+        modal.style.display = 'block';
+      }
+    }
+  </script>
 
   <script src="assets/app.js"></script>
 </body>
