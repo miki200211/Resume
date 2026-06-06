@@ -7,7 +7,7 @@
 :root {
   --ink:#f1f6fc; --text:#d4ddea; --muted:#93a4bd;
   --bg:#0b1220; --bg-2:#0e1729; --card:#121d33; --line:#233149;
-  --sidebar:#0c1525; --accent:#2dd4bf; --accent-2:#60a5fa; --accent-d:#14b8a6;
+  --sidebar:#0c1525; --accent:#3b82f6; --accent-2:#60a5fa; --accent-d:#2563eb;
   --chip-bg:#18253f; --chip-line:#2a3a57; --tag-bg:#16284a; --tag-fg:#9cc3ff;
   --nav-bg:rgba(11,18,32,.82); --shadow:0 14px 40px rgba(0,0,0,.45);
   --radius:16px; --maxw:1080px;
@@ -16,7 +16,7 @@
 :root[data-theme="light"] {
   --ink:#16233a; --text:#2c3a4b; --muted:#6a7888;
   --bg:#f6f8fb; --bg-2:#eef2f7; --card:#ffffff; --line:#e3e9f1;
-  --sidebar:#f4f7fb; --accent:#0d8a7d; --accent-2:#2563eb; --accent-d:#0a6b60;
+  --sidebar:#f4f7fb; --accent:#1e40af; --accent-2:#2563eb; --accent-d:#1e3a8a;
   --chip-bg:#eef3f8; --chip-line:#e0e7ef; --tag-bg:#eef4ff; --tag-fg:#2456c7;
   --nav-bg:rgba(255,255,255,.88); --shadow:0 12px 34px rgba(20,40,70,.12);
 }
@@ -272,7 +272,7 @@ footer { background:#07101e; color:#93a4bd; text-align:center; padding:28px 0; f
   .sec,.xp,.proj,.edu { break-inside:avoid; }
   :root, :root[data-theme="dark"] {
     --bg:#fff; --card:#fff; --ink:#16233a; --text:#2c3a4b; --muted:#5a6675;
-    --line:#dde4ec; --sidebar:#f4f7fb; --accent:#0a6b60; --accent-d:#0a6b60;
+    --line:#dde4ec; --sidebar:#f4f7fb; --accent:#1e3a8a; --accent-d:#1e3a8a;
     --chip-bg:#eef3f8; --chip-line:#e0e7ef;
   }
   .sidebar { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
@@ -443,4 +443,180 @@ html[lang="en"] .quote-text {
 }
 .ach-list li b:first-child {
   color: var(--accent);
+}
+
+/* ===== 個人作品與代表專案 ===== */
+.proj-item {
+  margin-bottom: 16px;
+  background: var(--sidebar);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+.proj-item:last-child {
+  margin-bottom: 0;
+}
+.proj-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 8px;
+}
+.proj-title-link {
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--accent);
+  transition: color 0.2s;
+}
+.proj-title-link:hover {
+  color: var(--accent-2);
+}
+.proj-tech {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.proj-detail p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.proj-detail p:last-child {
+  margin-bottom: 0;
+}
+.accent-link {
+  color: var(--accent-2);
+  font-weight: 700;
+  text-decoration: underline;
+}
+.accent-link:hover {
+  color: var(--accent);
+}
+
+/* ===== 證照與里程碑 ===== */
+.milestones-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.milestone-card {
+  background: var(--sidebar);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.m-title {
+  font-weight: 800;
+  font-size: 14.5px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 6px;
+}
+.m-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.m-list li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.m-list li::before {
+  content: "•";
+  color: var(--accent-2);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.cert-thumbs-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.cert-thumbs-row .cert-thumb {
+  margin-top: 0;
+  flex: 1;
+  max-width: none;
+  height: 64px;
+}
+
+/* ===== 學歷與海外經驗 ===== */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.edu-item {
+  background: var(--sidebar);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.edu-main {
+  flex: 1;
+}
+.edu-school {
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--ink);
+}
+.edu-deg {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 700;
+  margin: 2px 0 6px;
+}
+.edu-desc {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.edu-item .cert-thumb {
+  margin-top: 0;
+  width: 80px;
+  height: 54px;
+  flex: none;
+}
+
+/* ===== RWD 手機版置中與排版 ===== */
+@media (max-width: 860px) {
+  .milestones-grid, .edu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 列印模式調整 ===== */
+@media print {
+  .proj-item, .milestone-card, .edu-item {
+    background: transparent !important;
+    border: 1px solid #dde4ec !important;
+    page-break-inside: avoid;
+  }
+  .cert-thumbs-row, .edu-item .cert-thumb {
+    display: none !important;
+  }
+  .proj-header {
+    border-bottom: 1px dashed #dde4ec !important;
+  }
+  .m-title {
+    border-bottom: 1px dashed #dde4ec !important;
+  }
 }
