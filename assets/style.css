@@ -313,3 +313,29 @@ html[lang="en"] .quote-text {
 :root[data-theme="dark"] .pitch-list li {
   color: #a3b8cc;
 }
+
+/* ===== 履歷專業摘要條列式 ===== */
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--text);
+  line-height: 1.6;
+}
+.summary-list li {
+  position: relative;
+  padding-left: 18px;
+}
+.summary-list li::before {
+  content: "•";
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 18px;
+  position: absolute;
+  left: 0;
+  top: -2px;
+}
