@@ -26,8 +26,12 @@
   let zhTitle = document.title;
   function applyLang(lang) {
     document.querySelectorAll('[data-en]').forEach(el => {
-      if (el._zh === undefined) el._zh = el.innerHTML;
-      el.innerHTML = (lang === 'en') ? el.dataset.en : el._zh;
+      try {
+        if (el._zh === undefined) el._zh = el.innerHTML;
+        el.innerHTML = (lang === 'en') ? el.dataset.en : el._zh;
+      } catch (e) {
+        console.warn('[i18n] Failed to switch element:', el, e);
+      }
     });
     root.lang = (lang === 'en') ? 'en' : 'zh-Hant';
     document.title = (lang === 'en' && root.dataset.titleEn) ? root.dataset.titleEn : zhTitle;
