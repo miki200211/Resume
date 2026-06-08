@@ -45,7 +45,6 @@
         <!-- ★聯絡資訊（請替換電話）-->
         <div class="r-contact">
           <span class="it">📧 <a href="mailto:mike.2002.live@gmail.com">mike.2002.live@gmail.com</a></span>
-          <span class="it">📱 <a href="tel:+886900000000">＋886 9XX-XXX-XXX</a></span>
           <span class="it" data-en="📍 Kaohsiung, Taiwan">📍台灣</span>
           <span class="it">🔗 <a href="https://github.com/miki200211" target="_blank" rel="noopener">github.com/miki200211</a></span>
         </div>
@@ -101,10 +100,10 @@
             <li><b>4. Credential Bridge Security Tool</b>: Plaintext credentials scattered across automation scripts and machines posed serious security risks. Built a Go-based credential bridge with cloud AES-256-GCM, Windows DPAPI, and HMAC audit logging, achieving <b>0 plaintext passwords</b> across all scripts.</li>
             <li><b>5. Overseas On-site Support</b>: Dispatched to Japan to resolve device anomalies under tight shipment deadlines, serving as the bilingual (Chinese/Japanese) technical coordinator to identify root causes and keep the production timeline on track.</li>
           ">
-            <li><b>1. 自動化工作流程</b>：痛點為流程繁瑣需人工手動交叉比對、下載及填寫建單，極其耗時，因此開發一鍵自動建單程式，單案處理 <b>15分鐘 => 1分鐘</b>。</li>
+            <li><b>1. 自動化工作流程</b>：痛點為流程繁瑣需人工手動交叉比對、下載及填寫建單，極其耗時，因此開發一鍵自動建單程式，平均單案處理時間由 <b>30 分鐘縮短至 2 分鐘</b>。</li>
             <li><b>2. 保外流程系統</b>：痛點為保修外報價均由人工編輯，格式不一且易出錯，因此開發保外流程整合工具，文字轉換 <b>3分鐘 => 1分鐘</b>。</li>
             <li><b>3. 售後案件追蹤系統</b>：痛點為每日需在不同系統間人工交叉比對上百筆資料，極易漏件，實現自動比對分類資料及快送推送功能。</li>
-            <li><b>4. 憑證橋接安全工具</b>：痛點為多套自動化工具帳密明文散落於各電腦中，資安風險極高，因此開發雙因子雲端解密與憑證中心，讓程式 <b>100% 不儲存明文密碼</b>。</li>
+            <li><b>4. 憑證橋接安全工具</b>：痛點為多套自動化工具帳密明文散落於各電腦中，資安風險極高，因此開發以網域驗證與 ACL 存取控制為基礎的加密憑證橋接，讓程式 <b>100% 不儲存明文密碼</b>。</li>
             <li><b>5. 海外出差與現場支援</b>：痛點為日本現場設備異常與跨國溝通障礙，赴日進行現場排錯，並擔任中日雙語技術協調人，成功在時限內排除故障並保障產品順利出貨。</li>
           </ul>
         </section>
@@ -118,7 +117,7 @@
             </div>
             <div class="org" data-en="Garmin · AOEM Customer Service Engineering (CSE)">Garmin 台灣航電 · AOEM 客戶服務工程部</div>
             <ul>
-              <li data-en="**Led the development** of 4 internal automation & infrastructure tools (Go/Python), **cutting** per-case handling time from 30 to 2 minutes and **boosting** team efficiency by 93%."><b>主導開發：</b> 4 套內部自動化與基礎工具（Go / Python），縮短售後維修單案處理時間自 30 分鐘至 2 分鐘，提升整體流程效率達 93%。</li>
+              <li data-en="**Led the development** of 4 internal automation tools (Go/Python), **adopted as the team's daily standard workflow across all members**; per-case handling time cut from 30 to 2 minutes, **boosting** team efficiency by 93%."><b>主導開發：</b> 4 套內部自動化工具（Go / Python），已成為部門全員每日使用的標準作業工具；主要工具將單案處理時間由 30 分鐘縮短至 2 分鐘，提升流程效率達 93%。</li>
               <li data-en="**Designed and refactored** the JIRA & client repair log matching system (After-sales Case Tracker), **integrating** OCR and Union-Find algorithms to cross-reference hundreds of daily entries and **eliminate** human tracking errors."><b>設計與重構：</b> 資料比對系統，結合OCR 驗證碼辨識與資料案件綁定，自動對照每日上百筆資料，消除人工手動比對的失誤與漏單率。</li>
               <li data-en="**Built and maintained** a team-wide credential bridge, **implementing** AES-256-GCM, DPAPI, and HMAC auditing to **secure** 100% of automation scripts from storing plaintext passwords."><b>建構與維護：</b> 團隊憑證安全橋接器（憑證橋接安全工具），導入 AES-256-GCM、DPAPI 與 HMAC 稽核，保障所有自動化腳本內 100% 無明文密碼儲存，強化企業資訊安全。</li>
               <li data-en="**Coordinated** Official LINE customer support and JIRA ticketing, **analyzing and tracing** infotainment black-screen complaints to specific phone models & iOS versions, and collaborating with AOEM R&D to resolve root causes."><b>客戶服務：</b> 官方客訴與 JIRA 建案，追蹤並分析車載系統異常現象，定位故障與發生異常的關聯性，並與內部團隊部門合作修復根因。</li>
@@ -173,7 +172,7 @@
             </div>
             <div class="proj-detail">
               <p data-en="<b>Project Core:</b> Secure credential manager and API key bridge for multiple automation scripts accessing JIRA and client databases."><b>作品核心：</b>為團隊內部多套自動化工具提供安全存取 JIRA 與客戶系統憑證的金鑰管理橋接器。</p>
-              <p data-en="<b>Core Contribution:</b> Solved the high security risk of having plaintext passwords hardcoded inside multiple automation scripts and config files. Developed a secure CLI/GUI credential manager in Go, utilizing two-factor cloud key decryption, local <b>Windows DPAPI</b> encryption, and <b>HMAC</b> signature logging."><b>核心貢獻：</b>解決多套自動化工具將帳密明文寫在腳本或設定檔中，導致資安洩漏風險極高的痛點。以 Go 語言開發安全憑證中心，設計雙因子雲端金鑰解密，結合本地 <b>Windows DPAPI</b> 保護與 <b>HMAC</b> 加密日誌稽核。</p>
+              <p data-en="<b>Core Contribution:</b> Solved the high security risk of having plaintext passwords hardcoded inside multiple automation scripts and config files. Developed a secure CLI/GUI credential manager in Go, utilizing domain-validated, ACL-gated credential bridge with local <b>Windows DPAPI</b> encryption, and <b>HMAC</b> signature logging."><b>核心貢獻：</b>解決多套自動化工具將帳密明文寫在腳本或設定檔中，導致資安洩漏風險極高的痛點。以 Go 語言開發安全憑證中心，設計以網域驗證與 ACL 存取控制為基礎的加密憑證傳輸，結合本地 <b>Windows DPAPI</b> 保護與 <b>HMAC</b> 加密日誌稽核。</p>
               <p data-en="<b>Outcome:</b> All automation tools now call the bridge for secure authentication, ensuring <b>0 plaintext credentials in scripts</b>."><b>成果：</b>所有自動化工具改採橋接器安全調用認證，達成<b>程式腳本內 100% 無明文密碼</b>。</p>
             </div>
           </div>
