@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark" data-title-en="Japan Experience — Miki Hsieh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>日本經歷 — 謝茗鈞 Miki Hsieh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    /* Custom photo gallery styles */
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+    .photo-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--card);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .photo-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .photo-item img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .photo-item:hover img {
+      transform: scale(1.03);
+    }
+    .photo-caption {
+      font-size: 12.5px;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      background: var(--bg-2);
+    }
+    .certs-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 16px;
+      margin-bottom: 32px;
+    }
+    .cert-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .cert-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-align: center;
+    }
+    .xp-points {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+    .xp-points li {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .xp-points li b {
+      color: var(--ink);
+      display: block;
+      margin-bottom: 3px;
+    }
+    .xp-points li span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .lead-text {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 導覽列 -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" data-en="Home">首頁</a>
+        <a href="resume.html" data-en="Resume">履歷</a>
+        <a href="projects.html" data-en="Projects">專案作品</a>
+        <a href="personal.html" data-en="Personal">個人作品</a>
+        <a href="japan.html" data-en="Japan Experience">日本經歷</a>
+      </nav>
+      <div class="controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 內容區 -->
+  <section>
+    <div class="wrap">
+      <span class="eyebrow reveal">Japan</span>
+      <h2 class="section-title reveal" data-en="Japan Experience">日本經歷</h2>
+      <p class="section-sub reveal" data-en="My journey of academic exchange in Nagasaki and professional dispatch in Japan — bridging engineering with cross-cultural coordination.">留學長崎與赴日出差的實務軌跡，結合跨文化溝通與工程排錯實力。</p>
+
+      <!-- 留學經歷 -->
+      <div class="detail-sec reveal">
+        <h2 data-en="Academic Exchange (Nagasaki University)">🇯🇵 日本長崎大學 學術交換留學</h2>
+        <p class="lead-text" data-en="Selected for an academic exchange program at Nagasaki University, Japan. In addition to advanced engineering courses, actively participated in local academic research and cross-cultural exchanges, fostering a global mindset and achieving JLPT N2 certification and a Japan Tour Leader License.">
+          在學期間獲選赴日本長崎大學進行交換留學。修讀專業工程學術課程之餘，亦積極參與在地文化交流與工程研究，深化國際化思維。期間不僅鍛鍊了流利的日語溝通能力並取得日檢 N2 證書，更考取了日本領隊執照。
+        </p>
+
+        <!-- 留學照片 -->
+        <h3 style="font-size: 16px; color: var(--ink); margin-bottom: 12px;" data-en="Exchange Life Gallery">留學生活與交流紀實</h3>
+        <div class="photo-gallery">
+          <div class="photo-item" onclick="openCertModal('images/留學1.jpg')">
+            <img src="images/留學1.jpg" alt="留學生活 1" />
+            <div class="photo-caption" data-en="Nagasaki Exchange Life">長崎留學生活點滴</div>
+          </div>
+          <div class="photo-item" onclick="openCertModal('images/留學2.jpg')">
+            <img src="images/留學2.jpg" alt="Cultural Exchange">文化交流體驗</div>
+          </div>
+          <div class="photo-item" onclick="openCertModal('images/留學3.jpg')">
+            <img src="images/留學3.jpg" alt="Campus Life & Travel">校園生活與探訪</div>
+          </div>
+          <div class="photo-item" onclick="openCertModal('images/留學4.jpg')">
+            <img src="images/留學4.jpg" alt="Academic Research">在地學術探討</div>
+          </div>
+        </div>
+
+        <!-- 留學證書/執照 -->
+        <h3 style="font-size: 16px; color: var(--ink); margin-bottom: 12px;" data-en="Certificates & Credentials">語言檢定與專業證照</h3>
+        <div class="certs-gallery">
+          <div class="cert-item">
+            <div class="cert-thumb" onclick="openCertModal('images/nagasaki.png')">
+              <img src="images/nagasaki.png" alt="Nagasaki University Certificate" />
+              <span class="zoom-overlay">🔍 留學證明</span>
+            </div>
+            <div class="cert-label" data-en="Nagasaki Exchange Cert">長崎大學留學證明</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-thumb" onclick="openCertModal('images/JLPT N2.png')">
+              <img src="images/JLPT N2.png" alt="JLPT N2 Certificate" />
+              <span class="zoom-overlay">🔍 日檢證書</span>
+            </div>
+            <div class="cert-label" data-en="JLPT N2 Certificate">JLPT N2 日檢證書</div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-thumb" onclick="openCertModal('images/Tour Manager License.png')">
+              <img src="images/Tour Manager License.png" alt="Japan Tour Leader License" />
+              <span class="zoom-overlay">🔍 領隊執照</span>
+            </div>
+            <div class="cert-label" data-en="Japan Tour Leader License">日本領隊執照</div>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid var(--line); margin: 40px 0;" class="reveal" />
+
+      <!-- 出差經歷 -->
+      <div class="detail-sec reveal">
+        <h2 data-en="On-site Support Dispatch (Garmin Japan)">🚗 Garmin 赴日現場支援出差</h2>
+        <p class="lead-text" data-en="Dispatched to Japan for on-site product rework and device troubleshooting during the Garmin CSE internship. Worked under tight shipping deadlines and served as a bilingual coordinator to bridge technical teams and secure product delivery.">
+          實習期間獲派赴日本進行現場產品重工與設備異常問題排除。在時限緊迫的現場壓力下，發揮電子工程背景與日語雙重優勢，擔任中日雙語第一線技術協調人，成功排除故障並保障產品順利出貨。
+        </p>
+
+        <!-- 出差照片 -->
+        <h3 style="font-size: 16px; color: var(--ink); margin-bottom: 12px;" data-en="Dispatch Photo">出差現場點記</h3>
+        <div class="detail-shot" onclick="openCertModal('images/honda.jpg')" style="cursor: pointer;">
+          <img src="images/honda.jpg" alt="赴日出差現場" style="max-height: 500px; object-fit: cover;" />
+          <figcaption data-en="On-site technical support and device troubleshooting in Japan — Partner Facility">赴日技術支援現場 — 於日本合作夥伴廠區排錯實錄</figcaption>
+        </div>
+
+        <!-- 工作亮點 -->
+        <h3 style="font-size: 16px; color: var(--ink); margin-top: 24px; margin-bottom: 12px;" data-en="Key Contributions">出差核心工作內容</h3>
+        <ul class="xp-points">
+          <li>
+            <b data-en="1. On-site Troubleshooting & Rework">1. 現場異常排除與重工</b>
+            <span data-en="Quickly isolated software/hardware anomalies under live shipment pressure, carrying out systematic rework on-site.">面對日本現場設備異常，快速釐清軟硬體故障，進行系統性重工，成功解決出貨前的關鍵阻礙。</span>
+          </li>
+          <li>
+            <b data-en="2. Bilingual Technical Coordination">2. 中日雙語技術協作橋樑</b>
+            <span data-en="Acted as the primary bilingual coordinator between local Japanese engineers, clients, and Taiwan-based R&D/CSE teams, eliminating communication lag.">擔任現場技術對接窗口，直接與日本當地工廠技術人員溝通，並將關鍵資訊即時傳回台灣研發與客服團隊，徹底消除語言與時間差障礙。</span>
+          </li>
+          <li>
+            <b data-en="3. Ensuring Successful Shipment">3. 確保批次產品如期交付</b>
+            <span data-en="Completed all troubleshooting within critical timelines, ensuring successful product release and building lasting trust.">於緊湊的時限內完成全數設備的異常排除與測試，保障該批次產品順利出廠，獲得主管與日方合作夥伴的高度信賴。</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 頁尾 -->
+  <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
+
+  <!-- Lightbox Modal for Certificates/Photos -->
+  <div id="certModal" class="modal" onclick="this.style.display='none'">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="imgModalTarget" alt="Image Preview">
+  </div>
+
+  <script>
+    function openCertModal(src) {
+      const modal = document.getElementById('certModal');
+      const img = document.getElementById('imgModalTarget');
+      if (modal && img) {
+        img.src = src;
+        modal.style.display = 'block';
+      }
+    }
+  </script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
