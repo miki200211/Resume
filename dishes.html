@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark" data-title-en="Miki's Dishes — Miki Hsieh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miki 特製料理 — 謝茗鈞 Miki Hsieh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    /* Category Filter Styles */
+    .filter-container {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      transition: all 0.2s ease;
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      color: var(--card);
+      border-color: var(--accent);
+    }
+    
+    .dish-grid {
+      margin-bottom: 54px;
+    }
+    
+    .dish-card {
+      cursor: pointer;
+    }
+    
+    /* Filtering display helper */
+    .dish-card.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 導覽列 -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" data-en="Home">首頁</a>
+        <a href="resume.html" data-en="Resume">履歷</a>
+        <a href="projects.html" data-en="Projects">專案作品</a>
+        <a href="personal.html" data-en="Personal">個人作品</a>
+        <a href="japan.html" data-en="Japan Experience">日本經歷</a>
+        <a href="dishes.html" data-en="Miki's Dishes">Miki 特製料理</a>
+      </nav>
+      <div class="controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 內容區 -->
+  <section>
+    <div class="wrap">
+      <span class="eyebrow reveal">Culinary</span>
+      <h2 class="section-title reveal" data-en="Miki's Special Dishes">Miki 特製料理</h2>
+      <p class="section-sub reveal" data-en="A collection of delicious dishes crafted by Miki. Click on any card to view the dish in detail.">精選 Miki 的私房手作料理。點擊可放大檢視每道佳餚與製作巧思。</p>
+
+      <!-- 分類篩選按鈕 -->
+      <div class="filter-container reveal">
+        <button class="ctrl-btn filter-btn active" data-filter="all" data-en="All Dishes">全部料理</button>
+        <button class="ctrl-btn filter-btn" data-filter="main" data-en="Mains">主食餐點</button>
+        <button class="ctrl-btn filter-btn" data-filter="side" data-en="Sides & Snacks">配菜輕食</button>
+        <button class="ctrl-btn filter-btn" data-filter="sauce" data-en="Sauces">手作醬料</button>
+      </div>
+
+      <!-- 料理展示網格 -->
+      <div class="grid-3 dish-grid">
+
+        <!-- 1. 鮮蝦燉飯 -->
+        <article class="card pcard dish-card reveal" data-category="main" onclick="openCertModal('images/料理/鮮蝦頓飯.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">🦐</span>
+            <span class="badge" data-en="Risotto">招牌燉飯</span>
+            <span class="lang" data-en="Tomato Base">茄汁風味</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/鮮蝦頓飯.jpg" alt="經典鮮蝦燉飯" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="Classic Fresh Shrimp Risotto">經典鮮蝦燉飯</h3>
+          <p data-en="A rich risotto infused with seafood broth and tomato essence, topped with premium fresh shrimp.">
+            吸飽海鮮高湯與番茄醬精華的精緻燉飯，鋪上滿滿的鮮甜大蝦。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: Fresh Shrimp, Rice, Homemade Tomato Sauce">主要食材：鮮甜大蝦、白米、自製番茄醬</span>
+        </article>
+
+        <!-- 2. 蝦腸燉飯 -->
+        <article class="card pcard dish-card reveal" data-category="main" onclick="openCertModal('images/料理/蝦腸頓飯.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">🍖</span>
+            <span class="badge" data-en="Risotto">海陸燉飯</span>
+            <span class="lang" data-en="Sausage & Shrimp">德腸鮮蝦</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/蝦腸頓飯.jpg" alt="鮮蝦德式香腸燉飯" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="Shrimp & Sausage Risotto">鮮蝦德式香腸燉飯</h3>
+          <p data-en="A satisfying risotto combining savory sausage and fresh shrimp, cooked to creamy perfection.">
+            脆彈德式香腸與鮮美肥豬蝦的夢幻聯動，吸飽濃郁湯汁的燉飯令人垂涎。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: Fresh Shrimp, German Sausage, Risotto Rice">主要食材：鮮大蝦、德式香腸、白米</span>
+        </article>
+
+        <!-- 3. 鮮蝦燉麵 -->
+        <article class="card pcard dish-card reveal" data-category="main" onclick="openCertModal('images/料理/鮮蝦頓麵.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">🍝</span>
+            <span class="badge" data-en="Pasta">茄汁麵食</span>
+            <span class="lang" data-en="Shrimp Pasta">鮮蝦燉麵</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/鮮蝦頓麵.jpg" alt="茄汁鮮蝦燉麵" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="Fresh Shrimp Braised Pasta">茄汁鮮蝦燉麵</h3>
+          <p data-en="Al dente noodles coated in a rich tomato sauce, served with plump and juicy fresh shrimp.">
+            濃郁茄汁包裹著Ｑ彈麵條，搭配產地直送的肥美鮮蝦，口感豐富有層次。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: Fresh Shrimp, Pasta Noodles, Special Tomato Sauce">主要食材：鮮大蝦、義大利麵、特製番茄醬</span>
+        </article>
+
+        <!-- 4. 蝦仁佐番茄醬飯 -->
+        <article class="card pcard dish-card reveal" data-category="main" onclick="openCertModal('images/料理/蝦仁佐番茄醬飯.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">🍛</span>
+            <span class="badge" data-en="Rice Dish">茄汁蓋飯</span>
+            <span class="lang" data-en="Shrimp & Sauce">蝦仁番茄</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/蝦仁佐番茄醬飯.jpg" alt="蝦仁佐番茄醬飯" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="Shrimp Rice with Tomato Sauce">蝦仁佐番茄醬飯</h3>
+          <p data-en="Succulent shrimp combined with special tomato sauce over rice, ensuring every grain is flavorful.">
+            鮮甜彈牙的蝦仁與特製番茄醬汁完美融合，每一口飯都裹滿濃郁醬香。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: Shrimp, Steamed Rice, Tomato Sauce">主要食材：蝦仁、白飯、手作番茄醬</span>
+        </article>
+
+        <!-- 5. 海鮮雙拼 -->
+        <article class="card pcard dish-card reveal" data-category="side" onclick="openCertModal('images/料理/海鮮雙拼.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">🐟</span>
+            <span class="badge" data-en="Seafood Plate">海鮮雙拼</span>
+            <span class="lang" data-en="Deluxe Duo">雙重鮮甜</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/海鮮雙拼.jpg" alt="豪華海鮮雙拼" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="Deluxe Seafood Duo">豪華海鮮雙拼</h3>
+          <p data-en="Selected fresh shrimp and seafood paired together to deliver a rich, oceanic sweetness.">
+            嚴選新鮮蝦仁與精選海味，雙重海鮮交織出滿滿的鮮甜滋味。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: Fresh Shrimp, Selected Seafood, Spices">主要食材：鮮蝦、特選海味、香料調味</span>
+        </article>
+
+        <!-- 6. 香腸蝦 -->
+        <article class="card pcard dish-card reveal" data-category="side" onclick="openCertModal('images/料理/香腸蝦.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">🍳</span>
+            <span class="badge" data-en="Stir-fry">海陸熱炒</span>
+            <span class="lang" data-en="Sausage & Shrimp">香腸鮮蝦</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/香腸蝦.jpg" alt="德式香腸炒鮮蝦" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="Sausage & Shrimp Stir-fry">德式香腸炒鮮蝦</h3>
+          <p data-en="Savory German sausage and plump shrimp stir-fried together. A perfect side dish or savory snack.">
+            鹹香的德式香腸與鮮美蝦仁大火快炒，香氣四溢的完美下酒菜與配菜。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: German Sausage, Shrimp, Garlic, Green Onion">主要食材：德式香腸、鮮大蝦、蒜香調味</span>
+        </article>
+
+        <!-- 7. 吐司番茄醬 -->
+        <article class="card pcard dish-card reveal" data-category="side" onclick="openCertModal('images/料理/吐司番茄醬.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">🍞</span>
+            <span class="badge" data-en="Snack">酥脆輕食</span>
+            <span class="lang" data-en="Toast Delight">番茄吐司</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/吐司番茄醬.jpg" alt="吐司佐特製番茄醬" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="Toast with Special Tomato Sauce">吐司佐特製番茄醬</h3>
+          <p data-en="Crispy toasted bread spread with homemade special tomato sauce, a simple yet delicious combination.">
+            簡單的烤吐司抹上特製手工番茄醬，酥脆與酸甜的完美結合。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: Toasted Bread, Homemade Tomato Sauce">主要食材：吐司麵包、自製手熬番茄醬</span>
+        </article>
+
+        <!-- 8. 月底 -->
+        <article class="card pcard dish-card reveal" data-category="side" onclick="openCertModal('images/料理/月底.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">💸</span>
+            <span class="badge" data-en="Budget Dish">生存料理</span>
+            <span class="lang" data-en="End of Month">月底特餐</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/月底.jpg" alt="月底生存特餐" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="End-of-Month Survival Special">月底生存特餐</h3>
+          <p data-en="A budget-friendly meal for the end of the month without compromising on flavor and basic nutrition.">
+            月底省錢大作戰！雖然簡單，但營養與風味依然不妥協。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: Budget ingredients, creative cooking">主要食材：經濟食材、創意調味</span>
+        </article>
+
+        <!-- 9. 特製番茄醬 -->
+        <article class="card pcard dish-card reveal" data-category="sauce" onclick="openCertModal('images/料理/特製番茄醬.jpg')">
+          <div class="top">
+            <span style="font-size: 24px; line-height: 1;">🥫</span>
+            <span class="badge" data-en="Sauce">靈魂醬料</span>
+            <span class="lang" data-en="Homemade">獨門配方</span>
+          </div>
+          <div class="card-shot">
+            <img src="images/料理/特製番茄醬.jpg" alt="Miki 特製番茄醬" />
+            <figcaption data-en="Click to enlarge">點擊放大檢視</figcaption>
+          </div>
+          <h3 data-en="Miki's Special Tomato Sauce">Miki 特製番茄醬</h3>
+          <p data-en="A slow-simmered homemade tomato sauce, perfectly balanced in sweetness and acidity. The soul of Miki's dishes.">
+            慢火熬煮的獨門番茄醬汁，酸甜適中，是所有燉飯與料理的美味靈魂。
+          </p>
+          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Ingredients: Ripe Tomatoes, Garlic, Onion, Spices">主要食材：新鮮番茄、洋蔥、大蒜、特調香料</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 頁尾 -->
+  <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
+
+  <!-- Lightbox Modal -->
+  <div id="certModal" class="modal" onclick="this.style.display='none'">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="imgModalTarget" alt="Dish Preview">
+  </div>
+
+  <!-- Category Filter Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const dishCards = document.querySelectorAll('.dish-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation(); // Avoid triggering document clicks
+          
+          // Switch active class
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filterValue = btn.getAttribute('data-filter');
+
+          dishCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+    });
+
+    // Lightbox open function
+    function openCertModal(src) {
+      const modal = document.getElementById('certModal');
+      const img = document.getElementById('imgModalTarget');
+      if (modal && img) {
+        img.src = src;
+        modal.style.display = 'block';
+      }
+    }
+  </script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
