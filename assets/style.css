@@ -5,20 +5,22 @@
 
 /* ===== 深色（預設）===== */
 :root {
-  --ink:#f1f6fc; --text:#d4ddea; --muted:#93a4bd;
-  --bg:#0b1220; --bg-2:#0e1729; --card:#121d33; --line:#233149;
-  --sidebar:#0c1525; --accent:#3b82f6; --accent-2:#60a5fa; --accent-d:#2563eb;
-  --chip-bg:#18253f; --chip-line:#2a3a57; --tag-bg:#16284a; --tag-fg:#9cc3ff;
-  --nav-bg:rgba(11,18,32,.82); --shadow:0 14px 40px rgba(0,0,0,.45);
+  --ink:#f0f4f1; --text:#d5ded7; --muted:#94a398;
+  --bg:#111612; --bg-2:#151c16; --card:#1a221b; --line:#2d372e;
+  --sidebar:#131a14; --accent:#48a878; --accent-2:#6fc397; --accent-d:#328059;
+  --chip-bg:#1d2820; --chip-line:#2e3d31; --tag-bg:#203527; --tag-fg:#8be2b2;
+  --nav-bg:rgba(17,22,18,.82); --shadow:0 14px 40px rgba(8,12,9,.5);
   --radius:16px; --maxw:1080px;
+  --btn-text:#05140b; --btn-shadow:rgba(72,168,120,.35); --badge-bg:rgba(72,168,120,.16);
 }
 /* ===== 淺色（按 ☀ 切換）===== */
 :root[data-theme="light"] {
-  --ink:#16233a; --text:#2c3a4b; --muted:#6a7888;
-  --bg:#f6f8fb; --bg-2:#eef2f7; --card:#ffffff; --line:#e3e9f1;
-  --sidebar:#f4f7fb; --accent:#1e40af; --accent-2:#2563eb; --accent-d:#1e3a8a;
-  --chip-bg:#eef3f8; --chip-line:#e0e7ef; --tag-bg:#eef4ff; --tag-fg:#2456c7;
-  --nav-bg:rgba(255,255,255,.88); --shadow:0 12px 34px rgba(20,40,70,.12);
+  --ink:#1a2b1f; --text:#2f4034; --muted:#627567;
+  --bg:#f6f9f5; --bg-2:#ebf0ea; --card:#ffffff; --line:#dee5dd;
+  --sidebar:#f1f5f0; --accent:#2d6a4f; --accent-2:#40916c; --accent-d:#1b4332;
+  --chip-bg:#ebf0ea; --chip-line:#dce3da; --tag-bg:#e8f3ec; --tag-fg:#246e45;
+  --nav-bg:rgba(246,249,245,.88); --shadow:0 12px 34px rgba(27,43,31,.08);
+  --btn-text:#ffffff; --btn-shadow:rgba(45,106,79,.25); --badge-bg:rgba(45,106,79,.12);
 }
 
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -51,15 +53,15 @@ header.nav { position:sticky; top:0; z-index:50; background:var(--nav-bg); backd
 
 /* ===== 按鈕 ===== */
 .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:999px; font-weight:700; font-size:15px; transition:transform .15s,box-shadow .2s,background .2s; }
-.btn-primary { background:var(--accent); color:#00231f; box-shadow:0 8px 24px rgba(0,179,164,.35); }
+.btn-primary { background:var(--accent); color:var(--btn-text); box-shadow:0 8px 24px var(--btn-shadow); }
 .btn-primary:hover { transform:translateY(-2px); }
 .btn-ghost { border:1px solid var(--line); color:var(--ink); }
 .btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
 
 /* ===== HERO ===== */
-.hero { background:radial-gradient(900px 500px at 85% -10%,rgba(0,179,164,.22),transparent 60%),radial-gradient(700px 500px at 0% 0%,rgba(37,99,235,.20),transparent 55%),linear-gradient(160deg,#0b1f33 0%,#13314f 100%); color:#fff; }
+.hero { background:radial-gradient(900px 500px at 85% -10%,rgba(72,168,120,.22),transparent 60%),radial-gradient(700px 500px at 0% 0%,rgba(64,145,108,.20),transparent 55%),linear-gradient(160deg,#14231b 0%,#223a2b 100%); color:#fff; }
 .hero .wrap { padding-top:80px; padding-bottom:80px; }
-.hero .eyebrow { color:#6ff0e4; }
+.hero .eyebrow { color:#7ee8b0; }
 .hero h1 { font-size:clamp(34px,6vw,58px); font-weight:900; line-height:1.12; letter-spacing:1px; }
 .hero h1 .en { display:block; font-size:clamp(15px,2.4vw,21px); font-weight:600; color:#9fb3c8; letter-spacing:4px; margin-top:10px; }
 .hero .role { margin-top:18px; font-size:clamp(17px,2.4vw,21px); font-weight:700; color:#e8f1ff; }
@@ -70,7 +72,7 @@ header.nav { position:sticky; top:0; z-index:50; background:var(--nav-bg); backd
 .stats { margin-top:52px; display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
 .stat { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius); padding:22px 18px; }
 .stat .num { font-size:clamp(24px,4vw,34px); font-weight:900; color:#fff; }
-.stat .num .unit { font-size:15px; color:#6ff0e4; margin-left:2px; }
+.stat .num .unit { font-size:15px; color:#7ee8b0; margin-left:2px; }
 .stat .label { font-size:13px; color:#aebfd0; margin-top:4px; }
 
 /* ===== 卡片 / 格線 ===== */
@@ -91,8 +93,8 @@ header.nav { position:sticky; top:0; z-index:50; background:var(--nav-bg); backd
 .pcard { padding:24px; display:flex; flex-direction:column; transition:transform .18s,box-shadow .2s; }
 .pcard:hover { transform:translateY(-4px); box-shadow:0 18px 44px rgba(0,0,0,.4); }
 .pcard .top { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
-.proj-icon { width:46px; height:46px; border-radius:12px; object-fit:cover; flex:none; box-shadow:0 4px 14px rgba(0,0,0,.35); background:#0b1220; }
-.pcard .badge { font-size:12px; font-weight:800; letter-spacing:1px; color:var(--accent); background:rgba(45,212,191,.16); padding:4px 10px; border-radius:6px; }
+.proj-icon { width:46px; height:46px; border-radius:12px; object-fit:cover; flex:none; box-shadow:0 4px 14px rgba(0,0,0,.35); background:var(--bg); }
+.pcard .badge { font-size:12px; font-weight:800; letter-spacing:1px; color:var(--accent); background:var(--badge-bg); padding:4px 10px; border-radius:6px; }
 .pcard .lang { font-size:12px; color:var(--muted); font-weight:700; margin-left:auto; }
 .pcard h3 { color:var(--ink); font-size:19px; margin:6px 0; }
 .pcard p { color:var(--muted); font-size:14px; margin-bottom:14px; flex:1; }
@@ -105,7 +107,7 @@ header.nav { position:sticky; top:0; z-index:50; background:var(--nav-bg); backd
 .tag { background:var(--tag-bg); color:var(--tag-fg); font-size:13px; padding:5px 12px; border-radius:999px; font-weight:600; }
 
 /* ===== 專案詳細頁 ===== */
-.detail-hero { background:linear-gradient(160deg,#0b1f33,#13314f); color:#fff; padding:54px 0 46px; }
+.detail-hero { background:linear-gradient(160deg,#14231b,#223a2b); color:#fff; padding:54px 0 46px; }
 .detail-hero .top { display:flex; align-items:center; gap:16px; }
 .detail-hero .proj-icon { width:64px; height:64px; border-radius:16px; }
 .detail-hero h1 { font-size:clamp(26px,4vw,40px); font-weight:900; letter-spacing:.5px; }
@@ -113,7 +115,7 @@ header.nav { position:sticky; top:0; z-index:50; background:var(--nav-bg); backd
 .detail-hero .badges { margin-top:18px; display:flex; flex-wrap:wrap; gap:8px; }
 .detail-hero .badges .chip { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.18); color:#dbe6f2; }
 .back-link { display:inline-block; margin-bottom:18px; color:#9fb3c8; font-size:14px; font-weight:600; }
-.back-link:hover { color:#6ff0e4; }
+.back-link:hover { color:#7ee8b0; }
 .detail-sec { margin-bottom:40px; }
 .detail-sec h2 { font-size:21px; color:var(--ink); font-weight:800; margin-bottom:14px; padding-left:12px; border-left:4px solid var(--accent); }
 .detail-sec p { color:var(--text); margin-bottom:12px; }
@@ -182,8 +184,8 @@ header.nav { position:sticky; top:0; z-index:50; background:var(--nav-bg); backd
 .interests { font-size:13.2px; color:var(--muted); }
 
 /* ===== 頁尾 ===== */
-footer { background:#07101e; color:#93a4bd; text-align:center; padding:28px 0; font-size:13px; }
-:root[data-theme="light"] footer { background:#0b1f33; }
+footer { background:#0b110d; color:var(--muted); text-align:center; padding:28px 0; font-size:13px; }
+:root[data-theme="light"] footer { background:#14231b; }
 
 /* ===== 進場動畫 ===== */
 .reveal { opacity:0; transform:translateY(22px); transition:opacity .6s ease,transform .6s ease; }
@@ -271,9 +273,9 @@ footer { background:#07101e; color:#93a4bd; text-align:center; padding:28px 0; f
   @page { margin:12mm; }
   .sec,.xp,.proj,.edu { break-inside:avoid; }
   :root, :root[data-theme="dark"] {
-    --bg:#fff; --card:#fff; --ink:#16233a; --text:#2c3a4b; --muted:#5a6675;
-    --line:#dde4ec; --sidebar:#f4f7fb; --accent:#1e3a8a; --accent-d:#1e3a8a;
-    --chip-bg:#eef3f8; --chip-line:#e0e7ef;
+    --bg:#fff; --card:#fff; --ink:#1a2b1f; --text:#2f4034; --muted:#5c6e60;
+    --line:#dce3da; --sidebar:#f1f5f0; --accent:#2d6a4f; --accent-d:#1b4332;
+    --chip-bg:#ebf0ea; --chip-line:#dce3da;
   }
   .sidebar { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 }
