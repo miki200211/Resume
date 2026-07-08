@@ -8,14 +8,20 @@
   <meta name="description" content="謝茗鈞 Miki Hsieh 個人網站：客戶服務工程 × 自動化工具開發 × Android 工具開發。履歷、專案成果、個人作品。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
+  <meta name="theme-color" content="#111612" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231b4332'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='800' fill='%237ee8b0' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
   <style>
     /* 首頁 Hero：自拍圓形照 + 背景圖（僅本頁用）*/
     .hero-flex { display:flex; align-items:center; gap:44px; }
     .hero-flex .hero-text { flex:1; min-width:0; text-shadow:0 2px 14px rgba(0,0,0,.45); }
     .hero-photo { flex:none; width:250px; height:250px; border-radius:50%; object-fit:cover;
-      border:4px solid rgba(255,255,255,.85); box-shadow:0 18px 50px rgba(0,0,0,.55); }
+      border:3px solid rgba(255,255,255,.9);
+      box-shadow:0 0 0 8px rgba(126,232,176,.16), 0 0 42px rgba(126,232,176,.22), 0 18px 50px rgba(0,0,0,.55);
+      transition:transform .3s ease, box-shadow .3s ease; }
+    .hero-photo:hover { transform:scale(1.02);
+      box-shadow:0 0 0 8px rgba(126,232,176,.28), 0 0 56px rgba(126,232,176,.3), 0 18px 50px rgba(0,0,0,.55); }
     @media (max-width:820px){
       .hero-flex { flex-direction:column-reverse; gap:26px; }
       .hero-photo { width:160px; height:160px; }
@@ -54,11 +60,11 @@
       <div class="role" data-en="Customer Service Engineering × Automation × Systems Engineering">客戶服務工程 × 自動化工具開發 × 系統工程</div>
       <div class="pitch" data-en="Electronic engineering graduate specializing in:">電子工程背景的工程師，專長領域：</div>
       <ul class="pitch-list">
-        <li data-en="1. Automation tool development (Go / Python)">1. 自動化工具整合（Go / Python）</li>
-        <li data-en="2. Market issue investigation & hands-on troubleshooting">2. 市場問題調查 & 解決問題的能力</li>
-        <li data-en="3. Android app development">3. Android APP 開發</li>
-        <li data-en="4. IC circuit design & PCB layout">4. IC 電路設計、PCB Layout</li>
-        <li data-en="5. JLPT N2 Japanese — cross-border collaboration capability">5. N2 日本語跨國合作能力</li>
+        <li data-en="Automation tool development (Go / Python)">自動化工具整合（Go / Python）</li>
+        <li data-en="Market issue investigation & hands-on troubleshooting">市場問題調查 & 解決問題的能力</li>
+        <li data-en="Android app development">Android APP 開發</li>
+        <li data-en="IC circuit design & PCB layout">IC 電路設計、PCB Layout</li>
+        <li data-en="JLPT N2 Japanese — cross-border collaboration capability">N2 日本語跨國合作能力</li>
       </ul>
       <div class="hero-cta">
         <a href="resume.html" class="btn btn-primary" data-en="View résumé →">查看履歷 →</a>
@@ -116,7 +122,7 @@
         <a href="projects.html" class="card entry-card reveal">
           <div class="ic">⚙️</div>
           <h3 data-en="Automation">自動化流程</h3>
-          <p data-en="Built the automation tools that cut per-case handling time from 30 minutes to 2 minutes — web scraping, data matching, LLM text processing, and JIRA upload.">人工處理流程自動化——使用Pythen開發爬蟲、資料比對、處理資料、API串聯。</p>
+          <p data-en="Built the automation tools that cut per-case handling time from 30 minutes to 2 minutes — web scraping, data matching, LLM text processing, and JIRA upload.">人工處理流程自動化——使用 Python 開發爬蟲、資料比對、處理資料、API 串聯。</p>
           <span class="go" data-en="See projects →">看專案成果 →</span>
         </a>
         <a href="japan.html" class="card entry-card reveal">
