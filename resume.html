@@ -60,12 +60,61 @@
       <aside class="sidebar">
         <section class="sec">
           <h2 class="sec-title" data-en="Technical Skills">專業技能</h2>
-          <div class="skill-row"><div class="lab" data-en="Languages">程式語言</div><div class="val">Python · Go · Kotlin · C / C++ · C# · Visual Basic · Arduino</div></div>
-          <div class="skill-row"><div class="lab" data-en="Android Dev">Android 開發</div><div class="val">Kotlin · Jetpack Compose · Wear OS · Room SQLite · Android SDK · adb</div></div>
-          <div class="skill-row"><div class="lab" data-en="Automation & Scraping">自動化 & 爬蟲</div><div class="val" data-en="Selenium · JIRA REST API · Tesseract OCR · Multithreading / Subprocesses">Selenium · JIRA REST API · Tesseract OCR · 多執行緒 / 子行程</div></div>
-          <div class="skill-row"><div class="lab" data-en="Desktop & Data">桌面 & 資料</div><div class="val">Tkinter · Go walk GUI · PyInstaller · openpyxl · Regex · LLM</div></div>
-          <div class="skill-row"><div class="lab" data-en="Security & Networking">資安 & 網路</div><div class="val">AES-256-GCM · PBKDF2 · Windows DPAPI · HMAC · SOCKS5 / HTTP Proxy</div></div>
-          <div class="skill-row"><div class="lab" data-en="Hardware">硬體 / 電路</div><div class="val" data-en="IC Design · IC Layout · PCB Layout · Discrete Circuit Design">IC Design · IC Layout · PCB Layout · 離散電路設計</div></div>
+          
+          <div class="skill-row">
+            <div class="lab"><span data-en="Core Languages">主力語言</span> <span class="tag">Core</span></div>
+            <div class="skill-pills">
+              <span class="skill-pill core">Python</span>
+              <span class="skill-pill core">Go</span>
+              <span class="skill-pill core">Kotlin</span>
+              <span class="skill-pill">C / C++</span>
+              <span class="skill-pill">C#</span>
+              <span class="skill-pill">Visual Basic</span>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="lab"><span data-en="Android Dev">Android 開發</span> <span class="tag">Mobile</span></div>
+            <div class="skill-pills">
+              <span class="skill-pill core">Jetpack Compose</span>
+              <span class="skill-pill core">Wear OS</span>
+              <span class="skill-pill">Room SQLite</span>
+              <span class="skill-pill">Android SDK</span>
+              <span class="skill-pill">adb</span>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="lab"><span data-en="Automation & Systems">自動化 & 系統</span> <span class="tag">Enterprise</span></div>
+            <div class="skill-pills">
+              <span class="skill-pill core">Selenium</span>
+              <span class="skill-pill core">JIRA REST API</span>
+              <span class="skill-pill">Tesseract OCR</span>
+              <span class="skill-pill">多執行緒 (Threading)</span>
+              <span class="skill-pill">子行程 (Subprocesses)</span>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="lab"><span data-en="Security & Architecture">資安 & 網路架構</span> <span class="tag">Infra</span></div>
+            <div class="skill-pills">
+              <span class="skill-pill core">AES-256-GCM</span>
+              <span class="skill-pill">Windows DPAPI</span>
+              <span class="skill-pill">HMAC 稽核</span>
+              <span class="skill-pill">PBKDF2</span>
+              <span class="skill-pill">SOCKS5 / HTTP Proxy</span>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="lab"><span data-en="Hardware & Circuits">硬體 / 電路工程</span> <span class="tag">EE</span></div>
+            <div class="skill-pills">
+              <span class="skill-pill">IC Design</span>
+              <span class="skill-pill">IC Layout</span>
+              <span class="skill-pill">PCB Layout</span>
+              <span class="skill-pill">離散電路設計</span>
+            </div>
+          </div>
         </section>
         <section class="sec">
           <h2 class="sec-title" data-en="Languages">語言能力</h2>
@@ -153,6 +202,26 @@
               <p data-en="<b>Project Core:</b> One-click automated case-creation pipeline (download → match → LLM text parsing → format → JIRA auto-upload)."><b>作品核心：</b>實現售後案件「下載 → 比對 → LLM 文本解析 → 資料處理 → JIRA 自動建單」的一鍵式全自動建案系統。</p>
               <p data-en="<b>Core Contribution:</b> Eliminated the tedious workflow of logging into multiple systems, downloading logs, reading files, and typing JIRA tickets. Integrated Selenium with a <b>LLM API</b> to extract structured error logs, and designed a multi-threaded (Threading) architecture to support dual-account parallel creation."><b>核心貢獻：</b>解決手動登入多系統、下載記錄、閱讀長篇日誌並手動在 JIRA 建單之極度繁瑣流程。整合 Selenium 網頁爬蟲與 <b>LLM API</b>，自動提取結構化故障描述，並設計多執行緒（Threading）以支援雙帳號並行建案。</p>
               <p data-en="<b>Outcome:</b> Cut per-case processing time from <b>30 minutes to 2 minutes</b>, boosting efficiency by over 93%."><b>成果：</b>單案處理時間由 <b>30 分鐘縮短至 2 分鐘</b>，流程效率提升達 93%。</p>
+              
+              <!-- 視覺化數據對比條 -->
+              <div class="impact-bar-box">
+                <div class="impact-bar-title">
+                  <span data-en="Handling Time / Case">單案耗時大幅降低</span>
+                  <span class="delta" data-en="-93% Efficiency Boost">▼ -93% (效率提升 15 倍)</span>
+                </div>
+                <div class="impact-bar">
+                  <div class="bar-row">
+                    <span class="bar-label" data-en="Before">導入前</span>
+                    <div class="bar-track"><div class="bar-fill before" style="width:100%;"></div></div>
+                    <span class="bar-val">30 min</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-label" data-en="After">導入後</span>
+                    <div class="bar-track"><div class="bar-fill after" style="width:6.7%;"></div></div>
+                    <span class="bar-val" style="color:#22c55e;">2 min</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -165,6 +234,26 @@
               <p data-en="<b>Project Core:</b> A multi-page desktop tool integrating repair quoting, client LINE notifications (image + text), and online-updatable templates."><b>作品核心：</b>整合維修報價、客戶維修通知與訊息設定的多頁桌面工具，支援線上更新範本與自動版控。</p>
               <p data-en="<b>Core Contribution:</b> Solved the problem of manual quoting and inconsistent notification formats. Developed a modular Python/Tkinter GUI separating backend logic and UI pages. Implemented a JIRA-based update checker and online template fetching to ensure team-wide consistency."><b>核心貢獻：</b>為解決人工編輯報價單與備機回覆時，格式不一且易出錯的痛點。以 Python/Tkinter 開發模組化多頁桌面工具，清晰分離後端邏輯與 UI 頁面；設計以 JIRA 欄位為基礎的自動更新檢查機制，並實現範本線上更新以維持團隊對外文字一致性。</p>
               <p data-en="<b>Outcome:</b> Cut text conversion time from <b>3 minutes to 1 minute</b>, ensuring absolute wording consistency and minimizing human errors."><b>成果：</b>文字轉換時間由 <b>3 分鐘縮短至 1 分鐘</b>，確保內外部文字高度一致，杜絕人工繕寫錯誤。</p>
+              
+              <!-- 視覺化數據對比條 -->
+              <div class="impact-bar-box">
+                <div class="impact-bar-title">
+                  <span data-en="Text Conversion Time">文字轉換與維修報價時間</span>
+                  <span class="delta" data-en="-67% Faster">▼ -67%</span>
+                </div>
+                <div class="impact-bar">
+                  <div class="bar-row">
+                    <span class="bar-label" data-en="Before">導入前</span>
+                    <div class="bar-track"><div class="bar-fill before" style="width:100%;"></div></div>
+                    <span class="bar-val">3 min</span>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-label" data-en="After">導入後</span>
+                    <div class="bar-track"><div class="bar-fill after" style="width:33.3%;"></div></div>
+                    <span class="bar-val" style="color:#22c55e;">1 min</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
