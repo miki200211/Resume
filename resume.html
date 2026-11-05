@@ -98,17 +98,17 @@
         <section class="sec">
           <h2 class="sec-title" data-en="Key Achievements">主要成就</h2>
           <ul class="ach-list" data-en="
-            <li><b>1. Auto Workflow Integration</b>: The end-to-end case workflow required specialists to cross-reference data, download logs, and file JIRA tickets manually. Built a one-click automation pipeline, cutting per-case handling time from <b>30 min to 2 min</b>.</li>
-            <li><b>2. Out-of-Warranty (OOW) Process</b>: OOW quotes and customer LINE replies were composed manually, causing inconsistent formatting and human errors. Built an integrated OOW workflow tool, cutting text conversion time from <b>3 min to 1 min</b>.</li>
-            <li><b>3. After-sales Case Tracker</b>: Manually cross-referencing hundreds of daily cases across JIRA and client repair logs was slow and error-prone. Built an async crawler with Union-Find grouping to automate case matching and follow-up routing.</li>
-            <li><b>4. Credential Bridge Security Tool</b>: Plaintext credentials scattered across automation scripts and machines posed serious security risks. Built a Go-based credential bridge with cloud AES-256-GCM, Windows DPAPI, and HMAC audit logging, achieving <b>0 plaintext passwords</b> across all scripts.</li>
-            <li><b>5. Overseas On-site Support</b>: Dispatched to Japan to resolve device anomalies under tight shipment deadlines, serving as the bilingual (Chinese/Japanese) technical coordinator to identify root causes and keep the production timeline on track.</li>
+            <li><b>1. Overseas On-site Support</b>: Dispatched to Japan to resolve device anomalies under tight shipment deadlines, serving as the bilingual (Chinese/Japanese) technical coordinator to identify root causes and keep the production timeline on track.</li>
+            <li><b>2. Auto Workflow Integration</b>: The end-to-end case workflow required specialists to cross-reference data, download logs, and file JIRA tickets manually. Built a one-click automation pipeline, cutting per-case handling time from <b>30 min to 2 min</b>.</li>
+            <li><b>3. After-sales Process System</b>: OOW quotes and customer LINE replies were composed manually, causing inconsistent formatting and human errors. Built an integrated after-sales workflow tool, cutting text conversion time from <b>3 min to 1 min</b>.</li>
+            <li><b>4. After-sales Case Tracker</b>: Manually cross-referencing hundreds of daily cases across JIRA and client repair logs was slow and error-prone. Built an async crawler with Union-Find grouping to automate case matching and follow-up routing.</li>
+            <li><b>5. Credential Bridge Security Tool</b>: Plaintext credentials scattered across automation scripts and machines posed serious security risks. Built a Go-based credential bridge with cloud AES-256-GCM, Windows DPAPI, and HMAC audit logging, achieving <b>0 plaintext passwords</b> across all scripts.</li>
           ">
-            <li><b>1. 自動化工作流程</b>：痛點為流程繁瑣需人工手動交叉比對、下載及填寫建單，極其耗時，因此開發一鍵自動建單程式，平均單案處理時間由 <b>30 分鐘縮短至 2 分鐘</b>。</li>
-            <li><b>2. 保外流程系統</b>：痛點為保修外報價均由人工編輯，格式不一且易出錯，因此開發保外流程整合工具，文字轉換 <b>3分鐘 => 1分鐘</b>。</li>
-            <li><b>3. 售後案件追蹤系統</b>：痛點為每日需在不同系統間人工交叉比對上百筆資料，極易漏件，實現自動比對分類資料及快送推送功能。</li>
-            <li><b>4. 憑證橋接安全工具</b>：痛點為多套自動化工具帳密明文散落於各電腦中，資安風險極高，因此開發以網域驗證與 ACL 存取控制為基礎的加密憑證橋接，讓程式 <b>100% 不儲存明文密碼</b>。</li>
-            <li><b>5. 海外出差與現場支援</b>：痛點為日本現場設備異常與跨國溝通障礙，赴日進行現場排錯，並擔任中日雙語技術協調人，成功在時限內排除故障並保障產品順利出貨。</li>
+            <li><b>1. 海外出差與現場支援</b>：痛點為日本現場設備異常與跨國溝通障礙，赴日進行現場排錯，並擔任中日雙語技術協調人，成功在時限內排除故障並保障產品順利出貨。</li>
+            <li><b>2. 自動化工作流程</b>：痛點為流程繁瑣需人工手動交叉比對、下載及填寫建單，極其耗時，因此開發一鍵自動建單程式，平均單案處理時間由 <b>30 分鐘縮短至 2 分鐘</b>。</li>
+            <li><b>3. 售後流程系統</b>：痛點為保修外報價均由人工編輯，格式不一且易出錯，因此開發售後流程整合工具，文字轉換 <b>3分鐘 => 1分鐘</b>。</li>
+            <li><b>4. 售後案件追蹤系統</b>：痛點為每日需在不同系統間人工交叉比對上百筆資料，極易漏件，實現自動比對分類資料及快送推送功能。</li>
+            <li><b>5. 憑證橋接安全工具</b>：痛點為多套自動化工具帳密明文散落於各電腦中，資安風險極高，因此開發以網域驗證與 ACL 存取控制為基礎的加密憑證橋接，讓程式 <b>100% 不儲存明文密碼</b>。</li>
           </ul>
         </section>
 
@@ -123,7 +123,6 @@
             <ul>
               <li data-en="**Led the development** of 4 internal automation tools (Go/Python), **adopted as the team's daily standard workflow across all members**; per-case handling time cut from 30 to 2 minutes, **boosting** team efficiency by 93%."><b>主導開發：</b> 4 套內部自動化工具（Go / Python），已成為部門全員每日使用的標準作業工具；主要工具將單案處理時間由 30 分鐘縮短至 2 分鐘，提升流程效率達 93%。</li>
               <li data-en="**Designed and refactored** the JIRA & client repair log matching system (After-sales Case Tracker), **integrating** OCR and Union-Find algorithms to cross-reference hundreds of daily entries and **eliminate** human tracking errors."><b>設計與重構：</b> 資料比對系統，結合OCR 驗證碼辨識與資料案件綁定，自動對照每日上百筆資料，消除人工手動比對的失誤與漏單率。</li>
-              <li data-en="**Built and maintained** a team-wide credential bridge, **implementing** AES-256-GCM, DPAPI, and HMAC auditing to **secure** 100% of automation scripts from storing plaintext passwords."><b>建構與維護：</b> 團隊憑證安全橋接器（憑證橋接安全工具），導入 AES-256-GCM、DPAPI 與 HMAC 稽核，保障所有自動化腳本內 100% 無明文密碼儲存，強化企業資訊安全。</li>
               <li data-en="**Coordinated** Official LINE customer support and JIRA ticketing, **analyzing and tracing** infotainment black-screen complaints to specific phone models & iOS versions, and collaborating with AOEM R&D to resolve root causes."><b>客戶服務：</b> 官方客訴與 JIRA 建案，追蹤並分析車載系統異常現象，定位故障與發生異常的關聯性，並與內部團隊部門合作修復根因。</li>
               <li data-en="**Dispatched** to Japan for overseas product rework and on-site troubleshooting, **serving** as a bilingual (Chinese/Japanese) technical coordinator to facilitate cross-border communication and solve issues."><b>出差：</b> 支援日本產品現場問題排除，擔任中日雙語現場技術對接協調人，溝通與問題解決。</li>
             </ul>
@@ -159,7 +158,7 @@
 
           <div class="proj-item">
             <div class="proj-header">
-              <a href="project-oow.html" class="proj-title-link" data-en="【Out-of-Warranty (OOW) Process Integration】">【保外流程系統】</a>
+              <a href="project-oow.html" class="proj-title-link" data-en="【After-sales Process Integration】">【售後流程系統】</a>
               <span class="proj-tech" data-en="Tech Stack: Python, Tkinter, JIRA API">使用技術：Python, Tkinter, JIRA API</span>
             </div>
             <div class="proj-detail">

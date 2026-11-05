@@ -38,8 +38,7 @@ Quantitative trading systems and mobile apps built off the clock:
 | [Alpaca — US Stock Quant System](project-stock.html) | **Go** · Alpaca API · Monte Carlo | Point-in-time S&P 500 filter; backtests 8,114-stock universe; CAGR 29.61% *(backtest only)* |
 | crypto-dashboard | **Go** · Wails · Parquet · Binance API · goroutines | Full Go port of a ~4,000-line Python quant stack; max-drawdown hard cap + monthly circuit-breaker |
 | MemeWatch | **Kotlin** · Jetpack Compose · Wear OS · Room | Meme soundboard for Android + Wear OS; AdMob + Google Play Billing; signed .aab |
-| Book of Fate | **Kotlin** · Compose · Gemini API | Shake-to-query oracle book with server-side Gemini integration |
-| SoftEther VPN Bridge | **Go** · VPNGate API | Auto NIC check, quality scoring, one-click connect via browser GUI |
+| Book of Fate | **Kotlin** · Compose | Shake-to-query oracle book fusing classic literature and spatial acoustics |
 | AI_Web | **Go** · NIC Binding · HTTP Proxy | Dual-network routing to specific domains without virtual drivers |
 | Excel → PDF Batch Converter | **Python** · Tkinter · Win32 COM | Batch-converts entire directories of workbooks while preserving page layout |
 

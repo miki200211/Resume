@@ -71,14 +71,6 @@
       <h2 class="section-title reveal" data-en="Miki's Special Dishes">Miki 特製料理</h2>
       <p class="section-sub reveal" data-en="A collection of delicious dishes crafted by Miki. Click on any card to view the dish in detail.">精選 Miki 的私房手作料理。點擊可放大檢視每道佳餚與製作巧思。</p>
 
-      <!-- 分類篩選按鈕 -->
-      <div class="filter-container reveal">
-        <button class="ctrl-btn filter-btn active" data-filter="all" data-en="All Dishes">全部料理</button>
-        <button class="ctrl-btn filter-btn" data-filter="main" data-en="Mains">主食餐點</button>
-        <button class="ctrl-btn filter-btn" data-filter="side" data-en="Sides & Snacks">配菜輕食</button>
-        <button class="ctrl-btn filter-btn" data-filter="sauce" data-en="Sauces">手作醬料</button>
-      </div>
-
       <!-- 料理展示網格 -->
       <div class="grid-3 dish-grid">
 
@@ -257,33 +249,7 @@
     <img class="modal-content" id="imgModalTarget" alt="Dish Preview">
   </div>
 
-  <!-- Category Filter Logic -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const dishCards = document.querySelectorAll('.dish-card');
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation(); // Avoid triggering document clicks
-          
-          // Switch active class
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-
-          const filterValue = btn.getAttribute('data-filter');
-
-          dishCards.forEach(card => {
-            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-              card.classList.remove('hidden');
-            } else {
-              card.classList.add('hidden');
-            }
-          });
-        });
-      });
-    });
-
     // Lightbox open function
     function openCertModal(src) {
       const modal = document.getElementById('certModal');
