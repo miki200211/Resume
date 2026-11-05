@@ -47,7 +47,10 @@ section.alt { background:var(--bg-2); }
 .section-sub { color:var(--muted); margin-bottom:44px; font-size:15px; max-width:760px; }
 
 /* ===== 導覽列（共用）===== */
-header.nav { position:sticky; top:0; z-index:50; background:var(--nav-bg); backdrop-filter:saturate(160%) blur(10px); border-bottom:1px solid var(--line); }
+header.nav { position:sticky; top:0; z-index:50; background:var(--nav-bg); backdrop-filter:saturate(160%) blur(12px); border-bottom:1px solid var(--line); transition:background .2s, border-color .2s, box-shadow .2s; }
+:root[data-theme="light"] header.nav {
+  box-shadow: 0 2px 14px rgba(27, 43, 31, 0.06);
+}
 .nav-inner { display:flex; align-items:center; gap:12px; height:64px; max-width:var(--maxw); margin:0 auto; padding:0 22px; }
 .brand { font-weight:900; color:var(--ink); font-size:18px; letter-spacing:.5px; white-space:nowrap; }
 .brand span { color:var(--accent); }
