@@ -5,6 +5,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <script>try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="color-scheme"]').content=t;}catch(e){}</script>
   <title>謝茗鈞 Miki Hsieh — 履歷</title>
   <meta name="description" content="謝茗鈞 Miki Hsieh 履歷：Garmin AOEM CSE 客戶服務工程，自動化工具開發（Python / Go）。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,14 +14,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <meta name="theme-color" content="#111612" />
+  <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231b4332'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='800' fill='%237ee8b0' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
+  <a href="#main-content" class="skip-link" data-en="Skip to main content">跳至主要內容</a>
 
   <header class="nav">
     <div class="nav-inner">
       <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="主導覽列">
         <a href="index.html" data-en="Home">首頁</a>
         <a href="resume.html" data-en="Resume">履歷</a>
         <a href="projects.html" data-en="Projects">專案作品</a>
@@ -28,10 +32,10 @@
         <a href="dishes.html" data-en="Miki's Dishes">Miki 特製料理</a>
       </nav>
       <div class="controls">
-        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
-        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言" aria-pressed="false">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題" aria-pressed="false">☀</button>
         <button class="ctrl-btn" id="printBtn" aria-label="列印或存 PDF">🖨 PDF</button>
-        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單" aria-expanded="false" aria-controls="navLinks">☰</button>
       </div>
     </div>
   </header>
@@ -107,6 +111,18 @@
           </div>
 
           <div class="skill-row">
+            <div class="lab"><span data-en="Data &amp; Quant Systems">資料 &amp; 量化工程</span> <span class="tag">Quant</span></div>
+            <div class="skill-pills">
+              <span class="skill-pill core">Apache Parquet</span>
+              <span class="skill-pill core">Wails v2</span>
+              <span class="skill-pill">Alpaca &amp; Binance API</span>
+              <span class="skill-pill">WebSocket Streaming</span>
+              <span class="skill-pill">PIT Backtesting</span>
+              <span class="skill-pill">Walk-Forward &amp; Bootstrap</span>
+            </div>
+          </div>
+
+          <div class="skill-row">
             <div class="lab"><span data-en="Hardware & Circuits">硬體 / 電路工程</span> <span class="tag">EE</span></div>
             <div class="skill-pills">
               <span class="skill-pill">IC Design</span>
@@ -130,7 +146,7 @@
       </aside>
 
       <!-- 右欄 -->
-      <main class="main">
+      <main class="main" id="main-content">
         <section class="sec">
           <h2 class="sec-title" data-en="Professional Summary">專業摘要</h2>
           <ol class="summary-num-list" data-en="
@@ -268,6 +284,30 @@
               <p data-en="<b>Outcome:</b> All automation tools now call the bridge for secure authentication, ensuring <b>0 plaintext credentials in scripts</b>."><b>成果：</b>所有自動化工具改採橋接器安全調用認證，達成<b>程式腳本內 100% 無明文密碼</b>。</p>
             </div>
           </div>
+
+          <div class="proj-item">
+            <div class="proj-header">
+              <a href="project-stock.html" class="proj-title-link" data-en="【Alpaca — US Equities Algorithmic Trading &amp; PIT Backtesting Engine】">【Alpaca — 美股事件驅動量化交易與無偏誤回測系統】</a>
+              <span class="proj-tech" data-en="Tech Stack: Go (Golang), Wails v2, Alpaca API, PIT Backtesting, Stationary Block Bootstrap, Server-Side Stop">使用技術：Go (Golang), Wails v2, Alpaca API, PIT Backtesting, Stationary Block Bootstrap, Server-Side Stop</span>
+            </div>
+            <div class="proj-detail">
+              <p data-en="<b>Project Core:</b> Self-contained Go (Golang) and Wails v2 US equities automated trading and bias-free backtesting engine combining a Point-In-Time (PIT) historical constituent store, dual-engine regime routing, and broker-hosted server-side risk controls."><b>作品核心：</b>以 Go (Golang) 與 Wails v2 打造的免外部環境依賴美股自動化交易與無偏誤回測系統，結合 Point-In-Time (PIT) 歷史動態成分股資料庫、雙引擎市場狀態路由與券商伺服器端硬性風控，實現端到端閉環執行。</p>
+              <p data-en="<b>Core Contribution:</b> Built a local multi-year OHLCV JSON cache paired with historical S&amp;P 500 <b>PIT constituent</b> and GICS sector metadata for second-level computation, using deterministic tie-break sorting for 100% backtest-to-live parity. Implemented NYSE DST calendar alignment, <b>exponential backoff</b>, and synchronous <b>order-replacement (PATCH) polling</b> alongside Dual-Engine regime routing, VCP/EP models, <b>Walk-Forward</b> validation, and <b>Stationary Block Bootstrap</b> stress testing."><b>核心貢獻：</b>建置本地多年期 OHLCV JSON 快取搭配 S&amp;P 500 <b>PIT 動態成分股</b>與 GICS 產業資料，實現秒級運算與決定性排序對齊（回測與實盤 100% 一致）；實作美股夏冬令日曆對齊、<b>指數退避重試</b>與 <b>PATCH 改單同步輪詢驗證</b>，並整合雙引擎狀態路由、VCP/EP 模型、<b>Walk-Forward</b> 驗證與 <b>Stationary Block Bootstrap</b> 壓力測試杜絕偏誤。</p>
+              <p data-en="<b>Risk &amp; Outcome:</b> Implemented <b>volatility-adjusted sizing</b>, sector/position concentration caps, progressive pilot-to-pyramid scaling, Bootstrap-calibrated daily and two-tier <b>High-Water-Mark (HWM) circuit breakers</b>, and synchronous <b>broker-hosted server-side hard stops</b>."><b>風控與成果：</b>實作<b>波動度自適應倉位</b>、標的與產業集中度上限、漸進式加減碼，搭配經 Bootstrap 校準的單日與雙層 <b>High-Water-Mark (HWM) 淨值熔斷器</b>及同步掛出的<b>券商伺服器端硬性停損單</b>，確保斷網斷電下仍受交易所層級保護。</p>
+            </div>
+          </div>
+
+          <div class="proj-item">
+            <div class="proj-header">
+              <a href="project-crypto-dashboard.html" class="proj-title-link" data-en="【crypto-dashboard — 24/7 Crypto Algorithmic Trading &amp; Low-Latency Monitoring Engine】">【crypto-dashboard — 加密貨幣 24/7 全自動量化交易與低延遲監控引擎】</a>
+              <span class="proj-tech" data-en="Tech Stack: Go (Golang), Wails v2, Binance API, WebSocket, Apache Parquet, Walk-Forward">使用技術：Go (Golang), Wails v2, Binance API, WebSocket, Apache Parquet, Walk-Forward</span>
+            </div>
+            <div class="proj-detail">
+              <p data-en="<b>Project Core:</b> Self-contained 24/7 cryptocurrency automated trading and native Wails v2 monitoring engine combining sub-millisecond WebSocket caching with multi-layer portfolio risk controls for unattended operation."><b>作品核心：</b>以 Go (Golang) 與 Wails v2 打造的 24/7 加密貨幣自動化交易與原生桌面監控引擎，結合毫秒級 WebSocket 行情快取與多層次帳戶風控，實現零人工干預的全天候維運。</p>
+              <p data-en="<b>Core Contribution:</b> Engineered a thread-safe Binance <b>miniTicker WebSocket</b> in-memory cache with stale-TTL validation and REST cooldown fallback (zero REST weight during healthy streams), backed by a year-partitioned <b>Apache Parquet</b> store incorporating delisted pairs to eliminate survivorship bias. Built causal friction-aware backtesting (Maker/Taker fees, volatility slippage, funding rates) with multi-period <b>Walk-Forward</b> and <b>Bootstrap</b> validation."><b>核心貢獻：</b>實作執行緒安全的 Binance <b>miniTicker WebSocket</b> 記憶體快取與過期回退機制（串流健康時零 REST 權重消耗，徹底規避限流），並以 <b>Apache Parquet</b> 建置含下架幣種的年份分區歷史資料庫排除倖存者偏誤；搭配納入雙邊手續費、極端滑價與資金費率的因果摩擦回測，以及多時期 <b>Walk-Forward</b> 與 <b>Bootstrap</b> 驗證。</p>
+              <p data-en="<b>Risk &amp; Outcome:</b> Enforces <b>volatility-adjusted sizing</b>, dynamic single-asset concentration rebalancing, a real-time multi-stage stop state machine across ticks and closed bars, sticky <b>max-drawdown</b> and auto-rollover <b>monthly circuit breakers</b>, plus emergency kill-switch sentinels."><b>風控與成果：</b>強制執行<b>波動度自適應部位</b>、動態單一幣種集中度減碼調倉、橫跨即時報價與收盤 K 線的<b>多階段停損狀態機</b>，以及持久化<b>最大回撤硬頂</b>、自動換月<b>月度熔斷</b>與緊急 <b>KILL / KILL_FLATTEN</b> 斷路器。</p>
+            </div>
+          </div>
         </section>
 
         <section class="sec">
@@ -351,21 +391,10 @@
   </footer>
 
   <!-- Lightbox Modal for Certificates/Education -->
-  <div id="certModal" class="modal" onclick="this.style.display='none'">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="imgModalTarget" alt="Certificate Image Preview">
-  </div>
-
-  <script>
-    function openCertModal(src) {
-      const modal = document.getElementById('certModal');
-      const img = document.getElementById('imgModalTarget');
-      if (modal && img) {
-        img.src = src;
-        modal.style.display = 'block';
-      }
-    }
-  </script>
+  <dialog id="certModal" class="lightbox" closedby="any" aria-label="證照與圖片預覽">
+    <button type="button" class="lightbox-close" aria-label="關閉預覽">&times;</button>
+    <img id="imgModalTarget" alt="Certificate Image Preview" />
+  </dialog>
 
   <script src="assets/app.js"></script>
 </body>

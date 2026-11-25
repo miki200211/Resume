@@ -12,3 +12,6 @@ index_portfolio_backup.html
 Thumbs.db
 .DS_Store
 desktop.ini
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/

@@ -7,20 +7,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <script>try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="color-scheme"]').content=t;}catch(e){}</script>
   <title>個人作品 — 謝茗鈞 Miki Hsieh</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <meta name="theme-color" content="#111612" />
+  <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231b4332'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='800' fill='%237ee8b0' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
+  <a href="#main-content" class="skip-link" data-en="Skip to main content">跳至主要內容</a>
 
   <header class="nav">
     <div class="nav-inner">
       <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="主導覽列">
         <a href="index.html" data-en="Home">首頁</a>
         <a href="resume.html" data-en="Resume">履歷</a>
         <a href="projects.html" data-en="Projects">專案作品</a>
@@ -29,23 +33,24 @@
         <a href="dishes.html" data-en="Miki's Dishes">Miki 特製料理</a>
       </nav>
       <div class="controls">
-        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
-        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
-        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言" aria-pressed="false">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題" aria-pressed="false">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單" aria-expanded="false" aria-controls="navLinks">☰</button>
       </div>
     </div>
   </header>
 
+  <main id="main-content">
   <section>
     <div class="wrap">
       <span class="eyebrow reveal">Personal</span>
-      <h2 class="section-title reveal" data-en="Personal Works">個人作品</h2>
-      <p class="section-sub reveal" data-en="Side projects I build off the clock — this is my own space, separate from my day job.">下班後自己做的 side projects——這是與工作分開、屬於我自己的空間。（下面是預留位置，填入你的真實作品即可。）</p>
+      <h1 class="section-title reveal" data-en="Personal Works">個人作品</h1>
+      <p class="section-sub reveal" data-en="Personal side projects built off the clock — spanning quantitative trading engines, Android / Wear OS apps, and desktop utilities.">下班後自主研發的個人專案——涵蓋量化交易引擎、Android / Wear OS 應用與桌面自動化工具。</p>
 
       <!-- Android 行動開發 -->
-      <h3 class="reveal" style="font-size: 21px; color: var(--ink); font-weight: 800; margin: 38px 0 16px; padding-left: 12px; border-left: 4px solid var(--accent); display: flex; align-items: center; gap: 8px;" data-en="Android Mobile Apps">
+      <h2 class="reveal" style="font-size: 21px; color: var(--ink); font-weight: 800; margin: 38px 0 16px; padding-left: 12px; border-left: 4px solid var(--accent); display: flex; align-items: center; gap: 8px;" data-en="Android Mobile Apps">
         <span>🤖</span> Android 行動開發
-      </h3>
+      </h2>
       
       <div class="grid-2" style="margin-bottom: 48px;">
 
@@ -81,39 +86,57 @@
       </div>
 
       <!-- 自動化與個人工具 -->
-      <h3 class="reveal" style="font-size: 21px; color: var(--ink); font-weight: 800; margin: 38px 0 16px; padding-left: 12px; border-left: 4px solid var(--accent); display: flex; align-items: center; gap: 8px;" data-en="Automation & Utilities">
+      <h2 class="reveal" style="font-size: 21px; color: var(--ink); font-weight: 800; margin: 38px 0 16px; padding-left: 12px; border-left: 4px solid var(--accent); display: flex; align-items: center; gap: 8px;" data-en="Automation & Utilities">
         <span>🛠️</span> 自動化與個人工具
-      </h3>
+      </h2>
 
       <div class="grid-2">
 
-        <article class="card pcard reveal">
+        <a class="card pcard reveal" href="project-crypto-dashboard.html">
           <div class="top">
             <span style="font-size: 28px; line-height: 1;">📈</span>
-            <span class="badge" data-en="Quant Trading">量化交易</span>
+            <span class="badge" data-en="24/7 Quant Engine">24/7 量化引擎</span>
+            <span class="badge" data-en="Low-Latency">低延遲串流</span>
             <span class="lang">Go</span>
           </div>
-          <h3 data-en="crypto-dashboard — Crypto Quant Trading Dashboard">crypto-dashboard — 加密貨幣量化交易儀表板</h3>
+          <h3 data-en="crypto-dashboard — 24/7 Cryptocurrency Algorithmic Trading &amp; Low-Latency Monitoring Engine">crypto-dashboard — 加密貨幣 24/7 全自動量化交易與低延遲監控引擎</h3>
 
-          <p data-en="Cryptocurrency quantitative trading dashboard integrating exchange APIs and multi-factor strategies. Currently still in testing.">
-            加密貨幣量化交易儀表板，整合交易所 API 與多因子策略，目前系統還在測試中。
+          <p data-en="A high-concurrency cryptocurrency automated trading and native desktop monitoring engine built with Go (Golang) and Wails v2. Combines sub-millisecond Binance WebSocket in-memory caching, an Apache Parquet columnar store, and multi-layer risk controls (concentration rebalancing, multi-stage stops, and drawdown circuit breakers) for unattended 24/7 operation.">
+            以 Go (Golang) 與 Wails v2 打造的高併發加密貨幣自動化交易與原生桌面監控引擎，結合 Binance WebSocket 毫秒級行情快取、Apache Parquet 欄式歷史資料層與多層次帳戶風控（集中度調倉、多階停損與回撤熔斷），實現無人值守全天候運行。
           </p>
-          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Desktop (Go / Wails / Parquet / Binance API)">Desktop (Go / Wails / Parquet / Binance API)</span>
-        </article>
+          <div class="chips" style="margin-bottom: 14px;">
+            <span class="chip">Go (Golang)</span>
+            <span class="chip">Wails v2</span>
+            <span class="chip">Binance API</span>
+            <span class="chip">WebSocket Streaming</span>
+            <span class="chip">Apache Parquet</span>
+            <span class="chip">Walk-Forward &amp; Bootstrap</span>
+          </div>
+          <span class="go" data-en="View architecture &amp; risk design →">看完整架構與風控詳解 →</span>
+        </a>
 
-        <article class="card pcard reveal">
+        <a class="card pcard reveal" href="project-stock.html">
           <div class="top">
-            <span style="font-size: 28px; line-height: 1;">🔍</span>
+            <span style="font-size: 28px; line-height: 1;">📊</span>
             <span class="badge" data-en="Quant Trading">量化交易</span>
+            <span class="badge" data-en="PIT Backtest">PIT 無偏誤回測</span>
             <span class="lang">Go</span>
           </div>
-          <h3 data-en="Alpaca — US Equity Quantitative Trading System">Alpaca — 美股量化交易系統</h3>
+          <h3 data-en="Alpaca — US Equities Algorithmic Trading &amp; PIT Backtesting Engine">Alpaca — 美股事件驅動量化交易與無偏誤回測系統</h3>
 
-          <p data-en="US equity quantitative trading system interfacing with Alpaca API for backtesting and automated trading. Currently still in testing.">
-            Go 打造的美股量化交易系統，對接 Alpaca API 進行歷史回測與自動化交易，目前系統還在測試中。
+          <p data-en="A self-contained US equities automated trading engine built with Go (Golang) and Wails v2, combining a Point-In-Time (PIT) historical constituent store, dual-engine regime routing, and broker-hosted server-side hard stops for end-to-end signal scanning, position sizing, and automated order execution.">
+            以 Go (Golang) 與 Wails v2 打造的免外部環境依賴美股自動化交易引擎，結合 Point-In-Time (PIT) 歷史動態成分股資料庫、雙引擎市場狀態路由與券商伺服器端硬性停損，實現從訊號掃描、部位計算到自動下單的端到端閉環執行。
           </p>
-          <span class="go" style="font-size: 13.5px; opacity: 0.85;" data-en="Desktop (Go / Alpaca API / Backtest)">Desktop (Go / Alpaca API / Backtest)</span>
-        </article>
+          <div class="chips" style="margin-bottom: 14px;">
+            <span class="chip">Go (Golang)</span>
+            <span class="chip">Wails v2</span>
+            <span class="chip">Alpaca API</span>
+            <span class="chip">Point-In-Time (PIT) Backtesting</span>
+            <span class="chip">Stationary Block Bootstrap</span>
+            <span class="chip">Server-Side Hard Stop</span>
+          </div>
+          <span class="go" data-en="Full architecture &amp; write-up →">看完整架構與技術詳解 →</span>
+        </a>
 
         <article class="card pcard reveal">
           <div class="top">
@@ -143,10 +166,9 @@
         </article>
 
       </div>
-
-      <p class="section-sub reveal" style="margin-top:34px; margin-bottom:0;" data-en="Tip: each card above is a single HTML block — copy it, update the text, and optionally replace the icon with an image or wrap it in a link.">小提示：每張卡片就是一段 HTML——複製一張、改文字，需要的話把圖示換成圖片、再用連結包起來即可。</p>
     </div>
   </section>
+  </main>
 
   <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
   <script src="assets/app.js"></script>

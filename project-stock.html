@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<!-- 個人專案詳細頁：Alpaca 美股量化交易系統（Go）。
-     架構圖（Mermaid）僅描述實際使用的技術。回測數據明確標示為「回測」。 -->
-<html lang="zh-Hant" data-theme="dark" data-title-en="Alpaca US Stock Quant System — Miki Hsieh">
+<!-- 個人專案詳細頁：Alpaca 美股事件驅動量化交易與無偏誤回測系統（Go + Wails v2）。
+     僅呈現工程架構、無偏誤回測方法論與風險控管設計；核心參數與實盤/回測指標數據均予以隱藏。 -->
+<html lang="zh-Hant" data-theme="dark" data-title-en="Alpaca — US Equities Algorithmic Trading &amp; PIT Backtesting Engine — Miki Hsieh">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alpaca — 美股量化交易系統</title>
+  <meta name="color-scheme" content="dark light" />
+  <script>try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="color-scheme"]').content=t;}catch(e){}</script>
+  <title>Alpaca — 美股事件驅動量化交易與無偏誤回測系統 — 謝茗鈞 Miki Hsieh</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <meta name="theme-color" content="#111612" />
+  <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231b4332'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='800' fill='%237ee8b0' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
+  <a href="#main-content" class="skip-link" data-en="Skip to main content">跳至主要內容</a>
 
   <header class="nav">
     <div class="nav-inner">
       <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="主導覽列">
         <a href="index.html" data-en="Home">首頁</a>
         <a href="resume.html" data-en="Resume">履歷</a>
         <a href="projects.html" data-en="Projects">專案作品</a>
@@ -27,23 +31,30 @@
         <a href="dishes.html" data-en="Miki's Dishes">Miki 特製料理</a>
       </nav>
       <div class="controls">
-        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
-        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
-        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言" aria-pressed="false">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題" aria-pressed="false">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單" aria-expanded="false" aria-controls="navLinks">☰</button>
       </div>
     </div>
   </header>
 
+  <main id="main-content">
   <section class="detail-hero">
     <div class="wrap">
       <a href="personal.html" class="back-link" data-en="← Back to Personal Works">← 回個人作品</a>
       <div class="top">
-        <div class="proj-icon" style="display:flex;align-items:center;justify-content:center;font-size:32px;background:linear-gradient(150deg,var(--accent),var(--accent-d));">📈</div>
-        <h1 data-en="Alpaca — US Equity Quantitative Trading System">Alpaca — 美股量化交易系統</h1>
+        <div class="proj-icon" style="display:flex;align-items:center;justify-content:center;font-size:32px;background:linear-gradient(150deg,var(--accent),var(--accent-d));">📊</div>
+        <h1 data-en="Alpaca — US Equities Algorithmic Trading &amp; PIT Backtesting Engine">Alpaca — 美股事件驅動量化交易與無偏誤回測系統</h1>
       </div>
-      <p class="one-liner" data-en="A Go-based US equity quantitative trading system implementing Minervini's Trend Template with cross-sectional momentum ranking. A point-in-time S&P 500 constituent filter fully eliminates look-ahead and survivorship bias. Backtests the entire 8,114-stock US universe with Monte Carlo stress testing, and executes live trades via the Alpaca API.">以 Go 打造的美股量化交易系統：實作 Minervini Trend Template ＋ 橫斷面動能排名，透過「點對點成份股過濾」徹底消除 look-ahead 與生存者偏差；支援全美股 8,114 檔回測（含蒙地卡羅壓力測試），並透過 Alpaca API 執行實盤交易。</p>
+      <p class="one-liner" data-en="A self-contained US equities automated trading and bias-free backtesting engine built with Go (Golang) and Wails v2. Combines a Point-In-Time (PIT) historical constituent store, dual-engine regime routing, and broker-hosted server-side risk controls for end-to-end signal scanning, position sizing, and automated Alpaca API order execution.">以 Go (Golang) 與 Wails v2 打造的免外部環境依賴美股自動化交易與無偏誤回測系統，結合 Point-In-Time (PIT) 歷史動態成分股資料庫、雙引擎市場狀態路由與券商伺服器端硬性風控，實現從盤前掃描、部位計算到 Alpaca API 自動下單的端到端（End-to-End）閉環執行。</p>
       <div class="badges">
-        <span class="chip">Go</span><span class="chip">Alpaca API</span><span class="chip" data-en="Backtest Engine">回測引擎</span><span class="chip">Monte Carlo</span>
+        <span class="chip">Go (Golang)</span>
+        <span class="chip">Wails v2</span>
+        <span class="chip">Alpaca API</span>
+        <span class="chip">Point-In-Time (PIT) Backtesting</span>
+        <span class="chip">Stationary Block Bootstrap</span>
+        <span class="chip">Walk-Forward Validation</span>
+        <span class="chip">Server-Side Hard Stop</span>
       </div>
     </div>
   </section>
@@ -52,81 +63,89 @@
     <div class="wrap">
 
       <div class="ach" style="margin-bottom:40px;">
-        <div class="item"><div class="n">8,114</div><div class="t" data-en="US stocks cached locally">檔全美股本地快取</div></div>
-        <div class="item"><div class="n" data-en="Zero Bias">零偏差</div><div class="t" data-en="Look-ahead &amp; survivorship eliminated">消除 look-ahead + 生存者偏差</div></div>
-        <div class="item"><div class="n">10,000</div><div class="t" data-en="Monte Carlo paths">蒙地卡羅路徑</div></div>
-        <div class="item"><div class="n" data-en="Backtest = Live">回測＝實盤</div><div class="t" data-en="100% deterministic alignment">100% 決定性對齊</div></div>
+        <div class="item"><div class="n" data-en="Single Binary">獨立單一執行檔</div><div class="t" data-en="Zero-runtime-dep Go &amp; Wails v2 engine">免外部環境依賴・Wails 原生桌面與 CLI</div></div>
+        <div class="item"><div class="n" data-en="100% Parity">回測＝實盤對齊</div><div class="t" data-en="Fast local cache &amp; deterministic signal parity">高速本地快取與決定性訊號排序</div></div>
+        <div class="item"><div class="n" data-en="PIT Causal">PIT 因果隔離</div><div class="t" data-en="Zero survivorship &amp; look-ahead bias">歷史動態成分股杜絕倖存者與前視偏誤</div></div>
+        <div class="item"><div class="n" data-en="Server-Side Stop">券商端硬性風控</div><div class="t" data-en="Broker-hosted stops &amp; HWM circuit breakers">伺服器條件停損與雙層淨值熔斷</div></div>
       </div>
 
       <div class="detail-sec">
-        <h2 data-en="Background">背景</h2>
-        <p data-en="I had already built a large-scale Python quantitative platform (F_4, described below), but two fundamental problems remained unsolved: (a) a unified pipeline where screening, backtesting, and live trading yield 100% identical, reproducible signals; and (b) backtests completely free of look-ahead and survivorship bias — the two most pervasive ways quant backtests silently overstate performance. To address both at once, I rebuilt the entire system from scratch in Go, centered around the Alpaca API.">在此之前我已有一套龐大的 Python 量化平台（F_4，見下），但兩個根本問題始終未解：(a) 篩選、回測、實盤三者的結果要完全可重現且 100% 一致；(b) 回測必須完全不含 look-ahead 與生存者偏差——這兩者是量化回測最普遍的「隱性灌水」方式。為同時解決這兩個問題，我以 Go 從頭圍繞 Alpaca API 重建了整套系統。</p>
-      </div>
-
-      <div class="detail-sec">
-        <h2 data-en="Core Highlights: Eliminating Bias at the Source">核心亮點：從源頭消除偏差</h2>
+        <h2 data-en="1. System Architecture, Native Desktop GUI &amp; Automated Execution">1. 系統架構、原生桌面監控與自動化執行</h2>
         <ul class="feat-list">
           <li>
-            <b data-en="Point-in-time constituent filter">點對點成份股過濾</b>
-            <span data-en="On every rebalance date, the engine queries which stocks were actually in the S&amp;P 500 on that specific day. Future winners — such as SMCI, VRT, DELL, and IBKR — are excluded prior to their actual index-inclusion dates, simultaneously eliminating both look-ahead bias and survivorship bias.">每個 rebalance 日，引擎查詢「當日真實存在於 S&amp;P 500」的成份股清單。未來才入選的贏家（如 SMCI、VRT、DELL、IBKR）在實際入選日前一律排除，同時消除 look-ahead 偏差與生存者偏差。</span>
+            <b data-en="Self-Contained Go Engine &amp; Wails v2 Native Desktop GUI">獨立高併發執行檔與 Wails v2 原生桌面架構</b>
+            <span data-en="Compiled into self-contained native binaries with zero external runtime dependencies — pairing a Wails v2 live desktop terminal (with real-time SSE log and state streaming) and a standalone CLI backtesting engine interfacing directly with the Alpaca Markets API.">編譯為免外部環境依賴的獨立原生執行檔，結合 Wails v2 實盤桌面監控端（支援即時 SSE 日誌與狀態串流）與獨立 CLI 回測引擎，直接對接 Alpaca Markets API 完成盤前特徵掃描與自動化委託單派發。</span>
           </li>
           <li>
-            <b data-en="Full US universe — 8,114 stocks">全美股宇宙——8,114 檔</b>
-            <span data-en="The -universe all_us flag pulls every active, tradable US equity from the Alpaca Assets API and caches all daily OHLCV data as local JSON files. Any full-market backtest loads in seconds rather than minutes.">-universe all_us 旗標從 Alpaca Assets API 取得所有活躍可交易美股，並將完整日 K 線（OHLCV）快取為本地 JSON。任何全市場回測均能在數秒內載入，無需重複下載。</span>
+            <b data-en="High-Speed Local Market Cache &amp; Deterministic Parity">高速本地歷史資料快取與回測／實盤 100% 決定性對齊</b>
+            <span data-en="Built a local multi-year US equities OHLCV JSON cache paired with historical constituent and GICS sector/sub-industry metadata so multi-thousand-ticker feature computation and offline backtests complete in seconds, while deterministic tie-break sorting (sort.SliceStable) guarantees 100% reproducible signal parity between backtest and live execution.">建構本地端多年期美股歷史行情 JSON 快取，搭配歷史成分股清單與 GICS 產業分類中繼資料，使數千檔標的之特徵運算與離線回測皆能在秒級內完成；同時以穩定確定性排序（sort.SliceStable）與代號平手裁決機制，確保回測與實盤訊號 100% 可重現對齊。</span>
           </li>
           <li>
-            <b data-en="Deterministic backtest–live alignment">決定性的回測與實盤一致性</b>
-            <span data-en="Stable alphabetical sorting combined with symbol-level tie-breakers ensures that backtest signals and live signals are 100% reproducible with zero ambiguity from non-deterministic iteration order.">穩定的字母排序搭配代號 tie-breaker，確保回測訊號與實盤訊號 100% 可重現，不因迭代順序不確定而產生任何歧義。</span>
-          </li>
-          <li>
-            <b data-en="Monte Carlo stress testing">蒙地卡羅壓力測試</b>
-            <span data-en="A 10,000-path circular block bootstrap quantifies both profit probability and ruin probability (maximum drawdown exceeding 50%), replacing gut-feel risk assessment with rigorous statistical bounds.">10,000 條路徑的 circular block bootstrap 模擬，輸出獲利機率與破產機率（最大回撤超過 50%），以嚴謹的統計區間取代主觀風險直覺。</span>
+            <b data-en="NYSE Calendar Scheduling &amp; Order-State Fault Tolerance">美股交易日曆對齊與委託單狀態容錯機制</b>
+            <span data-en="Includes built-in NYSE holiday and US Eastern DST/EST alignment, exponential-backoff API retries, atomic trading-state persistence, and synchronous order-replacement polling (PATCH state transition verification) to eliminate locked-share race conditions, duplicate orders, or dropped fills.">內建美股 NYSE 開休市日曆與美東夏令／冬令時間自動對齊，並實作 API 指數退避重試、交易狀態原子持久化，以及委託單修改同步輪詢驗證（PATCH 狀態轉移確認），徹底消除鎖倉競態條件、重複下單與漏單風險。</span>
           </li>
         </ul>
       </div>
 
       <div class="detail-sec">
-        <h2 data-en="System Architecture (Data Flow)">系統架構（資料流）</h2>
+        <h2 data-en="2. Dual-Engine Quantitative Framework &amp; Bias-Free Backtesting">2. 雙引擎策略框架與無偏誤回測</h2>
+        <ul class="feat-list">
+          <li>
+            <b data-en="Dual-Engine Regime Routing &amp; Multi-Factor / Event-Driven Model">雙引擎市場狀態路由與多因子動能／事件驅動模型</b>
+            <span data-en="Integrates trend-template qualification and cross-sectional momentum ranking with Volatility Contraction Pattern (VCP) volume-dry-up detection and Episodic Pivot (EP) catalyst gap qualification, governed by a sticky-hysteresis macro-regime state machine across Large-Cap Core and Mid-Cap Satellite universes with liquidity and GICS sector gates.">整合趨勢樣板過濾與橫斷面動能排序、波動度收斂型態（VCP）量縮結構偵測以及事件驅動跳空動能（Episodic Pivots），由具遲滯防震（Hysteresis）的大盤宏觀狀態機跨大型股核心與中型股衛星雙引擎調度，並透過流動性下限與 GICS 產業集中度閘門篩選標的。</span>
+          </li>
+          <li>
+            <b data-en="Point-In-Time (PIT) Data Hygiene">杜絕前視與倖存者偏誤（PIT Data Hygiene）</b>
+            <span data-en="Constructed a historical daily S&amp;P 500 constituent membership matrix enforcing strict causal point-in-time filtering on every rebalance and scan date so future index additions are excluded prior to actual inclusion, eliminating survivorship and look-ahead bias at the source.">建構 S&amp;P 500 歷史逐日成分股矩陣，於每次再平衡與掃描時嚴格執行因果時間點隔離（Causal Point-In-Time Filtering），確保在實際納入指數日前一律排除未來成分股，從資料底層杜絕倖存者偏誤與前視偏誤。</span>
+          </li>
+          <li>
+            <b data-en="Block Bootstrap Tail-Risk Calibration &amp; Walk-Forward Validation">序列重抽樣壓力測試與樣本外驗證</b>
+            <span data-en="Combines regime-conditioned Circular Block Bootstrap Monte Carlo simulation and Stationary Block Bootstrap (Politis-Romano geometric block daily-return resampling) with Walk-Forward out-of-sample parameter validation to quantify tail risk and drawdown distributions across bull-bear cycles.">結合依市場狀態分層的 Circular Block Bootstrap 蒙地卡羅模擬、Stationary Block Bootstrap（Politis-Romano 幾何區塊日報酬重抽樣）與 Walk-Forward 滾動式樣本外參數驗證，嚴謹量化跨牛熊週期的尾端風險與回撤分佈。</span>
+          </li>
+          <li>
+            <b data-en="Realistic Transaction Friction &amp; Slippage Modeling">真實交易摩擦成本建模</b>
+            <span data-en="Models US regulatory execution fees and dynamic slippage penalties directly inside the simulation engine so backtest equity trajectories reflect realistic live fill conditions.">回測引擎內建美股交易規費與動態滑價（Slippage）懲罰模型，確保模擬淨值曲線貼近真實市場搓合環境。</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="3. Risk Management &amp; Broker-Level Protection">3. 風險控管與券商端硬性防護</h2>
+        <ul class="feat-list">
+          <li>
+            <b data-en="Volatility Sizing, Progressive Pyramiding &amp; Two-Tier HWM Breakers">波動度自適應倉位、漸進式加減碼與雙層高水位熔斷</b>
+            <span data-en="Dynamically derives share quantities from realized volatility and stop distance under single-position and sector concentration caps, paired with pilot-to-pyramid scaling and Bootstrap-calibrated daily loss and two-tier High-Water-Mark (HWM) account circuit breakers.">依據個股近期真實波動度與停損距離動態計算下單股數，結合單一標的與產業集中度上限、試單轉金字塔加碼機制，以及經 Bootstrap 尾端風險校準的單日虧損與雙層帳戶淨值高水位（High-Water-Mark）回撤熔斷器。</span>
+          </li>
+          <li>
+            <b data-en="Broker-Hosted Server-Side Hard Stop &amp; Dynamic Replacement">券商伺服器端硬性停損與動態移停（Server-Side Hard Stop）</b>
+            <span data-en="Synchronously dispatches and dynamically updates (PATCH) conditional stop orders hosted directly on Alpaca's servers upon entry fill and partial scale-out, ensuring open positions remain protected at the broker level even during local power loss or network outages.">主委託單成交當下即同步向 Alpaca 伺服器掛出條件停損單，並於分批減碼或移停時透過 PATCH 動態更新券商端停損單數量與價位，確保即使本機斷電或斷網，所有持倉仍受券商伺服器層級的硬性保護。</span>
+          </li>
+        </ul>
+        <p style="font-size:13px; color:var(--muted); margin-top:14px;" data-en="Note: this page documents system engineering, bias-free backtesting methodology, and risk-control architecture only; proprietary alpha thresholds, signal parameters, and live/backtest return figures are intentionally omitted.">註：本頁僅展示系統工程架構、無偏誤回測方法論與風險控管設計；具體訊號門檻、核心參數與實盤／回測績效數據均予隱藏以保護策略 Alpha。</p>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="System Architecture (End-to-End Pipeline)">系統架構（End-to-End 資料與執行流）</h2>
         <div style="background:var(--bg-2); border:1px solid var(--line); border-radius:12px; padding:18px; overflow:auto;">
           <pre class="mermaid">
 flowchart LR
-  A["Alpaca API (Assets + Market Data)"] --> B["Go downloader · 8,114 US stocks cached (JSON)"]
-  B --> C["Indicators + Minervini / momentum screen"]
-  C --> D["Point-in-time backtest (no look-ahead)"]
-  C --> E["Live trading (Alpaca)"]
-  D --> F["Dashboard / HTML report"]
-  E --> F
+  A["Alpaca Markets API (Data · Calendar · Orders)"] --> B["Local OHLCV Cache &amp; PIT S&amp;P 500 / GICS Store"]
+  B --> C["Dual-Engine Filter (Momentum · VCP · EP · Regime)"]
+  C --> D["Causal Validation (PIT · Walk-Forward · Block Bootstrap)"]
+  C --> E["Execution Engine (Vol Sizing · HWM Breakers · Parity)"]
+  E --> F["Broker Order Dispatch &amp; Dynamic Server-Side Stop"]
+  E --> G["Wails v2 Native Desktop Dashboard"]
           </pre>
         </div>
       </div>
 
-      <div class="detail-sec">
-        <h2 data-en="Backtest Results (clearly labeled as backtest)">回測結果（明確標示為回測）</h2>
-        <p data-en="Clean run: 2020–2026 (~5.8 years), point-in-time S&amp;P 500 universe, zero look-ahead. All figures below are backtest results only — not a forecast or guarantee of live performance.">乾淨回測：2020–2026（約 5.8 年），point-in-time S&amp;P 500 宇宙、零 look-ahead。以下所有數據均為「回測」結果，非對實盤績效的預測或保證。</p>
-        <ul class="feat-list">
-          <li>
-            <b>CAGR 29.61% · MDD −32.66% · Sharpe 0.82</b>
-            <span data-en="$3,000 concentrated-tier strategy — cumulative return +351.89%, profit factor 4.21, win rate 63.9%.">$3,000 集中型策略——累計報酬 +351.89%、獲利因子 4.21、勝率 63.9%。</span>
-          </li>
-          <li>
-            <b data-en="Monte Carlo: 99.72% profit probability">蒙地卡羅：99.72% 獲利機率</b>
-            <span data-en="Across 10,000 simulated 6-year paths; ruin probability (max drawdown exceeding 50%) was 10.11%.">10,000 條 6 年模擬路徑；破產機率（回撤超過 50%）為 10.11%。</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="detail-sec">
-        <h2 data-en="Lineage: The F_4 System">淵源：F_4 系統</h2>
-        <p data-en="This Go system evolved from F_4 — an approximately 31,000-line Python quantitative platform incorporating Minervini's Trend Template, Armstrong's ECM Pi-Cycle, a 9-factor Elite Score, dynamic risk management modes, and Monte Carlo plus crisis stress testing. I am progressively migrating its core strategy logic into this cleaner, faster Go implementation.">這套 Go 系統由 F_4 演進而來——一個約 31,000 行的 Python 量化平台，整合了 Minervini Trend Template、Armstrong ECM Pi-Cycle、九因子 Elite Score、動態風險管理模式，以及蒙地卡羅與危機壓力測試。我正逐步將其核心策略邏輯遷移至這套更精簡、更快速的 Go 實作中。</p>
-      </div>
-
-
       <div class="prevnext">
         <a href="personal.html" data-en="← All Personal Works">← 回個人作品</a>
-        <a href="project-crypto-dashboard.html" data-en="Crypto Dashboard →">看 crypto-dashboard →</a>
+        <a href="project-crypto-dashboard.html" data-en="24/7 Crypto Quant Engine →">看 crypto-dashboard 加密量化系統 →</a>
       </div>
     </div>
   </section>
+  </main>
 
   <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
 

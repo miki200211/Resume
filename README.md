@@ -35,17 +35,17 @@ Quantitative trading systems and mobile apps built off the clock:
 
 | Project | Stack | Note |
 |---|---|---|
-| [Alpaca — US Stock Quant System](project-stock.html) | **Go** · Alpaca API · Monte Carlo | Point-in-time S&P 500 filter; backtests 8,114-stock universe; CAGR 29.61% *(backtest only)* |
-| crypto-dashboard | **Go** · Wails · Parquet · Binance API · goroutines | Full Go port of a ~4,000-line Python quant stack; max-drawdown hard cap + monthly circuit-breaker |
+| [Alpaca — US Equities Algorithmic Trading & PIT Backtesting Engine](project-stock.html) | **Go (Golang)** · Wails v2 · Alpaca API · PIT Backtesting · Stationary Block Bootstrap | Self-contained desktop & CLI engine; causal S&P 500 PIT hygiene, dual-engine regime routing, HWM circuit breakers & broker server-side hard stops |
+| [crypto-dashboard — 24/7 Crypto Quant Engine](project-crypto-dashboard.html) | **Go (Golang)** · Wails v2 · Binance API · WebSocket · Apache Parquet · Goroutines | 24/7 sub-ms WebSocket in-memory cache, year-partitioned Parquet store (incl. delisted pairs), dynamic concentration rebalancing, MaxDD/monthly circuit breakers & Walk-Forward validation |
 | MemeWatch | **Kotlin** · Jetpack Compose · Wear OS · Room | Meme soundboard for Android + Wear OS; AdMob + Google Play Billing; signed .aab |
 | Book of Fate | **Kotlin** · Compose | Shake-to-query oracle book fusing classic literature and spatial acoustics |
 | AI_Web | **Go** · NIC Binding · HTTP Proxy | Dual-network routing to specific domains without virtual drivers |
 | Excel → PDF Batch Converter | **Python** · Tkinter · Win32 COM | Batch-converts entire directories of workbooks while preserving page layout |
 
 > **Architecture note — Quant systems:**  
-> The trading dashboards shown here are **Go desktop applications**, not browser-based web apps.  
-> All heavy computation — VCP screening, Monte Carlo simulation (10,000 paths), backtesting across 8,114 stocks — runs entirely inside the Go binary.  
-> This portfolio site displays screenshots and architecture write-ups only; no financial logic runs in the browser.
+> The trading systems shown here are **Go + Wails v2 native desktop applications** compiled into self-contained binaries (zero external runtime dependencies), not browser-based web apps.  
+> All heavy computation — Binance WebSocket in-memory streaming and year-partitioned Apache Parquet columnar I/O (`crypto-dashboard`), local historical OHLCV caching and causal S&P 500 Point-In-Time (PIT) backtesting (`Alpaca`), Walk-Forward validation, and Block Bootstrap stress testing — runs natively inside the Go binaries.  
+> This portfolio site displays architecture write-ups only; proprietary alpha parameters, signal thresholds, and return figures are intentionally omitted, and no financial logic runs in the browser.
 
 ---
 
@@ -77,7 +77,8 @@ Resume/
 ├── project-carmax.html             # Detail: Auto Workflow Integration
 ├── project-oow.html                # Detail: OOW Process Integration
 ├── project-credential-bridge.html  # Detail: Credential Bridge (Go)
-├── project-stock.html              # Detail: Alpaca US Stock Quant System (Go)
+├── project-stock.html              # Detail: Alpaca US Equities & PIT Backtesting Engine (Go)
+├── project-crypto-dashboard.html   # Detail: 24/7 Crypto Quant Engine (Go)
 ├── assets/
 │   ├── style.css                   # Shared styles + CSS design tokens
 │   └── app.js                      # Theme / i18n / nav / scroll-reveal
@@ -89,7 +90,7 @@ Resume/
 ## Key Highlights
 
 - 🇯🇵 **JLPT N2 + Japan on-site deployment** — dispatched to Japan for product rework; served as bilingual (Chinese / Japanese) technical coordinator under live production pressure
-- 📈 **Quantitative trading** — Go system backtested at CAGR 29.61%, Sharpe 0.82 over 5.8 years with zero look-ahead bias *(clearly labeled backtest, not live performance)*
+- 📈 **Quantitative trading & bias-free backtesting** — Self-contained Go + Wails v2 engines across US equities (`Alpaca`: causal S&P 500 PIT hygiene, dual-engine regime routing, Stationary Block Bootstrap, HWM breakers & broker server-side hard stops) and crypto (`crypto-dashboard`: 24/7 sub-ms WebSocket in-memory cache, Apache Parquet store incl. delisted pairs, multi-stage stops & drawdown circuit breakers)
 - 🔐 **Security-first automation** — zero plaintext credentials across all team scripts via Go credential bridge with AES-256-GCM + DPAPI + HMAC audit logging
 - ⚡ **93% efficiency gain** — per-case handling time reduced from 30 min to 2 min via one-click automation pipeline
 

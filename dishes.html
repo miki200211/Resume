@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <script>try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="color-scheme"]').content=t;}catch(e){}</script>
   <title>Miki 特製料理 — 謝茗鈞 Miki Hsieh</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <meta name="theme-color" content="#111612" />
+  <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231b4332'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='800' fill='%237ee8b0' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
   <style>
     /* Category Filter Styles */
@@ -43,12 +46,13 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link" data-en="Skip to main content">跳至主要內容</a>
 
   <!-- 導覽列 -->
   <header class="nav">
     <div class="nav-inner">
       <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="主導覽列">
         <a href="index.html" data-en="Home">首頁</a>
         <a href="resume.html" data-en="Resume">履歷</a>
         <a href="projects.html" data-en="Projects">專案作品</a>
@@ -57,18 +61,19 @@
         <a href="dishes.html" data-en="Miki's Dishes">Miki 特製料理</a>
       </nav>
       <div class="controls">
-        <button class="ctrl-btn" id="langToggle" aria-label="切換語言">EN</button>
-        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題">☀</button>
-        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單">☰</button>
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言" aria-pressed="false">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題" aria-pressed="false">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單" aria-expanded="false" aria-controls="navLinks">☰</button>
       </div>
     </div>
   </header>
 
   <!-- 內容區 -->
+  <main id="main-content">
   <section>
     <div class="wrap">
       <span class="eyebrow reveal">Culinary</span>
-      <h2 class="section-title reveal" data-en="Miki's Special Dishes">Miki 特製料理</h2>
+      <h1 class="section-title reveal" data-en="Miki's Special Dishes">Miki 特製料理</h1>
       <p class="section-sub reveal" data-en="A collection of delicious dishes crafted by Miki. Click on any card to view the dish in detail.">精選 Miki 的私房手作料理。點擊可放大檢視每道佳餚與製作巧思。</p>
 
       <!-- 料理展示網格 -->
@@ -239,27 +244,17 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- 頁尾 -->
   <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
 
   <!-- Lightbox Modal -->
-  <div id="certModal" class="modal" onclick="this.style.display='none'">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="imgModalTarget" alt="Dish Preview">
-  </div>
+  <dialog id="certModal" class="lightbox" closedby="any" aria-label="料理圖片預覽">
+    <button type="button" class="lightbox-close" aria-label="關閉預覽">&times;</button>
+    <img id="imgModalTarget" alt="Dish Preview" />
+  </dialog>
 
-  <script>
-    // Lightbox open function
-    function openCertModal(src) {
-      const modal = document.getElementById('certModal');
-      const img = document.getElementById('imgModalTarget');
-      if (modal && img) {
-        img.src = src;
-        modal.style.display = 'block';
-      }
-    }
-  </script>
   <script src="assets/app.js"></script>
 </body>
 </html>

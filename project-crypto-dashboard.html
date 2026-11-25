@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!-- 個人專案詳細頁：crypto-dashboard 加密貨幣 24/7 全自動量化交易與低延遲監控引擎（Go + Wails v2）。
+     架構與風控敘述嚴格隱藏內部子策略代號、核心參數、閾值與績效數字，保護 Alpha。 -->
+<html lang="zh-Hant" data-theme="dark" data-title-en="24/7 Crypto Algorithmic Trading &amp; Low-Latency Monitoring Engine — Miki Hsieh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <script>try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.querySelector('meta[name="color-scheme"]').content=t;}catch(e){}</script>
+  <title>crypto-dashboard — 加密貨幣 24/7 全自動量化交易與低延遲監控引擎</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <meta name="theme-color" content="#111612" />
+  <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231b4332'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='800' fill='%237ee8b0' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link" data-en="Skip to main content">跳至主要內容</a>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">Miki <span>Hsieh</span></a>
+      <nav class="nav-links" id="navLinks" aria-label="主導覽列">
+        <a href="index.html" data-en="Home">首頁</a>
+        <a href="resume.html" data-en="Resume">履歷</a>
+        <a href="projects.html" data-en="Projects">專案作品</a>
+        <a href="personal.html" data-en="Personal">個人作品</a>
+        <a href="japan.html" data-en="Japan Experience">日本經歷</a>
+        <a href="dishes.html" data-en="Miki's Dishes">Miki 特製料理</a>
+      </nav>
+      <div class="controls">
+        <button class="ctrl-btn" id="langToggle" aria-label="切換語言" aria-pressed="false">EN</button>
+        <button class="ctrl-btn" id="themeToggle" aria-label="切換主題" aria-pressed="false">☀</button>
+        <button class="ctrl-btn nav-toggle" id="navToggle" aria-label="選單" aria-expanded="false" aria-controls="navLinks">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+  <section class="detail-hero">
+    <div class="wrap">
+      <a href="personal.html" class="back-link" data-en="← Back to Personal Works">← 回個人作品</a>
+      <div class="top">
+        <div class="proj-icon" style="display:flex;align-items:center;justify-content:center;font-size:32px;background:linear-gradient(150deg,var(--accent),var(--accent-d));">⚡</div>
+        <h1 data-en="24/7 Cryptocurrency Algorithmic Trading &amp; Low-Latency Monitoring Engine">加密貨幣 24/7 全自動量化交易與低延遲監控引擎</h1>
+      </div>
+      <p class="one-liner" data-en="A high-concurrency cryptocurrency automated trading and native desktop monitoring engine built with Go (Golang) and Wails v2. Combines sub-millisecond Binance WebSocket in-memory market caching, Apache Parquet columnar storage, and multi-layer risk controls (dynamic concentration rebalancing, real-time multi-stage stops, and drawdown circuit breakers) for low-latency, unattended 24/7 operation.">以 Go (Golang) 與 Wails v2 打造的高併發加密貨幣自動化交易與原生桌面監控引擎，結合 Binance WebSocket 本地端毫秒級行情快取、Apache Parquet 欄式歷史資料層與多層次帳戶風控（動態集中度調倉、即時多階段停損與回撤熔斷），在 7×24 小時高波動市場中實現低延遲執行與無人值守維運。</p>
+      <div class="badges">
+        <span class="chip">Go (Golang)</span>
+        <span class="chip">Wails v2</span>
+        <span class="chip">Binance API &amp; WebSocket</span>
+        <span class="chip">Apache Parquet</span>
+        <span class="chip">In-Memory Caching</span>
+        <span class="chip">Walk-Forward &amp; Bootstrap</span>
+        <span class="chip">24/7 High Availability</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+
+      <div class="ach" style="margin-bottom:40px;">
+        <div class="item"><div class="n">24 / 7</div><div class="t" data-en="Unattended fault-tolerant state machine">無人值守容錯狀態機</div></div>
+        <div class="item"><div class="n">WS + Parquet</div><div class="t" data-en="Sub-ms in-memory cache &amp; columnar store">毫秒級記憶體快取與欄式資料層</div></div>
+        <div class="item"><div class="n" data-en="Rate-Limit Safe">零頻率封鎖</div><div class="t" data-en="Zero-weight stream with cooldown fallback">零權重串流與冷卻回退機制</div></div>
+        <div class="item"><div class="n" data-en="Multi-Layer Risk">多重硬風控</div><div class="t" data-en="Concentration cap · Multi-stage stop · Circuit breakers">集中度調倉・多階停損・帳戶熔斷</div></div>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="1. Low-Latency Streaming, Columnar Storage &amp; High Availability">1. 低延遲串流、欄式資料層與高可用架構</h2>
+        <ul class="feat-list">
+          <li>
+            <b data-en="WebSocket Local In-Memory Market Cache">WebSocket 本地端即時行情快取</b>
+            <span data-en="Ingests Binance WebSocket (miniTicker) streams into a thread-safe (sync.RWMutex) in-memory ticker cache with stale-TTL validation and REST cooldown fallback — delivering sub-millisecond reads with zero REST weight during healthy streams while structurally eliminating rate-limit throttling and IP ban risks.">導入 Binance WebSocket（miniTicker）串流並建構執行緒安全（sync.RWMutex）的記憶體內行情快取，結合過期時效驗證（Stale-TTL）與 REST 冷卻回退機制；串流健康期間以零 API 權重消耗實現毫秒級報價讀取，並從架構層面徹底規避交易所限流與 IP 封鎖風險。</span>
+          </li>
+          <li>
+            <b data-en="Apache Parquet Columnar Historical Store">Apache Parquet 高效能欄式歷史資料層</b>
+            <span data-en="Built on Go parquet-go with year-partitioned multi-timeframe OHLCV storage and automated deduplication, incorporating historical delisted trading pairs to eliminate survivorship bias while accelerating multi-asset feature and backtest reads.">基於 Go parquet-go 建置依年份分區的多時框 OHLCV 欄式儲存與自動去重管線，並納入歷史已下架交易對資料，在大幅加速多幣種特徵運算與回測讀取的同時，徹底排除加密貨幣市場常見的倖存者偏誤。</span>
+          </li>
+          <li>
+            <b data-en="Wails v2 Native Desktop GUI &amp; 24/7 Fault-Tolerant Engine">Wails v2 原生桌面監控與 24/7 容錯狀態機</b>
+            <span data-en="Compiled into a self-contained single binary (zero external runtime dependencies) supporting both a Wails v2 native desktop dashboard (streaming strongly-typed snapshots via EventsEmit) and headless/watchdog daemon modes, featuring exponential-backoff WebSocket auto-reconnection, atomic tmp + rename state persistence, and hourly-rotating JSONL audit logs.">編譯為免外部執行環境依賴的獨立單一執行檔，支援 Wails v2 原生桌面儀表板（透過 EventsEmit 即時推送強型別狀態快照）與無頭／看門狗守護進程模式；內建 WebSocket 指數退避自動重連、原子寫入（tmp + rename）狀態持久化與按小時輪轉的 JSONL 交易稽核日誌。</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="2. Multi-Regime Quantitative Framework &amp; Friction-Aware Backtesting">2. 多週期量化框架與無偏誤摩擦回測</h2>
+        <ul class="feat-list">
+          <li>
+            <b data-en="Multi-Regime Breakout &amp; Market-State Routing">多維度動能突破與市場狀態路由</b>
+            <span data-en="Combines Volatility Contraction Pattern (VCP) compression and Episodic Pivot abnormal-volume breakouts — including dynamic EP-to-VCP position promotion — with macro-regime-gated multi-directional filtering to isolate liquid market leaders and filter out choppy noise.">結合價格波動度收斂（VCP）與異常成交量突破（Episodic Pivots，含事件倉位動態升級為趨勢部位機制），搭配大盤宏觀狀態閘門進行多空結構過濾，在趨勢與震盪週期之間動態切換並過濾低流動性雜訊。</span>
+          </li>
+          <li>
+            <b data-en="Causal Simulation &amp; End-to-End Friction Modeling">因果無偏誤撮合與完整摩擦成本建模</b>
+            <span data-en="Enforces strict bar-by-bar causal ordering (evaluating exits prior to new entries with next-bar-open fill verification and delisted-pair inclusion) while modeling Maker/Taker fees, punitive volatility-spike slippage, and perpetual funding-rate settlements.">回測引擎於逐根 K 線推進時嚴格強制因果順序（先結算既有倉位出場再評估新進場，並驗證次根開盤價成交一致性與納入下架幣種），完整納入 Maker/Taker 手續費、高波動極端滑價懲罰與永續合約資金費率結算，避免理論報酬高估。</span>
+          </li>
+          <li>
+            <b data-en="Multi-Period Walk-Forward &amp; Bootstrap Validation">多期樣本外推進與 Bootstrap 統計驗證</b>
+            <span data-en="Applies multi-period Walk-Forward out-of-sample validation across bull-to-bear regime transitions alongside Bootstrap Sharpe confidence-interval and tail-drawdown stress testing.">採用多時期 Walk-Forward 樣本外推進驗證檢驗系統在加密貨幣牛熊劇烈轉換期的穩定度，並結合 Bootstrap 夏普比率信賴區間與極端尾端回撤壓力測試。</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="3. Crypto-Specific Multi-Layer Risk Engineering">3. 加密市場多層次風控工程</h2>
+        <ul class="feat-list">
+          <li>
+            <b data-en="Volatility-Adjusted Sizing &amp; Dynamic Concentration Rebalancing">波動度自適應倉位與動態集中度調倉</b>
+            <span data-en="Scales entry notional by realized ATR/volatility distance while enforcing per-asset concentration caps, concurrency limits, and automated concentration trimming/rebalancing to prevent single-coin or correlated altcoin over-exposure.">依據各幣種近期真實波動幅度（ATR）與停損距離動態反推下單名義部位，同時強制執行單一幣種集中度上限、最大併發持倉控制與自動化超限減碼調倉（Concentration Rebalancing），防止單一標的或高相關性山寨幣過度曝險。</span>
+          </li>
+          <li>
+            <b data-en="Real-Time Multi-Stage Stop &amp; Trailing State Machine">即時多階段停損與移動鎖利狀態機</b>
+            <span data-en="Continuously evaluates catastrophe stops, breakeven locks, partial profit scale-outs, Chandelier/volatility trailing stops, and time stops across both real-time WebSocket ticks and closed bars.">橫跨即時 WebSocket 報價與收盤 K 線持續評估災難性硬停損、損益兩平鎖定（Breakeven Lock）、分批獲利減碼、吊燈／波動度移動停利與時間停損，確保每個 Tick 皆受到一致的出場狀態機監控。</span>
+          </li>
+          <li>
+            <b data-en="Sticky Max-Drawdown Guard, Monthly Circuit Breaker &amp; Kill Switches">帳戶級最大回撤硬頂、月度熔斷與緊急斷路器</b>
+            <span data-en="Embeds a persistent sticky max-drawdown hard-cap guard, an auto-rollover monthly loss circuit breaker, and file-based emergency KILL / KILL_FLATTEN operator sentinels to halt entries or flatten exposure under extreme market stress.">內建持久化黏著式最大回撤硬頂守護（Sticky MaxDD Guard）、跨月自動重置的月度虧損熔斷機制（Monthly Circuit Breaker），以及外部檔案觸發的緊急停止新單／一鍵強制平倉（KILL / KILL_FLATTEN）斷路器，在極端行情下立即阻斷風險擴散。</span>
+          </li>
+        </ul>
+        <p style="font-size:13px; color:var(--muted); margin-top:14px;" data-en="Note: this page documents system engineering, bias-free backtesting methodology, and multi-layer risk architecture only; internal strategy codenames, signal thresholds, core parameters, and live/backtest return figures are intentionally omitted.">註：本頁僅展示系統工程架構、無偏誤回測方法論與多層次風控設計；內部子策略代號、具體訊號閾值、核心參數與實盤／回測績效數據均予隱藏以保護策略 Alpha。</p>
+      </div>
+
+      <div class="detail-sec">
+        <h2 data-en="System Architecture (Streaming, Storage &amp; Risk Flow)">系統架構（串流、欄式儲存與風控執行流）</h2>
+        <div style="background:var(--bg-2); border:1px solid var(--line); border-radius:12px; padding:18px; overflow:auto;">
+          <pre class="mermaid">
+flowchart LR
+  WS["Binance WebSocket (miniTicker)"] --> Cache["Thread-Safe In-Memory Cache"]
+  PQ["Apache Parquet Store (OHLCV + Delisted)"] --> Funnel["Multi-Regime Funnel (VCP · EP · Macro Gate)"]
+  Cache --> Funnel
+  Funnel --> BT["Causal Backtest · Walk-Forward &amp; Bootstrap"]
+  Funnel --> Risk["Risk Engine (Vol Sizing · Conc Cap · MaxDD &amp; Monthly CB)"]
+  Risk --> Exec["24/7 Execution &amp; Multi-Stage Stop State Machine"]
+  Exec --> UI["Wails v2 Native Real-Time Dashboard"]
+  BT --> UI
+          </pre>
+        </div>
+      </div>
+
+      <div class="prevnext">
+        <a href="project-stock.html" data-en="← Alpaca US Stock Quant">← 看 Alpaca 美股量化系統</a>
+        <a href="personal.html" data-en="All Personal Works →">回個人作品 →</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer>© <span id="year"></span> 謝茗鈞 Miki Hsieh</footer>
+
+  <script src="assets/app.js"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'strict' });
+  </script>
+</body>
+</html>
