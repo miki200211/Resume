@@ -95,22 +95,22 @@
         <a class="card pcard reveal" href="project-crypto-dashboard.html">
           <div class="top">
             <span style="font-size: 28px; line-height: 1;">📈</span>
-            <span class="badge" data-en="24/7 Quant Engine">24/7 量化引擎</span>
-            <span class="badge" data-en="Low-Latency">低延遲串流</span>
+            <span class="badge" data-en="24/7 Quant Engine">24/7 高併發引擎</span>
+            <span class="badge" data-en="Zero-Weight Cache">零權重快取</span>
             <span class="lang">Go</span>
           </div>
-          <h3 data-en="crypto-dashboard — 24/7 Cryptocurrency Algorithmic Trading &amp; Low-Latency Monitoring Engine">crypto-dashboard — 加密貨幣 24/7 全自動量化交易與低延遲監控引擎</h3>
+          <h3 data-en="crypto-dashboard — 24/7 Cryptocurrency Algorithmic Trading &amp; High-Concurrency Monitoring Engine">crypto-dashboard — 加密貨幣 24/7 全自動量化交易與高併發監控引擎</h3>
 
-          <p data-en="A high-concurrency cryptocurrency automated trading and native desktop monitoring engine built with Go (Golang) and Wails v2. Combines sub-millisecond Binance WebSocket in-memory caching, an Apache Parquet columnar store, and multi-layer risk controls (concentration rebalancing, multi-stage stops, and drawdown circuit breakers) for unattended 24/7 operation.">
-            以 Go (Golang) 與 Wails v2 打造的高併發加密貨幣自動化交易與原生桌面監控引擎，結合 Binance WebSocket 毫秒級行情快取、Apache Parquet 欄式歷史資料層與多層次帳戶風控（集中度調倉、多階停損與回撤熔斷），實現無人值守全天候運行。
+          <p data-en="A single-binary automated trading and Wails v2 native desktop monitoring system built with Go (Golang) — solving 24/7 unattended operation, concurrent stream consistency, and fault recovery. Combines a zero-API-weight Binance WebSocket cache (sync.RWMutex), year-partitioned Apache Parquet storage (~75% smaller footprint), and multi-layer risk state machines.">
+            以 Go (Golang) 與 Wails v2 打造的單一執行檔自動化交易與原生桌面監控系統，解決 7×24 無人值守維運、高併發串流一致性與異常容錯恢復；結合 Binance WebSocket 零權重快取（sync.RWMutex）、Apache Parquet 欄式儲存（節省約 75% 空間）與多層帳戶風控狀態機。
           </p>
           <div class="chips" style="margin-bottom: 14px;">
             <span class="chip">Go (Golang)</span>
             <span class="chip">Wails v2</span>
-            <span class="chip">Binance API</span>
-            <span class="chip">WebSocket Streaming</span>
+            <span class="chip">Binance WebSocket</span>
+            <span class="chip">sync.RWMutex Cache</span>
             <span class="chip">Apache Parquet</span>
-            <span class="chip">Walk-Forward &amp; Bootstrap</span>
+            <span class="chip">24/7 Fault-Tolerant FSM</span>
           </div>
           <span class="go" data-en="View architecture &amp; risk design →">看完整架構與風控詳解 →</span>
         </a>
@@ -124,15 +124,15 @@
           </div>
           <h3 data-en="Alpaca — US Equities Algorithmic Trading &amp; PIT Backtesting Engine">Alpaca — 美股事件驅動量化交易與無偏誤回測系統</h3>
 
-          <p data-en="A self-contained US equities automated trading engine built with Go (Golang) and Wails v2, combining a Point-In-Time (PIT) historical constituent store, dual-engine regime routing, and broker-hosted server-side hard stops for end-to-end signal scanning, position sizing, and automated order execution.">
-            以 Go (Golang) 與 Wails v2 打造的免外部環境依賴美股自動化交易引擎，結合 Point-In-Time (PIT) 歷史動態成分股資料庫、雙引擎市場狀態路由與券商伺服器端硬性停損，實現從訊號掃描、部位計算到自動下單的端到端閉環執行。
+          <p data-en="A zero-dependency US equities automated trading and bias-free backtesting system built with Go (Golang) and Wails v2 — engineered to solve causal isolation across large-scale time series, cross-timezone NYSE/DST scheduling state machines, and remote broker-hosted hard stops under local outages.">
+            以 Go (Golang) 與 Wails v2 打造的免外部環境依賴美股自動化交易與無偏誤回測系統，核心解決大規模歷史時序資料因果隔離（杜絕資料洩漏）、跨時區交易排程狀態機與斷網時的遠端硬性風控，實現端到端閉環執行。
           </p>
           <div class="chips" style="margin-bottom: 14px;">
             <span class="chip">Go (Golang)</span>
             <span class="chip">Wails v2</span>
             <span class="chip">Alpaca API</span>
-            <span class="chip">Point-In-Time (PIT) Backtesting</span>
-            <span class="chip">Stationary Block Bootstrap</span>
+            <span class="chip">Point-In-Time (PIT) Hygiene</span>
+            <span class="chip">Politis-Romano Bootstrap</span>
             <span class="chip">Server-Side Hard Stop</span>
           </div>
           <span class="go" data-en="Full architecture &amp; write-up →">看完整架構與技術詳解 →</span>

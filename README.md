@@ -35,8 +35,8 @@ Quantitative trading systems and mobile apps built off the clock:
 
 | Project | Stack | Note |
 |---|---|---|
-| [Alpaca — US Equities Algorithmic Trading & PIT Backtesting Engine](project-stock.html) | **Go (Golang)** · Wails v2 · Alpaca API · PIT Backtesting · Stationary Block Bootstrap | Self-contained desktop & CLI engine; causal S&P 500 PIT hygiene, dual-engine regime routing, HWM circuit breakers & broker server-side hard stops |
-| [crypto-dashboard — 24/7 Crypto Quant Engine](project-crypto-dashboard.html) | **Go (Golang)** · Wails v2 · Binance API · WebSocket · Apache Parquet · Goroutines | 24/7 sub-ms WebSocket in-memory cache, year-partitioned Parquet store (incl. delisted pairs), dynamic concentration rebalancing, MaxDD/monthly circuit breakers & Walk-Forward validation |
+| [Alpaca — US Equities Algorithmic Trading & PIT Backtesting Engine](project-stock.html) | **Go (Golang)** · Wails v2 · Alpaca API · PIT Hygiene · Walk-Forward · Politis-Romano Bootstrap | Self-contained ~17 MB binary (`<15 ms` 500+ scan / `3.0 s` 10-yr backtest); causal S&P 500 PIT matrix, NYSE/DST state machine & `PATCH`-confirmed broker hard stops |
+| [crypto-dashboard — 24/7 Crypto Quant Engine](project-crypto-dashboard.html) | **Go (Golang)** · Wails v2 · Binance WebSocket · sync.RWMutex · Apache Parquet | Unattended 24/7 fault-tolerant state machine, zero-API-weight concurrent memory cache, year-partitioned Parquet store (~75% smaller footprint, ~8x faster reads, incl. delisted pairs), and causal friction-modeled validation |
 | MemeWatch | **Kotlin** · Jetpack Compose · Wear OS · Room | Meme soundboard for Android + Wear OS; AdMob + Google Play Billing; signed .aab |
 | Book of Fate | **Kotlin** · Compose | Shake-to-query oracle book fusing classic literature and spatial acoustics |
 | AI_Web | **Go** · NIC Binding · HTTP Proxy | Dual-network routing to specific domains without virtual drivers |
@@ -44,8 +44,8 @@ Quantitative trading systems and mobile apps built off the clock:
 
 > **Architecture note — Quant systems:**  
 > The trading systems shown here are **Go + Wails v2 native desktop applications** compiled into self-contained binaries (zero external runtime dependencies), not browser-based web apps.  
-> All heavy computation — Binance WebSocket in-memory streaming and year-partitioned Apache Parquet columnar I/O (`crypto-dashboard`), local historical OHLCV caching and causal S&P 500 Point-In-Time (PIT) backtesting (`Alpaca`), Walk-Forward validation, and Block Bootstrap stress testing — runs natively inside the Go binaries.  
-> This portfolio site displays architecture write-ups only; proprietary alpha parameters, signal thresholds, and return figures are intentionally omitted, and no financial logic runs in the browser.
+> All heavy computation — zero-API-weight Binance WebSocket concurrent caching (`sync.RWMutex`) and year-partitioned Apache Parquet columnar I/O (`crypto-dashboard`), local historical OHLCV caching and causal S&P 500 Point-In-Time (PIT) backtesting with Block Bootstrap validation (`Alpaca`) — runs natively inside the Go binaries.
+> This portfolio site displays architecture write-ups and redacted GUI views only; proprietary alpha parameters, signal thresholds, and return figures are intentionally omitted, and no financial logic runs in the browser.
 
 ---
 
@@ -78,7 +78,7 @@ Resume/
 ├── project-oow.html                # Detail: OOW Process Integration
 ├── project-credential-bridge.html  # Detail: Credential Bridge (Go)
 ├── project-stock.html              # Detail: Alpaca US Equities & PIT Backtesting Engine (Go)
-├── project-crypto-dashboard.html   # Detail: 24/7 Crypto Quant Engine (Go)
+├── project-crypto-dashboard.html   # Detail: 24/7 Crypto Quant &amp; Wails v2 Monitoring Engine (Go)
 ├── assets/
 │   ├── style.css                   # Shared styles + CSS design tokens
 │   └── app.js                      # Theme / i18n / nav / scroll-reveal
@@ -90,7 +90,7 @@ Resume/
 ## Key Highlights
 
 - 🇯🇵 **JLPT N2 + Japan on-site deployment** — dispatched to Japan for product rework; served as bilingual (Chinese / Japanese) technical coordinator under live production pressure
-- 📈 **Quantitative trading & bias-free backtesting** — Self-contained Go + Wails v2 engines across US equities (`Alpaca`: causal S&P 500 PIT hygiene, dual-engine regime routing, Stationary Block Bootstrap, HWM breakers & broker server-side hard stops) and crypto (`crypto-dashboard`: 24/7 sub-ms WebSocket in-memory cache, Apache Parquet store incl. delisted pairs, multi-stage stops & drawdown circuit breakers)
+- 📈 **Quantitative trading & bias-free backtesting** — Self-contained Go + Wails v2 engines across US equities (`Alpaca`: ~17 MB binary, `<15 ms` scan / `3.0 s` 10-yr PIT backtest, daily S&P 500 PIT matrix, Circular & Politis-Romano Stationary Block Bootstrap, `PATCH`-synced broker hard stops) and crypto (`crypto-dashboard`: 24/7 sub-ms WebSocket in-memory cache, Apache Parquet store incl. delisted pairs, multi-stage stops & drawdown circuit breakers)
 - 🔐 **Security-first automation** — zero plaintext credentials across all team scripts via Go credential bridge with AES-256-GCM + DPAPI + HMAC audit logging
 - ⚡ **93% efficiency gain** — per-case handling time reduced from 30 min to 2 min via one-click automation pipeline
 
