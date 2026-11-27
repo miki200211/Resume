@@ -15,6 +15,464 @@
   <meta name="theme-color" content="#111612" />
   <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231b4332'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='800' fill='%237ee8b0' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <style>
+    /* ===== Interactive System Architecture Explorer (project-stock.html) ===== */
+    .arch-wide {
+      --off-accent: #38bdf8;
+      --off-bg: rgba(56, 189, 248, 0.10);
+      --off-line: rgba(56, 189, 248, 0.34);
+      width: 100%;
+    }
+    :root[data-theme="light"] .arch-wide {
+      --off-accent: #0284c7;
+      --off-bg: rgba(2, 132, 199, 0.08);
+      --off-line: rgba(2, 132, 199, 0.30);
+    }
+    @media (min-width: 1120px) {
+      .arch-wide {
+        width: min(1180px, calc(100vw - 44px));
+        margin-left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    .arch-board {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .arch-hint-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .arch-hint-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .arch-pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(72, 168, 120, 0.22);
+      flex: none;
+    }
+    .arch-legends {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .arch-legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--muted);
+    }
+    .arch-legend i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .arch-lane {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 18px 20px;
+    }
+    .arch-lane.offline {
+      border-color: var(--off-line);
+    }
+    .arch-lane.live {
+      border-color: rgba(72, 168, 120, 0.34);
+    }
+    .arch-lane-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .arch-lane-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .arch-lane-badge {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+    .arch-lane.offline .arch-lane-badge {
+      background: var(--off-bg);
+      color: var(--off-accent);
+      border: 1px solid var(--off-line);
+    }
+    .arch-lane.live .arch-lane-badge {
+      background: var(--badge-bg);
+      color: var(--accent);
+      border: 1px solid rgba(72, 168, 120, 0.35);
+    }
+    .arch-lane-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .arch-lane-trait {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .arch-grid-3 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr);
+      align-items: stretch;
+      gap: 6px;
+    }
+    .arch-grid-4 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr);
+      align-items: stretch;
+      gap: 4px;
+    }
+    .arch-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 800;
+      user-select: none;
+    }
+    .arch-node {
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      width: 100%;
+      min-height: 124px;
+      padding: 15px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--line);
+      background: var(--bg-2);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform .16s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .arch-node:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    }
+    .arch-node[data-lane="offline"]:hover {
+      border-color: var(--off-accent);
+    }
+    .arch-node.linked {
+      border-style: dashed;
+      border-color: var(--accent-2);
+    }
+    .arch-node[data-lane="offline"].linked {
+      border-color: var(--off-accent);
+    }
+    .arch-node.active {
+      background: var(--card);
+      border-style: solid;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(72, 168, 120, 0.22), 0 12px 28px rgba(0, 0, 0, 0.28);
+      transform: translateY(-2px);
+    }
+    .arch-node[data-lane="offline"].active {
+      border-color: var(--off-accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22), 0 12px 28px rgba(0, 0, 0, 0.28);
+    }
+    .arch-node-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .arch-node-code {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: var(--badge-bg);
+      color: var(--accent);
+    }
+    .arch-node[data-lane="offline"] .arch-node-code {
+      background: var(--off-bg);
+      color: var(--off-accent);
+    }
+    .arch-node-ic {
+      font-size: 18px;
+      line-height: 1;
+    }
+    .arch-node-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .arch-node-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+      flex: 1;
+    }
+    .arch-node-cta {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+    .arch-node[data-lane="offline"] .arch-node-cta {
+      color: var(--off-accent);
+    }
+    .arch-node .cta-on { display: none; }
+    .arch-node.active .cta-idle { display: none; }
+    .arch-node.active .cta-on { display: inline; }
+
+    .arch-bridge-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 14px 0;
+    }
+    .arch-bridge {
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: 1px dashed var(--off-line);
+      background: var(--off-bg);
+      color: var(--ink);
+      font-size: 12.5px;
+      font-weight: 700;
+      transition: transform .15s ease, border-color .2s ease;
+    }
+    .arch-bridge:hover {
+      transform: translateY(-1px);
+      border-color: var(--off-accent);
+    }
+    .arch-sink-row {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--line);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+    .arch-sink-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--badge-bg);
+      border: 1px solid rgba(72, 168, 120, 0.25);
+    }
+    .arch-node.sink {
+      min-height: 82px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .arch-node.sink .arch-node-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+    .arch-inspector {
+      margin-top: 20px;
+      border: 1.5px solid var(--accent);
+      border-radius: 14px;
+      background: var(--card);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .arch-insp-bar {
+      background: var(--sidebar);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .arch-insp-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .arch-insp-nav {
+      display: flex;
+      gap: 8px;
+    }
+    .arch-detail-pane {
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .arch-detail-pane[hidden] {
+      display: none;
+    }
+    .arch-det-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: var(--badge-bg);
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .arch-det-badge.offline {
+      background: var(--off-bg);
+      color: var(--off-accent);
+    }
+    .arch-detail-pane h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .arch-det-purpose {
+      font-size: 14.5px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .arch-mech-list {
+      list-style: none;
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+    }
+    .arch-mech-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .arch-mech-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .arch-mech-list li b {
+      color: var(--ink);
+    }
+    .arch-io-box {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .arch-io-row .arch-io-k {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .arch-io-row .arch-io-v {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .arch-jump-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 4px;
+    }
+    .arch-jump-chip {
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--chip-line);
+      background: var(--chip-bg);
+      color: var(--ink);
+      transition: border-color .15s, color .15s, background .15s;
+    }
+    .arch-jump-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--badge-bg);
+    }
+    @media (max-width: 960px) {
+      .arch-board { padding: 16px; }
+      .arch-grid-3, .arch-grid-4 {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .arch-arrow {
+        padding: 2px 0;
+        transform: rotate(90deg);
+      }
+      .arch-sink-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .arch-node.sink {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .arch-detail-pane {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+    }
+    @media print {
+      .arch-wide { width: 100% !important; margin-left: 0 !important; transform: none !important; }
+    }
+  </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link" data-en="Skip to main content">跳至主要內容</a>
@@ -124,35 +582,413 @@
         <p style="font-size:13px; color:var(--muted); margin-top:14px;" data-en="Note: this page documents system engineering, bias-free backtesting methodology, and risk-control architecture only; proprietary alpha thresholds, signal parameters, and live/backtest return figures are intentionally omitted.">註：本頁僅展示系統工程架構、無偏誤回測方法論與風險控管設計；具體訊號門檻、核心參數與實盤／回測績效數據均予隱藏以保護策略 Alpha。</p>
       </div>
 
-      <div class="detail-sec">
-        <h2 data-en="System Architecture (Decoupled Offline Validation &amp; Live Execution)">系統架構（離線 PIT／Bootstrap 驗證與實盤閉環分離）</h2>
-        <div style="background:var(--bg-2); border:1px solid var(--line); border-radius:12px; padding:18px; overflow:auto;">
-          <pre class="mermaid">
-flowchart LR
-  subgraph Offline ["Offline PIT &amp; Statistical Validation (離線驗證管線)"]
-    direction LR
-    Hist["`Local Multi-Year OHLCV
-&amp; Historical S&amp;P 500 / GICS`"] --> PIT["`Causal PIT Engine &amp; Parity Sort
-(sort.SliceStable)`"]
-    PIT --> Val["`Stress Testing
-(Walk-Forward · Stationary Block Bootstrap)`"]
-  end
+      <div class="detail-sec arch-wide">
+        <h2 data-en="Interactive System Architecture (Decoupled Offline Validation &amp; Live Execution)">系統架構（離線 PIT／Bootstrap 驗證與實盤閉環分離）</h2>
 
-  subgraph Live ["Live Pre-Market &amp; Execution Loop (實盤閉環執行流)"]
-    direction LR
-    API["`Alpaca Markets API
-(Market Data · NYSE Calendar)`"] --> Filter["`Dual-Engine Filter
-(Momentum · VCP · EP · Hysteresis Gate)`"]
-    Filter --> Exec["`Execution &amp; Risk Engine
-(Vol Sizing · HWM Breakers · PATCH Sync)`"]
-    Exec --> Broker["`Broker Order Dispatch
-&amp; Server-Side Hard Stop`"]
-  end
+        <div class="arch-board" id="archBoard">
+          <div class="arch-hint-bar">
+            <span class="arch-hint-text">
+              <span class="arch-pulse" aria-hidden="true"></span>
+              <span data-en="Click any architecture module below (or use ← / → keys) to inspect its role, internal mechanisms, and I/O contract.">點擊下方任一架構模組（或使用 ← / → 方向鍵），即時檢視工程職責、內部機制與上下游資料契約</span>
+            </span>
+            <div class="arch-legends">
+              <span class="arch-legend"><i style="background: var(--off-accent);"></i><span data-en="Offline Validation">離線驗證管線</span></span>
+              <span class="arch-legend"><i style="background: var(--accent);"></i><span data-en="Live Execution &amp; Custody">實盤閉環執行</span></span>
+            </div>
+          </div>
 
-  Val -.->|"Calibrated Risk &amp; Params"| Filter
-  Broker --> UI["`Wails v2 Native Desktop Dashboard
-(Real-Time SSE Stream)`"]
-          </pre>
+          <!-- Offline Pipeline Lane -->
+          <div class="arch-lane offline">
+            <div class="arch-lane-head">
+              <div class="arch-lane-title-wrap">
+                <span class="arch-lane-badge">OFFLINE PIPELINE</span>
+                <span class="arch-lane-title" data-en="Offline PIT &amp; Statistical Validation">離線 PIT 因果回測與統計壓力驗證管線</span>
+              </div>
+              <span class="arch-lane-trait" data-en="Zero Look-Ahead · Zero Survivorship Bias · Tail-Risk Calibration">零前視偏誤・零倖存者偏誤・尾端風險校準</span>
+            </div>
+
+            <div class="arch-grid-3" role="tablist" aria-label="Offline Validation Modules">
+              <button type="button" class="arch-node" role="tab" id="tab-hist" aria-controls="pane-hist" aria-selected="false" data-node="hist" data-lane="offline" data-neighbors="pit">
+                <div class="arch-node-top">
+                  <span class="arch-node-code">OFF-01</span>
+                  <span class="arch-node-ic" aria-hidden="true">🗄️</span>
+                </div>
+                <div class="arch-node-title" data-en="Local Multi-Year OHLCV &amp; PIT / GICS Store">本地多年期 OHLCV 與 PIT／GICS 資料庫</div>
+                <div class="arch-node-sub" data-en="Multi-year bars · Daily S&amp;P 500 matrix · GICS metadata">多年期日 K 快取・逐日歷史成分股・GICS 產業分類</div>
+                <div class="arch-node-cta"><span class="cta-idle" data-en="Click to inspect ▾">點擊解說用途 ▾</span><span class="cta-on" data-en="● Inspecting module">● 目前檢視中</span></div>
+              </button>
+
+              <div class="arch-arrow" aria-hidden="true">→</div>
+
+              <button type="button" class="arch-node active" role="tab" id="tab-pit" aria-controls="pane-pit" aria-selected="true" data-node="pit" data-lane="offline" data-neighbors="hist,val">
+                <div class="arch-node-top">
+                  <span class="arch-node-code">OFF-02</span>
+                  <span class="arch-node-ic" aria-hidden="true">🧬</span>
+                </div>
+                <div class="arch-node-title" data-en="Causal PIT Engine &amp; Parity Sort">PIT 因果隔離引擎與決定性排序</div>
+                <div class="arch-node-sub" data-en="Zero look-ahead / survivorship · sort.SliceStable">&lt; 15 ms 掃描・3.0 s 十年回測・sort.SliceStable 對齊</div>
+                <div class="arch-node-cta"><span class="cta-idle" data-en="Click to inspect ▾">點擊解說用途 ▾</span><span class="cta-on" data-en="● Inspecting module">● 目前檢視中</span></div>
+              </button>
+
+              <div class="arch-arrow" aria-hidden="true">→</div>
+
+              <button type="button" class="arch-node" role="tab" id="tab-val" aria-controls="pane-val" aria-selected="false" data-node="val" data-lane="offline" data-neighbors="pit,filter">
+                <div class="arch-node-top">
+                  <span class="arch-node-code">OFF-03</span>
+                  <span class="arch-node-ic" aria-hidden="true">🎲</span>
+                </div>
+                <div class="arch-node-title" data-en="Walk-Forward &amp; Politis-Romano Bootstrap">Walk-Forward 與 Politis-Romano 壓測</div>
+                <div class="arch-node-sub" data-en="Rolling OOS · Stationary Block Bootstrap · Tail calibration">滾動樣本外驗證・幾何區塊重抽樣・融資與滑價建模</div>
+                <div class="arch-node-cta"><span class="cta-idle" data-en="Click to inspect ▾">點擊解說用途 ▾</span><span class="cta-on" data-en="● Inspecting module">● 目前檢視中</span></div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Decoupled Calibration Bridge -->
+          <div class="arch-bridge-wrap">
+            <button type="button" class="arch-bridge" data-jump="val" title="Inspect Calibration Bridge">
+              <span aria-hidden="true">⚡</span>
+              <span data-en="Offline Validation Output: Calibrated HWM Risk Bounds &amp; Unbiased Logic ──▶ Injected into Live Filter (Val ⇢ Filter)">離線驗證輸出：經 Bootstrap 校準之 HWM 熔斷邊界與無偏誤門檻 ──▶ 注入實盤篩選器 (OFF-03 ⇢ LIVE-02)</span>
+            </button>
+          </div>
+
+          <!-- Live Pipeline Lane -->
+          <div class="arch-lane live">
+            <div class="arch-lane-head">
+              <div class="arch-lane-title-wrap">
+                <span class="arch-lane-badge">LIVE PIPELINE</span>
+                <span class="arch-lane-title" data-en="Live Pre-Market Scan &amp; Closed-Loop Execution">實盤盤前掃描與端到端閉環執行流</span>
+              </div>
+              <span class="arch-lane-trait" data-en="NYSE Calendar / DST Sync · Idempotent PATCH · Server-Side Custody">NYSE 日曆與冬夏令對齊・冪等改單同步・券商端硬風控</span>
+            </div>
+
+            <div class="arch-grid-4" role="tablist" aria-label="Live Execution Modules">
+              <button type="button" class="arch-node" role="tab" id="tab-api" aria-controls="pane-api" aria-selected="false" data-node="api" data-lane="live" data-neighbors="filter">
+                <div class="arch-node-top">
+                  <span class="arch-node-code">LIVE-01</span>
+                  <span class="arch-node-ic" aria-hidden="true">🏛️</span>
+                </div>
+                <div class="arch-node-title" data-en="Alpaca API &amp; NYSE Calendar State Machine">Alpaca 行情與 NYSE 日曆狀態機</div>
+                <div class="arch-node-sub" data-en="Holidays &amp; early closes · EDT/EST sync · Backoff">休市／半日市自動識別・美東夏冬令對齊・退避重連</div>
+                <div class="arch-node-cta"><span class="cta-idle" data-en="Click to inspect ▾">點擊解說用途 ▾</span><span class="cta-on" data-en="● Inspecting module">● 目前檢視中</span></div>
+              </button>
+
+              <div class="arch-arrow" aria-hidden="true">→</div>
+
+              <button type="button" class="arch-node" role="tab" id="tab-filter" aria-controls="pane-filter" aria-selected="false" data-node="filter" data-lane="live" data-neighbors="val,api,exec">
+                <div class="arch-node-top">
+                  <span class="arch-node-code">LIVE-02</span>
+                  <span class="arch-node-ic" aria-hidden="true">🧭</span>
+                </div>
+                <div class="arch-node-title" data-en="Dual-Engine Filter &amp; Hysteresis Gate">雙引擎市場狀態路由與多因子漏斗</div>
+                <div class="arch-node-sub" data-en="Macro hysteresis · Breadth lock · Momentum &amp; EP routing">遲滯防洗盤閘門・廣度派發鎖定・雙通道訊號篩選</div>
+                <div class="arch-node-cta"><span class="cta-idle" data-en="Click to inspect ▾">點擊解說用途 ▾</span><span class="cta-on" data-en="● Inspecting module">● 目前檢視中</span></div>
+              </button>
+
+              <div class="arch-arrow" aria-hidden="true">→</div>
+
+              <button type="button" class="arch-node" role="tab" id="tab-exec" aria-controls="pane-exec" aria-selected="false" data-node="exec" data-lane="live" data-neighbors="filter,broker,ui">
+                <div class="arch-node-top">
+                  <span class="arch-node-code">LIVE-03</span>
+                  <span class="arch-node-ic" aria-hidden="true">🛡️</span>
+                </div>
+                <div class="arch-node-title" data-en="Execution, HWM Breakers &amp; PATCH Sync">波動度倉位、HWM 熔斷與 PATCH 同步</div>
+                <div class="arch-node-sub" data-en="Vol sizing · Two-tier HWM breakers · Lock-free PATCH">波動調倉・集中度削峰・雙層熔斷・PATCH 狀態確認</div>
+                <div class="arch-node-cta"><span class="cta-idle" data-en="Click to inspect ▾">點擊解說用途 ▾</span><span class="cta-on" data-en="● Inspecting module">● 目前檢視中</span></div>
+              </button>
+
+              <div class="arch-arrow" aria-hidden="true">→</div>
+
+              <button type="button" class="arch-node" role="tab" id="tab-broker" aria-controls="pane-broker" aria-selected="false" data-node="broker" data-lane="live" data-neighbors="exec,ui">
+                <div class="arch-node-top">
+                  <span class="arch-node-code">LIVE-04</span>
+                  <span class="arch-node-ic" aria-hidden="true">🔒</span>
+                </div>
+                <div class="arch-node-title" data-en="Broker Dispatch &amp; Server-Side Hard Stop">委託單自動派發與伺服器端硬停損</div>
+                <div class="arch-node-sub" data-en="Broker-hosted stops · Outage-proof · State persistence">券商條件停損託管・關機斷網持續防護・狀態持久化</div>
+                <div class="arch-node-cta"><span class="cta-idle" data-en="Click to inspect ▾">點擊解說用途 ▾</span><span class="cta-on" data-en="● Inspecting module">● 目前檢視中</span></div>
+              </button>
+            </div>
+
+            <!-- Telemetry Sink to Native UI -->
+            <div class="arch-sink-row">
+              <div class="arch-sink-label" data-en="LIVE-03 / LIVE-04 ──▶ Real-Time State &amp; SSE">LIVE-03 / LIVE-04 ──▶ 即時快照與 SSE 事件串流</div>
+              <button type="button" class="arch-node sink" role="tab" id="tab-ui" aria-controls="pane-ui" aria-selected="false" data-node="ui" data-lane="live" data-neighbors="exec,broker">
+                <div class="arch-node-main">
+                  <div class="arch-node-top" style="justify-content:flex-start;">
+                    <span class="arch-node-code">GUI-01</span>
+                    <span class="arch-node-ic" aria-hidden="true">🖥️</span>
+                    <span class="arch-node-title" data-en="Wails v2 Native Desktop Dashboard (Real-Time SSE Stream)">Wails v2 原生桌面監控終端（SSE 即時串流）</span>
+                  </div>
+                  <div class="arch-node-sub" data-en="Self-contained ~17 MB Windows binary bundling SSE execution console, macro regime indicators, and rotating daily audit logs.">體積僅約 17 MB 的免依賴原生執行檔：整合 SSE 即時日誌主控台、大盤體制燈號儀表板與按日輪轉本地稽核日誌</div>
+                </div>
+                <div class="arch-node-cta" style="white-space:nowrap;"><span class="cta-idle" data-en="Click to inspect ▾">點擊解說用途 ▾</span><span class="cta-on" data-en="● Inspecting module">● 目前檢視中</span></div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Module Inspector Panel -->
+          <div class="arch-inspector" aria-live="polite">
+            <div class="arch-insp-bar">
+              <div class="arch-insp-status">
+                <span data-en="Module Inspector">模組架構解說面板</span>
+                <span style="color:var(--muted);">·</span>
+                <span><span data-en="Module">模組</span> <span id="archStepNum">2 / 8</span></span>
+              </div>
+              <div class="arch-insp-nav">
+                <button type="button" class="ctrl-btn" id="archPrev" data-en="← Prev Module">← 上一模組</button>
+                <button type="button" class="ctrl-btn" id="archNext" data-en="Next Module →">下一模組 →</button>
+              </div>
+            </div>
+
+            <!-- Pane 1: hist -->
+            <div class="arch-detail-pane" id="pane-hist" role="tabpanel" aria-labelledby="tab-hist" data-pane="hist" hidden>
+              <div>
+                <span class="arch-det-badge offline">OFF-01 · OFFLINE DATA LAYER</span>
+                <h3 data-en="Local Multi-Year OHLCV &amp; PIT / GICS Store">本地多年期 OHLCV 與 PIT／GICS 資料庫</h3>
+                <p class="arch-det-purpose" data-en="Serves as the unified local data foundation for offline research and pre-market scanning, consolidating multi-year US equity OHLCV bars, daily historical S&amp;P 500 membership records, and GICS sector/sub-industry metadata with zero external database dependencies.">作為離線研發與盤前掃描的統一資料底座，將多年期美股日 K 線（OHLCV）、S&amp;P 500 歷史逐日成分股異動紀錄與 GICS 產業／子產業分類整合為高速本地快取，免除外部資料庫依賴並消除重複 API 拉取延遲。</p>
+                <ul class="arch-mech-list">
+                  <li data-en="<b>NY-Date Cache Keying:</b> Automatically manages incremental updates and local cache hits keyed by US Eastern trading date, preventing cross-timezone midnight mismatches."><b>紐約交易日快取鍵控：</b>依美東交易日自動管理增量更新與離線快取命中，避免跨時區換日誤判。</li>
+                  <li data-en="<b>Historical &amp; Removed Ticker Retention:</b> Preserves multi-year bars for historical constituents later dropped, acquired, or delisted so simulations cover the true historical universe."><b>歷史已剔除與下市標的保留：</b>完整保留曾納入指數但後續遭剔除、併購或下市之歷史標的 K 線，確保回測母體完整。</li>
+                  <li data-en="<b>GICS Metadata &amp; Split-Anomaly Guards:</b> Embeds sector/sub-industry mappings and unadjusted price-split anomaly detection to keep ranking metrics clean."><b>GICS 產業與異常拆股防護：</b>內建產業分類映射與未調整拆股價格跳變偵測，防止髒資料污染動能排序。</li>
+                </ul>
+              </div>
+              <div class="arch-io-box">
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📥 Upstream Input">📥 輸入來源 (Upstream Input)</div>
+                  <div class="arch-io-v" data-en="Alpaca Historical Bars API · S&amp;P 500 historical component changelog · GICS industry mapping tables">Alpaca Historical Bars API · S&amp;P 500 歷史成分股異動表 · GICS 產業映射表</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📤 Downstream Output">📤 輸出契約 (Downstream Output)</div>
+                  <div class="arch-io-v" data-en="Cleaned, date-aligned multi-year time-series slices and daily constituent snapshots ready for PIT causal isolation.">經清洗對齊之多年期時序 K 線切片與逐日成分股快照 → 送入「PIT 因果隔離引擎」</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="🔗 Connected Modules">🔗 關聯模組跳轉</div>
+                  <div class="arch-jump-row">
+                    <button type="button" class="arch-jump-chip" data-jump="pit" data-en="Downstream: OFF-02 PIT Engine →">下游：OFF-02 PIT 因果引擎 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 2: pit (default visible) -->
+            <div class="arch-detail-pane" id="pane-pit" role="tabpanel" aria-labelledby="tab-pit" data-pane="pit">
+              <div>
+                <span class="arch-det-badge offline">OFF-02 · CAUSAL HYGIENE CORE</span>
+                <h3 data-en="Causal PIT Engine &amp; Parity Sort">PIT 因果隔離引擎與決定性排序</h3>
+                <p class="arch-det-purpose" data-en="Eliminates the two most pervasive sources of overstated equity backtests — look-ahead bias and survivorship bias — by restricting every historical scan strictly to constituents actually in the index on that date while guaranteeing 100% identical ordering between backtest and live runs.">解決美股量化回測最致命的「未來飆股偷看（Look-Ahead）」與「倖存者偏誤（Survivorship Bias）」。引擎在任一歷史交易日嚴格只開放當日已公開存在於指數內的成分股參與評分，並保證回測與實盤產出 100% 相同的排序結果。</p>
+                <ul class="arch-mech-list">
+                  <li data-en="<b>Daily Membership Time-Lock:</b> Excludes future index winners from both candidate pools and cross-sectional relative-strength denominators prior to their actual effective inclusion dates."><b>逐日成分股時間鎖（Causal Gate）：</b>未來才納入指數的強勢股在實際生效日前一律隔離於候選池與相對強度分母之外。</li>
+                  <li data-en="<b>Deterministic Tie-Break Sort:</b> Uses sort.SliceStable paired with alphabetical symbol tie-breakers, eliminating non-deterministic Go map iteration drift."><b>決定性平手裁決排序：</b>採用 sort.SliceStable 搭配股票代號字典序裁決，徹底消除 Go map 隨機迭代順序造成的訊號漂移。</li>
+                  <li data-en="<b>Sub-15ms Scan &amp; 3.0s 10-Year Backtest:</b> Computes features and parity rankings for 500+ symbols in &lt; 15 ms per pass and completes a full 10-year causal simulation in 3.0 seconds."><b>極速橫斷面掃描與十年回測：</b>單次完成 500+ 檔成分股特徵計算與確定性排名僅需 &lt; 15 ms，十年期完整事件驅動模擬於 3.0 秒內跑完。</li>
+                </ul>
+              </div>
+              <div class="arch-io-box">
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📥 Upstream Input">📥 輸入來源 (Upstream Input)</div>
+                  <div class="arch-io-v" data-en="Local multi-year OHLCV bars + historical daily index membership matrix">本地多年期 OHLCV 快取 + 歷史逐日指數成分股矩陣</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📤 Downstream Output">📤 輸出契約 (Downstream Output)</div>
+                  <div class="arch-io-v" data-en="Leak-free causal equity trajectories, trade ledger, and daily return series forwarded to statistical stress testing.">100% 無資料洩漏之因果交易軌跡與日報酬序列 → 送入「統計壓力驗證」</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="🔗 Connected Modules">🔗 關聯模組跳轉</div>
+                  <div class="arch-jump-row">
+                    <button type="button" class="arch-jump-chip" data-jump="hist" data-en="← Upstream: OFF-01 Data Store">← 上游：OFF-01 本地資料庫</button>
+                    <button type="button" class="arch-jump-chip" data-jump="val" data-en="Downstream: OFF-03 Bootstrap →">下游：OFF-03 統計壓力驗證 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 3: val -->
+            <div class="arch-detail-pane" id="pane-val" role="tabpanel" aria-labelledby="tab-val" data-pane="val" hidden>
+              <div>
+                <span class="arch-det-badge offline">OFF-03 · STATISTICAL STRESS TESTING</span>
+                <h3 data-en="Walk-Forward &amp; Politis-Romano Bootstrap">Walk-Forward 與 Politis-Romano 壓測</h3>
+                <p class="arch-det-purpose" data-en="Replaces fragile single-sample curve fitting with rolling out-of-sample Walk-Forward testing and volatility-clustering-aware block resampling to quantify multi-cycle drawdown distributions and scientifically calibrate live circuit-breaker thresholds.">捨棄易過度擬合的單一全樣本回測，透過多期滾動樣本外推進與保留波動叢聚特性的序列重抽樣模擬，量化策略在跨牛熊週期與黑天鵝連跌期間的最大回撤分佈，據此科學化設定實盤帳戶熔斷水位。</p>
+                <ul class="arch-mech-list">
+                  <li data-en="<b>Stationary Block Bootstrap (Politis-Romano):</b> Resamples daily returns using geometric random block lengths, preserving serial volatility clustering without fixed-block boundary distortion."><b>Stationary Block Bootstrap（Politis-Romano）：</b>以幾何分佈隨機區塊長度重抽樣日報酬序列，保留真實市場連跌與波動叢聚結構，避免固定區塊邊界失真。</li>
+                  <li data-en="<b>Circular Block Bootstrap Monte Carlo:</b> Generates thousands of synthetic multi-year paths across market regimes to estimate drawdown percentiles and tail-risk bounds."><b>Circular Block Bootstrap 蒙地卡羅：</b>依市場狀態分層執行數千條多年期路徑模擬，嚴謹量化極端尾端回撤分佈區間。</li>
+                  <li data-en="<b>Friction, Gap-Slippage &amp; Actual/360 Margin:</b> Accounts for regulatory fees, adverse gap-through stop slippage, and compounded overnight margin interest before pushing calibrated rules live."><b>真實摩擦與隔夜融資計息：</b>完整計入交易規費、跳空穿價停損滑價與 Actual/360 隔夜融資複利計息，校準後之風控參數再注入實盤。</li>
+                </ul>
+              </div>
+              <div class="arch-io-box">
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📥 Upstream Input">📥 輸入來源 (Upstream Input)</div>
+                  <div class="arch-io-v" data-en="Causal PIT backtest daily return series &amp; segmented walk-forward windows">PIT 因果回測日報酬序列與跨牛熊週期分段樣本</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📤 Downstream Output">📤 輸出契約 (Downstream Output)</div>
+                  <div class="arch-io-v" data-en="Statistically calibrated HWM breaker bounds &amp; unbiased strategy configuration injected into the live dual-engine filter.">經統計校準之雙層 HWM 熔斷水位與無偏誤門檻 → 跨管線注入「雙引擎篩選器」</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="🔗 Connected Modules">🔗 關聯模組跳轉</div>
+                  <div class="arch-jump-row">
+                    <button type="button" class="arch-jump-chip" data-jump="pit" data-en="← Upstream: OFF-02 PIT Engine">← 上游：OFF-02 PIT 因果引擎</button>
+                    <button type="button" class="arch-jump-chip" data-jump="filter" data-en="Bridge: LIVE-02 Live Filter →">跨管線：LIVE-02 雙引擎篩選器 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 4: api -->
+            <div class="arch-detail-pane" id="pane-api" role="tabpanel" aria-labelledby="tab-api" data-pane="api" hidden>
+              <div>
+                <span class="arch-det-badge">LIVE-01 · BROKER GATEWAY &amp; CLOCK</span>
+                <h3 data-en="Alpaca API &amp; NYSE Calendar State Machine">Alpaca 行情與 NYSE 日曆狀態機</h3>
+                <p class="arch-det-purpose" data-en="Purpose-built for non-24-hour US equity market structure, encapsulating direct Alpaca REST/Clock communication and timezone-aware session state machines across pre-market scans, adaptive intraday polling, and end-of-day windows.">針對美股「非 24 小時連續交易、具開休市與冬夏令切換」的特性，封裝直連 Alpaca 原生 API 的通訊與排程閘門，精準協調盤前掃描、盤中自適應輪詢與收盤前尾盤確認視窗。</p>
+                <ul class="arch-mech-list">
+                  <li data-en="<b>Holiday &amp; Early-Close Clock Sync:</b> Queries Alpaca Clock API to detect market holidays and half-day early closes automatically, staying silent when US exchanges are closed."><b>NYSE 假日與提前收盤感知：</b>串接 Alpaca Clock API 自動識別感恩節休市與半日市提前收盤等特殊時段，休市期間自動靜默待機不誤觸發。</li>
+                  <li data-en="<b>Automatic EDT/EST DST Alignment:</b> Anchors all scan schedules and daily bar cache keys strictly to America/New_York time so daylight-saving transitions never cause drift."><b>美東夏令／冬令（EDT/EST）自動對齊：</b>所有排程與日線快取鍵統一錨定紐約時間，徹底消除夏冬令切換造成的排程偏移。</li>
+                  <li data-en="<b>Adaptive Cadence &amp; Exponential Backoff:</b> Scales catalyst snapshot frequency dynamically (&lt; 1% rate-limit usage) with exponential-backoff retry guards on transient disconnects."><b>自適應頻率控制與指數退避：</b>依催化劑接近程度動態調節輪詢頻率（API 消耗 &lt; 1%），網路波動時自動指數退避重試。</li>
+                </ul>
+              </div>
+              <div class="arch-io-box">
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📥 Upstream Input">📥 輸入來源 (Upstream Input)</div>
+                  <div class="arch-io-v" data-en="Alpaca Markets REST Data, Exchange Clock &amp; Account endpoints">Alpaca Market Data / Exchange Clock / Account REST API 即時狀態</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📤 Downstream Output">📤 輸出契約 (Downstream Output)</div>
+                  <div class="arch-io-v" data-en="Batched market quotes, verified session-window flags, and synced account buying power sent to the live filter.">即時批次報價快照、交易時段旗標與帳戶淨值 → 送入「雙引擎篩選器」</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="🔗 Connected Modules">🔗 關聯模組跳轉</div>
+                  <div class="arch-jump-row">
+                    <button type="button" class="arch-jump-chip" data-jump="filter" data-en="Downstream: LIVE-02 Live Filter →">下游：LIVE-02 雙引擎篩選器 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 5: filter -->
+            <div class="arch-detail-pane" id="pane-filter" role="tabpanel" aria-labelledby="tab-filter" data-pane="filter" hidden>
+              <div>
+                <span class="arch-det-badge">LIVE-02 · DUAL-ENGINE ROUTER</span>
+                <h3 data-en="Dual-Engine Filter &amp; Hysteresis Gate">雙引擎市場狀態路由與多因子漏斗</h3>
+                <p class="arch-det-purpose" data-en="Acts as the multi-stage macro and stock-level gatekeeper: evaluates sticky macro-regime hysteresis and market-breadth distribution health before routing capital across primary trend-breakout and opportunistic catalyst channels.">實盤進場前的多層次宏觀與個股過濾中樞：先由大盤長期趨勢遲滯狀態機與市場廣度派發日門控決定是否開放風險敞口，再將資金動態路由至趨勢突破主引擎與事件驅動催化劑通道。</p>
+                <ul class="arch-mech-list">
+                  <li data-en="<b>Sticky Hysteresis Gate &amp; Fail-Closed HOLD:</b> Dual-threshold confirmation buffers prevent whipsaws near trend boundaries, locking out new entries immediately (FAIL-CLOSED) if benchmark data is stale."><b>遲滯防洗盤大盤狀態機（Hysteresis Gate）：</b>透過雙門檻與連續確認緩衝避免均線邊緣假切換；基準資料缺漏或過期時自動進入 FAIL-CLOSED (HOLD)。</li>
+                  <li data-en="<b>Market Breadth &amp; Distribution Lock:</b> Aggregates market-wide breadth health and index distribution days, automatically blocking new buys and top-ups during distribution regimes."><b>市場廣度與派發日封鎖門控：</b>即時統計全市場均線廣度、新高新低比與指數派發日，一旦判定處於派發期即全面凍結新買單。</li>
+                  <li data-en="<b>Zero-Dilution Dual-Channel Routing:</b> Coordinates cross-sectional momentum leaders with end-of-day confirmed catalyst breakouts, including in-place promotion for winning catalyst positions."><b>零稀釋雙通道協同路由：</b>整合橫斷面動能領漲股突破與尾盤確認之事件驅動跳空（EP），並支援獲利事件倉原地升級為主倉位。</li>
+                </ul>
+              </div>
+              <div class="arch-io-box">
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📥 Upstream Input">📥 輸入來源 (Upstream Input)</div>
+                  <div class="arch-io-v" data-en="Live batched quotes from LIVE-01 + calibrated regime &amp; breadth bounds from OFF-03">LIVE-01 即時行情快照 + OFF-03 離線驗證注入之校準門檻</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📤 Downstream Output">📤 輸出契約 (Downstream Output)</div>
+                  <div class="arch-io-v" data-en="Deterministic, macro-approved candidate entry/exit signals routed to the execution and risk engine.">通過宏觀、流動性與結構三重審核之決定性候選訊號 → 送入「風控與執行引擎」</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="🔗 Connected Modules">🔗 關聯模組跳轉</div>
+                  <div class="arch-jump-row">
+                    <button type="button" class="arch-jump-chip" data-jump="val" data-en="← Calibrated by OFF-03">← 校準來源：OFF-03 壓測</button>
+                    <button type="button" class="arch-jump-chip" data-jump="api" data-en="← Upstream: LIVE-01 API">← 上游：LIVE-01 日曆介面</button>
+                    <button type="button" class="arch-jump-chip" data-jump="exec" data-en="Downstream: LIVE-03 Execution →">下游：LIVE-03 風控執行 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 6: exec -->
+            <div class="arch-detail-pane" id="pane-exec" role="tabpanel" aria-labelledby="tab-exec" data-pane="exec" hidden>
+              <div>
+                <span class="arch-det-badge">LIVE-03 · RISK &amp; RACE-FREE SYNC</span>
+                <h3 data-en="Execution, HWM Breakers &amp; PATCH Sync">波動度倉位、HWM 熔斷與 PATCH 同步</h3>
+                <p class="arch-det-purpose" data-en="Translates qualified signals into race-free broker instructions — enforcing per-trade volatility risk caps, single-position concentration peak-shaving, two-tier HWM circuit breakers, and lock-free order state transitions.">負責將交易訊號轉化為精確且具備競態防護的委託指令：統一控管單筆風險暴露、單一持倉集中度削峰與雙層帳戶淨值熔斷，並解決券商 API 減碼與改價時的股票鎖倉競態問題。</p>
+                <ul class="arch-mech-list">
+                  <li data-en="<b>Volatility Sizing &amp; Concentration Peak-Shaving:</b> Computes whole-share quantities from realized volatility and stop distance while automatically trimming oversized winning positions back toward target caps."><b>波動度自適應倉位與集中度削峰：</b>依波動幅度與停損距離反推整股股數，並對過度膨脹之獲利單一持倉自動執行削峰減碼以控制集中度。</li>
+                  <li data-en="<b>Two-Tier Ladder HWM Circuit Breaker:</b> Tier-1 soft de-leveraging reverts exposure to pure cash without premature trend liquidation; Tier-2 hard flatten halts the portfolio after confirmed extreme drawdown."><b>雙層階梯式 HWM 帳戶熔斷器：</b>第一層軟減速線強制降回純現金運作而不誤砍趨勢倉；第二層硬熔斷線經連續確認後執行緊急全平倉鎖機。</li>
+                  <li data-en="<b>Atomic PATCH &amp; State-Transition Polling:</b> Modifies open stop orders via atomic PATCH requests and synchronously polls until pending_replace clears, preventing held_for_orders share-lock rejections."><b>原子化 PATCH 與輪詢解鎖：</b>減碼或上移停損時先透過 PATCH 修改既有停損單並同步輪詢確認狀態轉移，徹底規避 Alpaca held_for_orders 鎖股失敗。</li>
+                </ul>
+              </div>
+              <div class="arch-io-box">
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📥 Upstream Input">📥 輸入來源 (Upstream Input)</div>
+                  <div class="arch-io-v" data-en="Qualified candidate signals + live equity, HWM watermark &amp; open position state">候選進出場訊號 + 即時帳戶淨值、HWM 高水位與持倉狀態</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📤 Downstream Output">📤 輸出契約 (Downstream Output)</div>
+                  <div class="arch-io-v" data-en="Sized, idempotent order &amp; stop-modification payloads sent to broker dispatch and GUI telemetry.">具冪等保護之標準化下單／PATCH 改單指令 → 派發至「券商委託與硬停損」及「桌面終端」</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="🔗 Connected Modules">🔗 關聯模組跳轉</div>
+                  <div class="arch-jump-row">
+                    <button type="button" class="arch-jump-chip" data-jump="filter" data-en="← Upstream: LIVE-02 Filter">← 上游：LIVE-02 篩選器</button>
+                    <button type="button" class="arch-jump-chip" data-jump="broker" data-en="Downstream: LIVE-04 Broker →">下游：LIVE-04 券商停損 →</button>
+                    <button type="button" class="arch-jump-chip" data-jump="ui" data-en="Telemetry: GUI-01 Dashboard →">遙測：GUI-01 桌面終端 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 7: broker -->
+            <div class="arch-detail-pane" id="pane-broker" role="tabpanel" aria-labelledby="tab-broker" data-pane="broker" hidden>
+              <div>
+                <span class="arch-det-badge">LIVE-04 · SERVER-SIDE CUSTODY</span>
+                <h3 data-en="Broker Dispatch &amp; Server-Side Hard Stop">委託單自動派發與伺服器端硬停損</h3>
+                <p class="arch-det-purpose" data-en="Forms the final physical line of defense: guarantees every filled position is immediately backed by a conditional stop order hosted directly inside Alpaca's broker infrastructure, decoupling downside protection from local hardware or internet uptime.">系統的最後一道物理防線：確保每一筆實盤持倉在成交當下即具備託管於 Alpaca 券商機房的伺服器端條件停損單，使風控保護完全獨立於本地電腦硬體與網路連線之外。</p>
+                <ul class="arch-mech-list">
+                  <li data-en="<b>Outage-Proof Broker Stop Custody:</b> Conditional stop orders live directly on Alpaca's servers via OTO / synchronized dispatch — protecting open positions even if the local PC shuts down, loses power, or crashes."><b>斷網／關機持續保護：</b>條件停損單直接託管於 Alpaca 券商伺服器端，即使本機電腦關機、斷電、斷網或程式崩潰，硬性停損依然在遠端生效。</li>
+                  <li data-en="<b>Bounded Limit-Buffer Execution:</b> Dispatches breakout entries with tightly bounded limit buffers instead of unconstrained market orders to guard against opening or thin-book slippage spikes."><b>限價緩衝執行防護：</b>進場委託採用具上限緩衝之限價單取代無保護市價單，防範瞬間流動性真空導致的極端成交滑價。</li>
+                  <li data-en="<b>Atomic State Persistence &amp; Reconciliation:</b> Atomically persists stop-order IDs, locked entry risk baselines, and HWM metrics locally so restarts reconcile seamlessly with live broker state."><b>原子持久化與重啟對帳：</b>每次倉位、停損單號與高水位異動皆原子寫入本地狀態檔，程式重啟後自動與券商 API 對帳恢復一致狀態。</li>
+                </ul>
+              </div>
+              <div class="arch-io-box">
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📥 Upstream Input">📥 輸入來源 (Upstream Input)</div>
+                  <div class="arch-io-v" data-en="Risk-approved entry, scale-out &amp; PATCH stop-ratchet requests from LIVE-03">LIVE-03 風控引擎核准之進場／減碼／PATCH 移停指令</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📤 Downstream Output">📤 輸出契約 (Downstream Output)</div>
+                  <div class="arch-io-v" data-en="Confirmed broker fills, active server stop-order IDs, and reconciled portfolio state streamed to GUI-01.">券商成交回報、有效伺服器停損單號與對帳倉位快照 → 推送至「Wails v2 桌面儀表板」</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="🔗 Connected Modules">🔗 關聯模組跳轉</div>
+                  <div class="arch-jump-row">
+                    <button type="button" class="arch-jump-chip" data-jump="exec" data-en="← Upstream: LIVE-03 Execution">← 上游：LIVE-03 風控執行</button>
+                    <button type="button" class="arch-jump-chip" data-jump="ui" data-en="Downstream: GUI-01 Dashboard →">下游：GUI-01 桌面儀表板 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 8: ui -->
+            <div class="arch-detail-pane" id="pane-ui" role="tabpanel" aria-labelledby="tab-ui" data-pane="ui" hidden>
+              <div>
+                <span class="arch-det-badge">GUI-01 · NATIVE DESKTOP &amp; AUDIT</span>
+                <h3 data-en="Wails v2 Native Desktop Dashboard (SSE Stream)">Wails v2 原生桌面監控終端（SSE 串流）</h3>
+                <p class="arch-det-purpose" data-en="Packages the background quantitative daemon, technical symbol inspector, and live execution console into a ~17 MB Wails v2 native desktop binary for zero-setup real-time operational visibility.">將背景量化守護進程、技術指標檢視器與即時執行日誌封裝進體積僅約 17 MB 的 Wails v2 原生 Windows 桌面應用程式，讓操作者無需開啟終端機或安裝任何開發環境即可一目了然掌握系統脈動。</p>
+                <ul class="arch-mech-list">
+                  <li data-en="<b>Real-Time SSE Log Broadcaster:</b> Captures engine stdout/stderr and streams clean events in real time via Server-Sent Events alongside automatic daily log rotation."><b>SSE 低延遲即時日誌廣播：</b>攔截核心引擎標準輸出並透過 Server-Sent Events 即時推送至前端主控台視窗，同時按日自動輪轉寫入本地稽核日誌檔。</li>
+                  <li data-en="<b>Macro Regime &amp; Breaker Telemetry:</b> Displays live SPY/IJH regime indicators, breadth scorecards, dual-channel slot utilization, and two-tier HWM circuit-breaker status."><b>宏觀體制與熔斷燈號視覺化：</b>即時顯示大盤與中型股體制燈號、市場廣度評分、雙通道槽位利用率與雙層熔斷狀態。</li>
+                  <li data-en="<b>Zero-Dependency Single Binary (~17 MB):</b> Bundles Go backend and WebView2 frontend assets into a single executable — launch and monitor unattended live sessions in one click."><b>單機免外部依賴部署（~17 MB）：</b>前後端資源完整內嵌編譯為單一原生執行檔，雙擊即可啟動完整守護排程與視覺化監控面板。</li>
+                </ul>
+              </div>
+              <div class="arch-io-box">
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📥 Upstream Input">📥 輸入來源 (Upstream Input)</div>
+                  <div class="arch-io-v" data-en="Synchronized broker positions, order events &amp; daemon SSE stdout stream from LIVE-03 / LIVE-04">LIVE-03／LIVE-04 之券商成交倉位狀態與守護進程即時 SSE 事件流</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="📤 Downstream Output">📤 輸出契約 (Downstream Output)</div>
+                  <div class="arch-io-v" data-en="Interactive native monitoring panels, symbol technical diagnostics &amp; daily audit log files (see screenshots below).">原生桌面視覺化監控面板、個股技術診斷與按日輪轉稽核日誌（詳見下方實機畫面）</div>
+                </div>
+                <div class="arch-io-row">
+                  <div class="arch-io-k" data-en="🔗 Connected Modules">🔗 關聯模組跳轉</div>
+                  <div class="arch-jump-row">
+                    <button type="button" class="arch-jump-chip" data-jump="exec" data-en="← From LIVE-03 Risk Engine">← 來源：LIVE-03 風控執行</button>
+                    <button type="button" class="arch-jump-chip" data-jump="broker" data-en="← From LIVE-04 Broker">← 來源：LIVE-04 券商託管</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -190,9 +1026,72 @@ flowchart LR
   </dialog>
 
   <script src="assets/app.js"></script>
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'strict' });
+  <script>
+    (function () {
+      const board = document.getElementById('archBoard');
+      if (!board) return;
+      const nodes = Array.from(board.querySelectorAll('.arch-node[data-node]'));
+      const panes = Array.from(board.querySelectorAll('.arch-detail-pane[data-pane]'));
+      const stepNum = document.getElementById('archStepNum');
+      const prevBtn = document.getElementById('archPrev');
+      const nextBtn = document.getElementById('archNext');
+      const order = nodes.map(n => n.dataset.node);
+      let current = 'pit';
+
+      function selectNode(id, focusTab) {
+        if (!order.includes(id)) return;
+        current = id;
+        const activeBtn = nodes.find(n => n.dataset.node === id);
+        const neighbors = activeBtn && activeBtn.dataset.neighbors
+          ? activeBtn.dataset.neighbors.split(',').map(s => s.trim())
+          : [];
+
+        nodes.forEach(n => {
+          const isMatch = n.dataset.node === id;
+          n.classList.toggle('active', isMatch);
+          n.classList.toggle('linked', !isMatch && neighbors.includes(n.dataset.node));
+          n.setAttribute('aria-selected', String(isMatch));
+        });
+
+        panes.forEach(p => {
+          p.hidden = p.dataset.pane !== id;
+        });
+
+        if (stepNum) {
+          stepNum.textContent = (order.indexOf(id) + 1) + ' / ' + order.length;
+        }
+        if (focusTab && activeBtn) {
+          activeBtn.focus();
+        }
+      }
+
+      nodes.forEach(n => n.addEventListener('click', () => selectNode(n.dataset.node, false)));
+      board.querySelectorAll('[data-jump]').forEach(btn => {
+        btn.addEventListener('click', () => selectNode(btn.dataset.jump, false));
+      });
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          const idx = (order.indexOf(current) - 1 + order.length) % order.length;
+          selectNode(order[idx], false);
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          const idx = (order.indexOf(current) + 1) % order.length;
+          selectNode(order[idx], false);
+        });
+      }
+      board.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        if (!e.target || !e.target.classList || !e.target.classList.contains('arch-node')) return;
+        e.preventDefault();
+        const delta = e.key === 'ArrowRight' ? 1 : -1;
+        const idx = (order.indexOf(current) + delta + order.length) % order.length;
+        selectNode(order[idx], true);
+      });
+
+      selectNode('pit', false);
+    })();
   </script>
 </body>
 </html>
